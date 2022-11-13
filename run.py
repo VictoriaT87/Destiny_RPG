@@ -2,7 +2,7 @@
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
-
+import sys
 
 def get_name():
     """
@@ -19,7 +19,7 @@ def get_name():
             print("Please enter letters only.")
             continue
         else:
-            print(f"Hello {name}. Welcome to your Destiny.")
+            print(f"It's nice to meet you, {name}. I'm your Ghost.")
             break
     return name
 
@@ -45,8 +45,49 @@ def get_class():
     return chosen_class
 
 
-if __name__ == "__main__":
-  while True:
+def opening_scene():
+    """
+    First scene to play after choosing a name and class
+    """
+
+    print("You look around and notice you're in a familiar place...")
+    print("This is the Cosmodrome. The last thing you remember is fighting here.")
+    print("You were in a war against The Fallen.")
+    print("But now everything fis overgrown, it feels as if centuries have passed.\n")
+    print("You look around. Behind you is a cliff edge.")
+    print("In front of you are some cars. Beyond them is an entrance to a building.")
+    print("What do you want to do?\n")
+    print("1. Search the cars?")
+    print("2. Go to the building entrance?")
+    print("3. Run off the cliff behind you? This is all too weird!")
+
+    user_input = ""
+
+    user_input = input()
+    if user_input == "1":
+      search_cars()
+    elif user_input == "2":
+      building_entrance()
+    elif user_input == "3":
+      print("You run towards the cliff and jump! This is all too much to take. [END]")
+      quit()
+    else: 
+      print("Please enter a valid option.")
+
+
+def search_cars():
+    print("search cars option")
+
+
+def building_entrance():
+    print("building entrance option")
+
+
+def quit():
+    sys.exit()
+
+
+def main():
     """
     Introduction to the game to run first
     """
@@ -62,4 +103,7 @@ if __name__ == "__main__":
     
     get_name()
     get_class()
-    break
+    opening_scene()
+
+
+main()
