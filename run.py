@@ -2,6 +2,8 @@
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
+
+
 def get_name():
     """
     Get the name of the player.
@@ -21,7 +23,7 @@ def get_name():
             break
     return name
 
-
+    
 def get_class():
     """
     Player chooses their class. 3 available based on Destiny lore.
@@ -43,5 +45,21 @@ def get_class():
     return chosen_class
 
 
-get_name()
-get_class()
+if __name__ == "__main__":
+  while True:
+    """
+    Introduction to the game to run first
+    """
+
+    print("Welcome Guardian!")
+    print("This is a text adventure game based on the video game Destiny!\n")
+    print("You are a New Light - a person newly re-awoken by a small robot companion")
+    print("known as a Ghost. You are now a Guardian, chosen to wield the Light")
+    print("to defeat the Darkness.\n")
+
+    print("Let's get your adventure started!\n")
+    print("\n")
+    
+    get_name()
+    get_class()
+    break
