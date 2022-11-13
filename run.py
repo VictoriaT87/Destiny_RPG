@@ -3,6 +3,7 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
 import sys
+import os
 import random
 
 
@@ -86,23 +87,58 @@ def opening_scene():
 
 
 def search_cars():
+    """
+    Function to search the cars
+    """
     print("You decide to search through some of the abandoned cars.")
     check_items()
+    print(guardian.items)
+
+    if guardian.items == ["key"]:
+        print("You put your key away and walk towards the building.")
+    else:
+        print("You didn't find anything")
+
+    building_entrance()
 
 
 def building_entrance():
-    print("building entrance option")
+    """
+    Function to enter the building and try to open a chest
+    """
 
-    check_items()
-    if guardian.items == "key":
-        guardian.items.remove("key")
+    print("The building is long abandoned, rust covers the doors")
+    print("All the windows are broken.")
+    print("In front of you, you see a chest...\n")
+    print("Try to open the chest?")
+    print("Yes or No")
 
-    
+    while True:
+        action = input("\n> ").capitalize()
+        if action == "yes":
+            if guardian.items == ["key"]:
+                guardian.items.remove("key")
+                print("You've used your key!")
+                check_weapon()
+            elif guardian.items == [""]:
+                print("You don't have a key. The chest won't open without one.")
+                break
+            else:
+                print("test")
+        elif action == "no":
+            print("The chest looks old... you don't think you'll")
+            print("find anything of value in there.")
+            print("You move into the building.")
+        else:
+            print("Please choose Yes or No")
+
+
 def check_items():
     item_find = random.choice([True, False])
     if item_find is True:
         guardian.items.append("key")
         print("You've found a key!")
+
 
 def check_weapon():
     weapon_find = random.choice([True, False])
