@@ -13,7 +13,9 @@ class player:
         self.health = health
         self.items = items
 
+
 guardian = player("opening_scene", 100, [])
+
 
 def get_name():
     """
@@ -34,7 +36,7 @@ def get_name():
             break
     return name
 
-    
+
 def get_class():
     """
     Player chooses their class. 3 available based on Destiny lore.
@@ -76,14 +78,15 @@ def opening_scene():
 
     user_input = input()
     if user_input == "1":
-      search_cars()
+        search_cars()
     elif user_input == "2":
-      building_entrance()
+        building_entrance()
     elif user_input == "3":
-      print("You run towards the cliff and jump! This is all too much to take. [END]")
-      sys.exit()
-    else: 
-      print("Please enter a valid option.")
+        print(
+            "You run towards the cliff and jump! This is all too much to take. [END]")
+        sys.exit()
+    else:
+        print("Please enter a valid option.")
 
 
 def search_cars():
@@ -113,24 +116,25 @@ def building_entrance():
     print("Try to open the chest?")
     print("Yes or No")
 
-    while True:
-        action = input("\n> ").capitalize()
-        if action == "yes":
-            if guardian.items == ["key"]:
-                guardian.items.remove("key")
-                print("You've used your key!")
-                check_weapon()
-            elif guardian.items == [""]:
-                print("You don't have a key. The chest won't open without one.")
-                break
-            else:
-                print("test")
-        elif action == "no":
-            print("The chest looks old... you don't think you'll")
-            print("find anything of value in there.")
-            print("You move into the building.")
+    user_input = ""
+
+    user_input = input().capitalize()
+
+    if user_input == "yes":
+        if guardian.items == ["key"]:
+            guardian.items.remove("key")
+            print("You've used your key!")
+            check_weapon()
+        elif guardian.items == [""]:
+            print("You don't have a key. The chest won't open without one.")
         else:
-            print("Please choose Yes or No")
+            print("test")
+    elif user_input == "no":
+        print("The chest looks old... you don't think you'll")
+        print("find anything of value in there.")
+        print("You move into the building.")
+    else:
+        print("Please enter Yes or No.")
 
 
 def check_items():
@@ -143,7 +147,8 @@ def check_items():
 def check_weapon():
     weapon_find = random.choice([True, False])
     if weapon_find is True:
-        weapon = random.choice(["Zhalo Supercell", "The Last Word", "No Land Beyond", "Felwinter's Lie", "Gjallarhorn"])
+        weapon = random.choice(["Zhalo Supercell", "The Last Word",
+                               "No Land Beyond", "Felwinter's Lie", "Gjallarhorn"])
         guardian.items.append(weapon)
         print(f"You've found a {weapon}!")
 
@@ -161,7 +166,7 @@ def main():
 
     print("Let's get your adventure started!\n")
     print("\n")
-    
+
     get_name()
     get_class()
     opening_scene()
