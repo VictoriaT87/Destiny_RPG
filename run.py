@@ -3,6 +3,16 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
 import sys
+import random
+
+
+class player:
+    def __init__(self, location, health, items):
+        self.location = location
+        self.health = health
+        self.items = items
+
+guardian = player("opening_scene", 100, [])
 
 def get_name():
     """
@@ -70,21 +80,36 @@ def opening_scene():
       building_entrance()
     elif user_input == "3":
       print("You run towards the cliff and jump! This is all too much to take. [END]")
-      quit()
+      sys.exit()
     else: 
       print("Please enter a valid option.")
 
 
 def search_cars():
-    print("search cars option")
+    print("You decide to search through some of the abandoned cars.")
+    check_items()
 
 
 def building_entrance():
     print("building entrance option")
 
+    check_items()
+    if guardian.items == "key":
+        guardian.items.remove("key")
 
-def quit():
-    sys.exit()
+    
+def check_items():
+    item_find = random.choice([True, False])
+    if item_find is True:
+        guardian.items.append("key")
+        print("You've found a key!")
+
+def check_weapon():
+    weapon_find = random.choice([True, False])
+    if weapon_find is True:
+        weapon = random.choice(["Zhalo Supercell", "The Last Word", "No Land Beyond", "Felwinter's Lie", "Gjallarhorn"])
+        guardian.items.append(weapon)
+        print(f"You've found a {weapon}!")
 
 
 def main():
