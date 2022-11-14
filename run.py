@@ -156,6 +156,8 @@ def check_weapon():
                                ])
         guardian.items.append(weapon)
         print(f"You've found a {weapon}!")
+    if weapon_find is False:
+        print("There was nothing in the chest, only dust...")
 
 
 def main():
