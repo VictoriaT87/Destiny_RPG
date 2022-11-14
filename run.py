@@ -76,7 +76,7 @@ def opening_scene():
 
     user_input = ""
 
-    user_input = input()
+    user_input = input("\n> ")
     if user_input == "1":
         search_cars()
     elif user_input == "2":
@@ -116,25 +116,21 @@ def building_entrance():
     print("Try to open the chest?")
     print("Yes or No")
 
-    user_input = ""
-
-    user_input = input().capitalize()
-
-    if user_input == "yes":
-        if guardian.items == ["key"]:
-            guardian.items.remove("key")
-            print("You've used your key!")
-            check_weapon()
-        elif guardian.items == [""]:
-            print("You don't have a key. The chest won't open without one.")
-        else:
-            print("test")
-    elif user_input == "no":
-        print("The chest looks old... you don't think you'll")
-        print("find anything of value in there.")
-        print("You move into the building.")
-    else:
-        print("Please enter Yes or No.")
+    while True:
+            action = input("\n> ")
+            if action == "yes" and guardian.items == ["key"]:
+                guardian.items.remove("key")
+                print("You've used your key!")
+                check_weapon()
+            elif action == "yes" and guardian.items == []:
+                print("You don't have a key and the lock won't budge.")
+                print("You decide to move on")
+            elif action == "no":
+                print("The chest looks old and worn...")
+                print("You don't think you'll find anything of value in there.")
+                print("You move into the building.")
+            else:
+                print("Please enter Yes or No.")
 
 
 def check_items():
