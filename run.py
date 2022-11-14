@@ -3,7 +3,6 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
 import sys
-import os
 import random
 
 
@@ -43,9 +42,12 @@ def get_class():
     """
     print("Let's try to figure out what kind of Guardian you are... \n")
     print("Do you think you're a Hunter, Warlock or Titan?\n")
-    print("Hunter: Agile and daring, Hunters are quick on their feet and quicker on the draw.\n")
-    print("Warlock: Warlocks weaponize the mysteries of the universe to sustain themselves and devastate their foes.\n")
-    print("Titan: Disciplined and proud, Titans are capable of both aggresive assaults and stalwart defenses.\n")
+    print("Hunter: Agile and daring, Hunters are quick on their feet")
+    print("and quicker on the draw.\n")
+    print("Warlock: Warlocks weaponize the mysteries of the universe")
+    print("to sustain themselves and devastate their foes.\n")
+    print("Titan: Disciplined and proud, Titans are capable of both ")
+    print("aggresive assaults and stalwart defenses.\n")
     while True:
         chosen_class = input("My class is: ").capitalize()
         classes = ["Hunter", "Warlock", "Titan"]
@@ -64,11 +66,13 @@ def opening_scene():
     """
 
     print("You look around and notice you're in a familiar place...")
-    print("This is the Cosmodrome. The last thing you remember is fighting here.")
-    print("You were in a war against The Fallen.")
-    print("But now everything fis overgrown, it feels as if centuries have passed.\n")
+    print("This is the Cosmodrome. The last thing you remember is fighting")
+    print("here in a war against The Fallen.")
+    print("But now everything is overgrown, it feels as if centuries")
+    print("have passed.\n")
     print("You look around. Behind you is a cliff edge.")
-    print("In front of you are some cars. Beyond them is an entrance to a building.")
+    print("In front of you are some cars. Beyond them is an entrance")
+    print("to a building.")
     print("What do you want to do?\n")
     print("1. Search the cars?")
     print("2. Go to the building entrance?")
@@ -82,8 +86,8 @@ def opening_scene():
     elif user_input == "2":
         building_entrance()
     elif user_input == "3":
-        print(
-            "You run towards the cliff and jump! This is all too much to take. [END]")
+        print("You run towards the cliff and jump! This is all too much")
+        print("to take. [END]")
         sys.exit()
     else:
         print("Please enter a valid option.")
@@ -117,20 +121,20 @@ def building_entrance():
     print("Yes or No")
 
     while True:
-            action = input("\n> ")
-            if action == "yes" and guardian.items == ["key"]:
-                guardian.items.remove("key")
-                print("You've used your key!")
-                check_weapon()
-            elif action == "yes" and guardian.items == []:
-                print("You don't have a key and the lock won't budge.")
-                print("You decide to move on")
-            elif action == "no":
-                print("The chest looks old and worn...")
-                print("You don't think you'll find anything of value in there.")
-                print("You move into the building.")
-            else:
-                print("Please enter Yes or No.")
+        action = input("\n> ")
+        if action == "yes" and guardian.items == ["key"]:
+            guardian.items.remove("key")
+            print("You've used your key!")
+            check_weapon()
+        elif action == "yes" and guardian.items == []:
+            print("You don't have a key and the lock won't budge.")
+            print("You decide to move on")
+        elif action == "no":
+            print("The chest looks old and worn...")
+            print("You don't think you'll find anything of value in there.")
+            print("You move into the building.")
+        else:
+            print("Please enter Yes or No.")
 
 
 def check_items():
@@ -143,8 +147,13 @@ def check_items():
 def check_weapon():
     weapon_find = random.choice([True, False])
     if weapon_find is True:
-        weapon = random.choice(["Zhalo Supercell", "The Last Word",
-                               "No Land Beyond", "Felwinter's Lie", "Gjallarhorn"])
+        weapon = random.choice([
+                                "Zhalo Supercell",
+                               "The Last Word",
+                               "No Land Beyond",
+                               "Felwinter's Lie",
+                               "Gjallarhorn"
+                               ])
         guardian.items.append(weapon)
         print(f"You've found a {weapon}!")
 
@@ -156,8 +165,9 @@ def main():
 
     print("Welcome Guardian!")
     print("This is a text adventure game based on the video game Destiny!\n")
-    print("You are a New Light - a person newly re-awoken by a small robot companion")
-    print("known as a Ghost. You are now a Guardian, chosen to wield the Light")
+    print("You are a New Light - a person newly re-awoken by a small")
+    print("robot companion known as a Ghost.")
+    print("You are now a Guardian, chosen to wield the Light")
     print("to defeat the Darkness.\n")
 
     print("Let's get your adventure started!\n")
