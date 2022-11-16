@@ -7,13 +7,15 @@ import random
 
 
 class player:
-    def __init__(self, location, health, items):
-        self.location = location
+    """
+    Class for player health and inventory.
+    """
+    def __init__(self, health, items):
         self.health = health
         self.items = items
 
 
-guardian = player("opening_scene", 100, [])
+guardian = player(100, [])
 
 
 def get_name():
@@ -138,6 +140,9 @@ def building_entrance():
 
 
 def check_items():
+    """
+    Function to check if the player has an key in their inventory
+    """
     item_find = random.choice([True, False])
     if item_find is True:
         guardian.items.append("key")
@@ -145,6 +150,9 @@ def check_items():
 
 
 def check_weapon():
+    """
+    Function to choose if the player gets a random weapoon from the chest
+    """
     weapon_find = random.choice([True, False])
     if weapon_find is True:
         weapon = random.choice([
