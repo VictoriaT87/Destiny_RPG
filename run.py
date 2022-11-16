@@ -6,7 +6,7 @@ import sys
 import random
 
 
-class player:
+class Player:
     """
     Class for player health and inventory.
     """
@@ -15,7 +15,7 @@ class player:
         self.items = items
 
 
-guardian = player(100, [])
+guardian = Player(100, [])
 
 
 def get_name():
@@ -51,15 +51,49 @@ def get_class():
     print("Titan: Disciplined and proud, Titans are capable of both ")
     print("aggresive assaults and stalwart defenses.\n")
     while True:
-        chosen_class = input("My class is: ").capitalize()
+        chosen_class = input("My class is: \n> ").capitalize()
         classes = ["Hunter", "Warlock", "Titan"]
         if chosen_class in classes:
             print(f"Welcome, {chosen_class}.")
+            print("\n")
             break
         else:
             print("Please type one of the classes listed.")
             continue
     return chosen_class
+
+
+def get_subclass(chosen_class):
+    """
+    Players choose their subclass - each class has 3.
+    """
+    print("Each Lightbearer has a choice... \n")
+    print("Your subclass defines your personality and skill.")
+    print("You must choose now. Are you a... \n")
+
+    if chosen_class == "Hunter":
+        print("1. Nightstalker?")
+        print("2. Blade Dancer?")
+        print("3. Gunslinger?")
+
+        while True:
+            subclasses = {'1': 'Nightstalker',
+                               '2': 'Blade Dancer',
+                               '3': 'Gunslinger'}
+            subclass = input("\n> ")
+            if subclass in subclasses:
+                print(f"A {subclasses[subclass]}?")
+                print("The Darkness doesn't stand a chance.")
+                break
+            else:
+                print(
+                    """
+                    Please choose either 1, 2 or 3.
+                    """
+                )
+                continue
+
+    return subclass
 
 
 def opening_scene():
@@ -184,7 +218,7 @@ def main():
     print("\n")
 
     get_name()
-    get_class()
+    get_subclass(get_class())
     opening_scene()
 
 
