@@ -1,10 +1,6 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
-
 import sys
 import random
-import time
+# import time
 
 
 # def slow_text(text):
@@ -22,6 +18,7 @@ class Player:
     """
     Class for player health and inventory.
     """
+
     def __init__(self, health, items):
         self.health = health
         self.items = items
@@ -76,72 +73,25 @@ def get_class():
 
 
 def get_subclass(chosen_class):
-    """
-    Players choose their subclass - each class has 3.
-    """
+    """Players choose their subclass - each class has 3."""
+
     print("Each Lightbearer has a choice... \n")
     print("Your subclass defines your personality and skill.")
     print("You must choose now. Are you a... \n")
 
     if chosen_class == "Hunter":
-        print("1. Nightstalker?")
-        print("2. Blade Dancer?")
-        print("3. Gunslinger?")
+        subclasses = ['Nightstalker?', 'Blade Dancer?', 'Gunslinger?']
 
-        while True:
-            hunter_subclasses = {'1': 'Nightstalker',
-                                 '2': 'Blade Dancer',
-                                 '3': 'Gunslinger'}
-            subclass = input("\n> ")
-            if subclass in hunter_subclasses:
-                # https://stackoverflow.com/questions/66484472/check-python-list-dict-based-on-user-input-display-from-the-same-index-value-i
-                print(f"A {hunter_subclasses[subclass]}?")
-                print("The Darkness doesn't stand a chance.\n")
-                break
-            else:
-                print(" Please choose either 1, 2 or 3.")
-                continue
     elif chosen_class == "Warlock":
-        print("1. Voidwalker?")
-        print("2. Sunsinger?")
-        print("3. Stormcaller?")
-
-        while True:
-            warlock_subclasses = {'1': 'Voidwalker',
-                                  '2': 'Sunsinger',
-                                  '3': 'Stormcaller'}
-            subclass = input("\n> ")
-            if subclass in warlock_subclasses:
-                # https://stackoverflow.com/questions/66484472/check-python-list-dict-based-on-user-input-display-from-the-same-index-value-i
-                print(f"A {warlock_subclasses[subclass]}?")
-                print("The Darkness doesn't stand a chance.\n")
-                break
-            else:
-                print(" Please choose either 1, 2 or 3.")
-                continue
+        subclasses = ['Voidwalker?', 'Sunsinger?', 'Stormcaller?']
 
     elif chosen_class == "Titan":
-        print("1. Striker?")
-        print("2. Defender?")
-        print("3. Sunbreaker?")
+        subclasses = ['Striker?', 'Defender?', 'Sunbreaker?']
 
-        while True:
-            titan_subclasses = {'1': 'Striker',
-                                '2': 'Defender',
-                                '3': 'Sunbreaker'}
-            subclass = input("\n> ")
-            if subclass in titan_subclasses:
-                # https://stackoverflow.com/questions/66484472/check-python-list-dict-based-on-user-input-display-from-the-same-index-value-i
-                print(f"A {titan_subclasses[subclass]}?")
-                print("The Darkness doesn't stand a chance.\n")
-                break
-            else:
-                print(" Please choose either 1, 2 or 3.")
-                continue
-    else:
-        print("Please choose a subclass")
-
-    return subclass
+    for index, subclass in enumerate(subclasses, 1):
+        print(index, subclass)
+    choice = int(input(f"Make your choice, {chosen_class} \n>"))
+    print(f"A {subclasses[choice-1]} The darkness doesn't stand a chance \n")
 
 
 def opening_scene():
@@ -238,7 +188,7 @@ def check_weapon():
     weapon_find = random.choice([True, False])
     if weapon_find is True:
         weapon = random.choice([
-                                "Zhalo Supercell",
+            "Zhalo Supercell",
                                "The Last Word",
                                "No Land Beyond",
                                "Felwinter's Lie",
