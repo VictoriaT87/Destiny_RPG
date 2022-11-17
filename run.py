@@ -19,12 +19,13 @@ class Player:
     Class for player health and inventory.
     """
 
-    def __init__(self, health, items):
+    def __init__(self, health, items, weapon):
         self.health = health
         self.items = items
+        self.weapon = weapon
 
 
-guardian = Player(100, [])
+guardian = Player(100, [], [])
 
 
 def get_name():
@@ -93,6 +94,9 @@ def get_subclass(chosen_class):
     choice = int(input(f"Make your choice, {chosen_class} \n>"))
     print(f"A {subclasses[choice-1]} The darkness doesn't stand a chance \n")
 
+    chosen_subclass = subclasses[choice-1]
+    return chosen_subclass
+
 
 def opening_scene():
     """
@@ -140,8 +144,6 @@ def search_cars():
     else:
         print("But you didn't find anything")
 
-    building_entrance()
-
 
 def building_entrance():
     """
@@ -163,12 +165,69 @@ def building_entrance():
         elif action == "yes" and guardian.items == []:
             print("You don't have a key and the lock won't budge.")
             print("You decide to move on")
+            building_hallway()
         elif action == "no":
             print("The chest looks old and worn...")
             print("You don't think you'll find anything of value in there.")
             print("You move into the building.")
+            building_hallway()
         else:
             print("Please enter Yes or No.")
+
+
+def building_hallway():
+    """
+    Function to play scene on entering the building hallway,
+    call fight scene or end
+    """
+    print("You enter into a long hallway inside the building")
+    print("Everything seems eerily quiet...")
+    print("Suddenly, a loud bang!")
+    print("You peer into the darkness ahead")
+    print("and slowly make out a shape...\n")
+    print("You see a Dreg! A soldier of the Fallen!")
+    print("He runs at you, holding a weapon.")
+    print("What do you do?")
+    print("Fight or Run [END]?")
+
+    user_input = ""
+
+    user_input = input("\n> ").capitalize()
+    if user_input == "Fight":
+        dreg_fight(guardian.weapon, get_class, get_subclass)
+    elif user_input == "Run":
+        print("You've alerady died once fighting Dregs")
+        print("You're not doing it again.")
+        print("You flee and run back to the cliff...")
+        print("And jump!")
+        print("[END]")
+
+        sys.exit()
+    else:
+        print("Please enter a valid option.")
+
+
+def dreg_fight(weapon, chosen_class, chosen_subclass):
+    """
+    fight scene function, checks for weapon from random roll
+    or else use abilities
+    """
+    if guardian.weapon == [weapon]:
+        print(f"You pull out your {weapon}")
+        print("line up on the Dreg's head...")
+        print("and pull the trigger.")
+        print("Nice work!")
+    elif guardian.weapon == []:
+        print("You don't have a gun... but you do have your abilities")
+        print(f"You're a {chosen_class}. A {chosen_subclass}.")
+        print("You throw your grenade!")
+        print("It sticks to the Dreg")
+        print("and explodes in a burst of Light!")
+        print("Nice work! The Dreg is dust.")
+    else:
+        print("else weapon")
+
+    print("dreg fight function")
 
 
 def check_items():
@@ -194,10 +253,11 @@ def check_weapon():
                                "Felwinter's Lie",
                                "Gjallarhorn"
                                ])
-        guardian.items.append(weapon)
+        guardian.weapon.append(weapon)
         print(f"You've found a {weapon}!")
     if weapon_find is False:
         print("There was nothing in the chest, only dust...")
+        building_hallway()
 
 
 def main():
@@ -218,6 +278,8 @@ def main():
     get_name()
     get_subclass(get_class())
     opening_scene()
+    building_entrance()
+    building_hallway()
 
 
 main()
