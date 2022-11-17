@@ -90,8 +90,8 @@ def get_subclass(chosen_class):
 
         while True:
             hunter_subclasses = {'1': 'Nightstalker',
-                                '2': 'Blade Dancer',
-                                '3': 'Gunslinger'}
+                                 '2': 'Blade Dancer',
+                                 '3': 'Gunslinger'}
             subclass = input("\n> ")
             if subclass in hunter_subclasses:
                 # https://stackoverflow.com/questions/66484472/check-python-list-dict-based-on-user-input-display-from-the-same-index-value-i
@@ -99,11 +99,7 @@ def get_subclass(chosen_class):
                 print("The Darkness doesn't stand a chance.\n")
                 break
             else:
-                print(
-                    """
-                    Please choose either 1, 2 or 3.
-                    """
-                )
+                print(" Please choose either 1, 2 or 3.")
                 continue
     elif chosen_class == "Warlock":
         print("1. Voidwalker?")
@@ -112,8 +108,8 @@ def get_subclass(chosen_class):
 
         while True:
             warlock_subclasses = {'1': 'Voidwalker',
-                               '2': 'Sunsinger',
-                               '3': 'Stormcaller'}
+                                  '2': 'Sunsinger',
+                                  '3': 'Stormcaller'}
             subclass = input("\n> ")
             if subclass in warlock_subclasses:
                 # https://stackoverflow.com/questions/66484472/check-python-list-dict-based-on-user-input-display-from-the-same-index-value-i
@@ -121,11 +117,7 @@ def get_subclass(chosen_class):
                 print("The Darkness doesn't stand a chance.\n")
                 break
             else:
-                print(
-                    """
-                    Please choose either 1, 2 or 3.
-                    """
-                )
+                print(" Please choose either 1, 2 or 3.")
                 continue
 
     elif chosen_class == "Titan":
@@ -135,8 +127,8 @@ def get_subclass(chosen_class):
 
         while True:
             titan_subclasses = {'1': 'Striker',
-                               '2': 'Defender',
-                               '3': 'Sunbreaker'}
+                                '2': 'Defender',
+                                '3': 'Sunbreaker'}
             subclass = input("\n> ")
             if subclass in titan_subclasses:
                 # https://stackoverflow.com/questions/66484472/check-python-list-dict-based-on-user-input-display-from-the-same-index-value-i
@@ -144,11 +136,7 @@ def get_subclass(chosen_class):
                 print("The Darkness doesn't stand a chance.\n")
                 break
             else:
-                print(
-                    """
-                    Please choose either 1, 2 or 3.
-                    """
-                )
+                print(" Please choose either 1, 2 or 3.")
                 continue
     else:
         print("Please choose a subclass")
