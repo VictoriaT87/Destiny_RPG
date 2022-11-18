@@ -1,7 +1,22 @@
+import gspread
+from google.oauth2.service_account import Credentials
+
 import sys
 import random
 # import time
 
+SCOPE = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive"
+    ]
+
+CREDS = Credentials.from_service_account_file('creds.json')
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+SHEET = GSPREAD_CLIENT.open('Destiny_RPG')
+
+worksheet = SHEET.worksheet('Stats')
 
 # def slow_text(text):
 #     """
@@ -251,7 +266,7 @@ def check_weapon():
                                "Felwinter's Lie",
                                "Gjallarhorn"
                                ])
-        guardian.weapon.append(weapon)
+        worksheet.update_cell(2, 4, weapon)
         print(f"You've found a {weapon}!")
 
     if weapon_find is False:
@@ -279,6 +294,7 @@ def main():
     opening_scene()
     building_entrance()
     building_hallway()
+    check_weapon()
 
 
 main()
