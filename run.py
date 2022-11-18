@@ -91,7 +91,7 @@ def get_subclass(chosen_class):
 
     for index, subclass in enumerate(subclasses, 1):
         print(index, subclass)
-    choice = int(input(f"Make your choice, {chosen_class} \n>"))
+    choice = int(input(f"Make your choice, {chosen_class} \n> "))
     print(f"A {subclasses[choice-1]} The darkness doesn't stand a chance \n")
 
     chosen_subclass = subclasses[choice-1]
@@ -207,7 +207,7 @@ def building_hallway():
         print("Please enter a valid option.")
 
 
-def dreg_fight(weapon, chosen_class, chosen_subclass):
+def dreg_fight(weapon, get_class, get_subclass):
     """
     fight scene function, checks for weapon from random roll
     or else use abilities
@@ -219,15 +219,13 @@ def dreg_fight(weapon, chosen_class, chosen_subclass):
         print("Nice work!")
     elif guardian.weapon == []:
         print("You don't have a gun... but you do have your abilities")
-        print(f"You're a {chosen_class}. A {chosen_subclass}.")
+        print(f"You're a {get_class}. A {get_subclass}.")
         print("You throw your grenade!")
         print("It sticks to the Dreg")
         print("and explodes in a burst of Light!")
         print("Nice work! The Dreg is dust.")
     else:
         print("else weapon")
-
-    print("dreg fight function")
 
 
 def check_items():
@@ -255,9 +253,10 @@ def check_weapon():
                                ])
         guardian.weapon.append(weapon)
         print(f"You've found a {weapon}!")
+
     if weapon_find is False:
         print("There was nothing in the chest, only dust...")
-        building_hallway()
+    building_hallway()
 
 
 def main():
