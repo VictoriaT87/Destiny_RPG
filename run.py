@@ -31,16 +31,22 @@ worksheet = SHEET.worksheet('Stats')
 
 class Player:
     """
-    Class for player health and inventory.
+    Class for player inventory and weapon.
     """
 
-    def __init__(self, health, items, weapon):
-        self.health = health
+    def __init__(self, items):
         self.items = items
-        self.weapon = weapon
+
+    def weapons(self):
+        """
+        Connect to weapon cell in spreadsheet
+        """
+        worksheet_weapon = worksheet.cell(2, 4).value
+        return worksheet_weapon
 
 
-guardian = Player(100, [], [])
+guardian = Player([])
+stored_weapon = Player.weapons('')
 
 
 def get_name():
@@ -209,7 +215,7 @@ def building_hallway():
 
     user_input = input("\n> ").capitalize()
     if user_input == "Fight":
-        dreg_fight(guardian.weapon, get_class, get_subclass)
+        dreg_fight(check_weapon)
     elif user_input == "Run":
         print("You've alerady died once fighting Dregs")
         print("You're not doing it again.")
@@ -222,25 +228,24 @@ def building_hallway():
         print("Please enter a valid option.")
 
 
-def dreg_fight(weapon, get_class, get_subclass):
+def dreg_fight(weapon):
     """
     fight scene function, checks for weapon from random roll
     or else use abilities
     """
-    if guardian.weapon == [weapon]:
+
+    if stored_weapon:
         print(f"You pull out your {weapon}")
         print("line up on the Dreg's head...")
         print("and pull the trigger.")
         print("Nice work!")
-    elif guardian.weapon == []:
+    else:
         print("You don't have a gun... but you do have your abilities")
         print(f"You're a {get_class}. A {get_subclass}.")
         print("You throw your grenade!")
         print("It sticks to the Dreg")
         print("and explodes in a burst of Light!")
         print("Nice work! The Dreg is dust.")
-    else:
-        print("else weapon")
 
 
 def check_items():
@@ -260,7 +265,7 @@ def check_weapon():
     weapon_find = random.choice([True, False])
     if weapon_find is True:
         weapon = random.choice([
-            "Zhalo Supercell",
+                               "Zhalo Supercell",
                                "The Last Word",
                                "No Land Beyond",
                                "Felwinter's Lie",
@@ -268,9 +273,10 @@ def check_weapon():
                                ])
         worksheet.update_cell(2, 4, weapon)
         print(f"You've found a {weapon}!")
+        return weapon
 
-    if weapon_find is False:
-        print("There was nothing in the chest, only dust...")
+    elif weapon_find is False:
+        print("There was nothing in the chest, only dust...")  
     building_hallway()
 
 
