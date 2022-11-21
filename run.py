@@ -9,7 +9,7 @@ SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
     "https://www.googleapis.com/auth/drive"
-    ]
+]
 
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
@@ -91,6 +91,7 @@ def get_class():
         else:
             print("Please type one of the classes listed.")
             continue
+    worksheet.update_cell(2, 1, chosen_class)
     return chosen_class
 
 
@@ -102,21 +103,43 @@ def get_subclass(chosen_class):
     print("You must choose now. Are you a... \n")
 
     if chosen_class == "Hunter":
-        subclasses = ['Nightstalker?', 'Blade Dancer?', 'Gunslinger?']
+        subclasses = ['Nightstalker', 'Blade Dancer', 'Gunslinger']
 
     elif chosen_class == "Warlock":
-        subclasses = ['Voidwalker?', 'Sunsinger?', 'Stormcaller?']
+        subclasses = ['Voidwalker', 'Sunsinger', 'Stormcaller']
 
     elif chosen_class == "Titan":
-        subclasses = ['Striker?', 'Defender?', 'Sunbreaker?']
+        subclasses = ['Striker', 'Defender', 'Sunbreaker']
 
     for index, subclass in enumerate(subclasses, 1):
         print(index, subclass)
     choice = int(input(f"Make your choice, {chosen_class} \n> "))
-    print(f"A {subclasses[choice-1]} The darkness doesn't stand a chance \n")
+    print(f"A {subclasses[choice-1]}?")
+    print(" The darkness doesn't stand a chance \n")
 
     chosen_subclass = subclasses[choice-1]
+    worksheet.update_cell(2, 2, chosen_subclass)
+    player_abilites(chosen_subclass)
     return chosen_subclass
+
+
+def player_abilites(chosen_subclass):
+    """
+    Gives the player an ability, based on their choice of subclass
+    """
+
+    if chosen_subclass == "Nightstalker" or "Voidwalker" or "Defender":
+        ability = 'Vortex Grenade'
+
+    elif chosen_subclass == "Blade Dancer" or "Stormcaller" or "Striker":
+        ability = 'Lightning Grenade'
+
+    elif chosen_subclass == "Gunslinger" or "Sunsinger" or "Sunbreaker":
+        ability = 'Solar Grenade'
+
+    grenade_ability = ability
+    worksheet.update_cell(2, 3, grenade_ability)
+    return ability
 
 
 def opening_scene():
@@ -252,7 +275,7 @@ def clear_worksheet():
     """
     Clear player spreadsheet at start of game
     """
-    worksheet.delete_rows(2) 
+    worksheet.delete_rows(2)
 
 
 def check_items():
@@ -283,7 +306,7 @@ def check_weapon():
         return weapon
 
     elif weapon_find is False:
-        print("There was nothing in the chest, only dust...")   
+        print("There was nothing in the chest, only dust...")
     building_hallway()
 
 
