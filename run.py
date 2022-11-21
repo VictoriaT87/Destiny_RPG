@@ -34,10 +34,11 @@ class Player:
     Class for player inventory and weapon.
     """
 
-    def __init__(self, items):
+    def __init__(self, items, health):
         self.items = items
+        self.health = health
 
-    def weapons(self):
+    def weapons(self, worksheet_weapon):
         """
         Connect to weapon cell in spreadsheet
         """
@@ -45,8 +46,8 @@ class Player:
         return worksheet_weapon
 
 
-guardian = Player([])
-stored_weapon = Player.weapons('')
+guardian = Player([], 100)
+stored_weapon = Player.weapons([], '')
 
 
 def get_name():
@@ -115,7 +116,7 @@ def get_subclass(chosen_class):
         print(index, subclass)
     choice = int(input(f"Make your choice, {chosen_class} \n> "))
     print(f"A {subclasses[choice-1]}?")
-    print(" The darkness doesn't stand a chance \n")
+    print("The darkness doesn't stand a chance \n")
 
     chosen_subclass = subclasses[choice-1]
     worksheet.update_cell(2, 2, chosen_subclass)
@@ -137,138 +138,143 @@ def player_abilites(chosen_subclass):
     elif chosen_subclass == "Gunslinger" or "Sunsinger" or "Sunbreaker":
         ability = 'Solar Grenade'
 
-    grenade_ability = ability
-    worksheet.update_cell(2, 3, grenade_ability)
+    worksheet.update_cell(2, 3, ability)
     return ability
 
 
-def opening_scene():
+class Story:
     """
-    First scene to play after choosing a name and class
+    Functions for the story and player choices
     """
+    def opening_scene(self):
+        """
+        First scene to play after choosing a name and class
+        """
 
-    print("You look around and notice you're in a familiar place...")
-    print("This is the Cosmodrome. The last thing you remember is fighting")
-    print("here in a war against The Fallen.")
-    print("But now everything is overgrown, it feels as if centuries")
-    print("have passed.\n")
-    print("You look around. Behind you is a cliff edge.")
-    print("In front of you are some cars. Beyond them is an entrance")
-    print("to a building.")
-    print("What do you want to do?\n")
-    print("1. Search the cars?")
-    print("2. Go to the building entrance?")
-    print("3. Run off the cliff behind you? This is all too weird!")
+        print("You look around and notice you're in a familiar place...")
+        print("This is the Cosmodrome. The last thing you remember is")
+        print("fighting here in a war against The Fallen.")
+        print("But now everything is overgrown, it feels as if centuries")
+        print("have passed.\n")
+        print("You look around. Behind you is a cliff edge.")
+        print("In front of you are some cars. Beyond them is an entrance")
+        print("to a building.")
+        print("What do you want to do?\n")
+        print("1. Search the cars?")
+        print("2. Go to the building entrance?")
+        print("3. Run off the cliff behind you? This is all too weird!")
 
-    user_input = ""
+        user_input = ""
 
-    user_input = input("\n> ")
-    if user_input == "1":
-        search_cars()
-    elif user_input == "2":
-        building_entrance()
-    elif user_input == "3":
-        print("You run towards the cliff and jump! This is all too much")
-        print("to take. [END]")
-        sys.exit()
-    else:
-        print("Please enter a valid option.")
-
-
-def search_cars():
-    """
-    Function to search the cars
-    """
-    print("You decide to search through some of the abandoned cars.")
-    check_items()
-    print(guardian.items)
-
-    if guardian.items == ["key"]:
-        print("You put your key away and walk towards the building.")
-    else:
-        print("But you didn't find anything")
-
-
-def building_entrance():
-    """
-    Function to enter the building and try to open a chest
-    """
-
-    print("The building is long abandoned, rust covers the doors")
-    print("All the windows are broken.")
-    print("In front of you, you see a chest...\n")
-    print("Try to open the chest?")
-    print("Yes or No")
-
-    while True:
-        action = input("\n> ")
-        if action == "yes" and guardian.items == ["key"]:
-            guardian.items.remove("key")
-            print("You've used your key!")
-            check_weapon()
-        elif action == "yes" and guardian.items == []:
-            print("You don't have a key and the lock won't budge.")
-            print("You decide to move on")
-            building_hallway()
-        elif action == "no":
-            print("The chest looks old and worn...")
-            print("You don't think you'll find anything of value in there.")
-            print("You move into the building.")
-            building_hallway()
+        user_input = input("\n> ")
+        if user_input == "1":
+            self.search_cars()
+        elif user_input == "2":
+            self.building_entrance()
+        elif user_input == "3":
+            print("You run towards the cliff and jump! This is all too much")
+            print("to take. [END]")
+            sys.exit()
         else:
-            print("Please enter Yes or No.")
+            print("Please enter a valid option.")
 
+    def search_cars(self):
+        """
+        Function to search the cars
+        """
+        print("You decide to search through some of the abandoned cars.")
+        check_items()
+        print(guardian.items)
 
-def building_hallway():
-    """
-    Function to play scene on entering the building hallway,
-    call fight scene or end
-    """
-    print("You enter into a long hallway inside the building")
-    print("Everything seems eerily quiet...")
-    print("Suddenly, a loud bang!")
-    print("You peer into the darkness ahead")
-    print("and slowly make out a shape...\n")
-    print("You see a Dreg! A soldier of the Fallen!")
-    print("He runs at you, holding a weapon.")
-    print("What do you do?")
-    print("Fight or Run [END]?")
+        if guardian.items == ["key"]:
+            print("You put your key away and walk towards the building.")
+        else:
+            print("But you didn't find anything")
 
-    user_input = ""
+        self.building_entrance()
 
-    user_input = input("\n> ").capitalize()
-    if user_input == "Fight":
-        dreg_fight()
-    elif user_input == "Run":
-        print("You've alerady died once fighting Dregs")
-        print("You're not doing it again.")
-        print("You flee and run back to the cliff...")
-        print("And jump!")
-        print("[END]")
+    def building_entrance(self):
+        """
+        Function to enter the building and try to open a chest
+        """
 
-        sys.exit()
-    else:
-        print("Please enter a valid option.")
+        print("The building is long abandoned, rust covers the doors")
+        print("All the windows are broken.")
+        print("In front of you, you see a chest...\n")
+        print("Try to open the chest?")
+        print("Yes or No")
 
+        while True:
+            action = input("\n> ")
+            if action == "yes" and guardian.items == ["key"]:
+                guardian.items.remove("key")
+                print("You've used your key!")
+                check_weapon()
+            elif action == "yes" and guardian.items == []:
+                print("You don't have a key and the lock won't budge.")
+                print("You decide to move on")
+                self.building_hallway()
+            elif action == "no":
+                print("The chest looks old and worn...")
+                print("You don't think you'll find anything of value in it.")
+                print("You move into the building.")
+                self.building_hallway()
+            else:
+                print("Please enter Yes or No.")
 
-def dreg_fight():
-    """
-    fight scene function, checks for weapon from random roll
-    or else use abilities
-    """
+    def building_hallway(self):
+        """
+        Function to play scene on entering the building hallway,
+        call fight scene or end
+        """
+        print("You enter into a long hallway inside the building")
+        print("Everything seems eerily quiet...")
+        print("Suddenly, a loud bang!")
+        print("You peer into the darkness ahead")
+        print("and slowly make out a shape...\n")
+        print("You see a Dreg! A soldier of the Fallen!")
+        print("He runs at you, holding a weapon.")
+        print("What do you do?")
+        print("Fight or Run [END]?")
 
-    if stored_weapon:
-        print(f"You pull out your {stored_weapon}")
-        print("line up on the Dreg's head...")
-        print("and pull the trigger.")
-        print("Nice work!")
-    else:
-        print("You don't have a gun... but you do have your abilities")
-        print(f"You're a {get_class}. A {get_subclass}.")
-        print("You throw your grenade!")
-        print("It sticks to the Dreg")
-        print("and explodes in a burst of Light!")
-        print("Nice work! The Dreg is dust.")
+        user_input = ""
+
+        user_input = input("\n> ").capitalize()
+        if user_input == "Fight":
+            self.dreg_fight()
+        elif user_input == "Run":
+            print("You've alerady died once fighting Dregs")
+            print("You're not doing it again.")
+            print("You flee and run back to the cliff...")
+            print("And jump!")
+            print("[END]")
+
+            sys.exit()
+        else:
+            print("Please enter a valid option.")
+
+    def dreg_fight(self):
+        """
+        fight scene function, checks for weapon from random roll
+        or else use abilities
+        """
+
+        player_class = worksheet.cell(2, 1).value
+        player_subclass = worksheet.cell(2, 2).value
+        player_ability = worksheet.cell(2, 3).value
+
+        if stored_weapon is not None:
+            print(f"You pull out your {stored_weapon}")
+            print("line up on the Dreg's head...")
+            print("and pull the trigger.")
+            print("Nice work!")
+        else:
+            print("You don't have a gun... but you do have your abilities")
+            print(f"You're a {player_class}. A {player_subclass}.")
+            print(f"You can use your {player_ability}")
+            print("You throw it and it sticks to the Dreg")
+            print("and explodes in a burst of Light!")
+            print("Nice work! The Dreg is dust.")
 
 
 def clear_worksheet():
@@ -307,32 +313,38 @@ def check_weapon():
 
     elif weapon_find is False:
         print("There was nothing in the chest, only dust...")
-    building_hallway()
+
+    Story.building_hallway('')
 
 
-def main():
-    """
-    Introduction to the game to run first
-    """
+# def main():
+#     """
+#     Introduction to the game to run first
+#     """
 
-    print("Welcome Guardian!")
-    print("This is a text adventure game based on the video game Destiny!\n")
-    print("You are a New Light - a person newly re-awoken by a small")
-    print("robot companion known as a Ghost.")
-    print("You are now a Guardian, chosen to wield the Light")
-    print("to defeat the Darkness.\n")
+#     print("Welcome Guardian!")
+#     print("This is a text adventure game based on the video game Destiny!\n")
+#     print("You are a New Light - a person newly re-awoken by a small")
+#     print("robot companion known as a Ghost.")
+#     print("You are now a Guardian, chosen to wield the Light")
+#     print("to defeat the Darkness.\n")
 
-    print("Let's get your adventure started!\n")
-    print("\n")
+#     print("Let's get your adventure started!\n")
+#     print("\n")
 
-    clear_worksheet()
+#     clear_worksheet()
 
-    get_name()
-    get_subclass(get_class())
-    opening_scene()
-    building_entrance()
-    building_hallway()
-    check_weapon()
+#     get_name()
+#     get_subclass(get_class())
+#     Story.opening_scene(self)
+#     Story.building_entrance()
+#     Story.building_hallway()
+#     check_weapon()
 
 
-main()
+# main()
+
+new_story = Story()
+
+
+new_story.opening_scene()
