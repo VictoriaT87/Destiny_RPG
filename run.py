@@ -215,7 +215,7 @@ def building_hallway():
 
     user_input = input("\n> ").capitalize()
     if user_input == "Fight":
-        dreg_fight(check_weapon)
+        dreg_fight()
     elif user_input == "Run":
         print("You've alerady died once fighting Dregs")
         print("You're not doing it again.")
@@ -228,14 +228,14 @@ def building_hallway():
         print("Please enter a valid option.")
 
 
-def dreg_fight(weapon):
+def dreg_fight():
     """
     fight scene function, checks for weapon from random roll
     or else use abilities
     """
 
     if stored_weapon:
-        print(f"You pull out your {weapon}")
+        print(f"You pull out your {stored_weapon}")
         print("line up on the Dreg's head...")
         print("and pull the trigger.")
         print("Nice work!")
@@ -246,6 +246,13 @@ def dreg_fight(weapon):
         print("It sticks to the Dreg")
         print("and explodes in a burst of Light!")
         print("Nice work! The Dreg is dust.")
+
+
+def clear_worksheet():
+    """
+    Clear player spreadsheet at start of game
+    """
+    worksheet.delete_rows(2) 
 
 
 def check_items():
@@ -276,7 +283,7 @@ def check_weapon():
         return weapon
 
     elif weapon_find is False:
-        print("There was nothing in the chest, only dust...")  
+        print("There was nothing in the chest, only dust...")   
     building_hallway()
 
 
@@ -294,6 +301,8 @@ def main():
 
     print("Let's get your adventure started!\n")
     print("\n")
+
+    clear_worksheet()
 
     get_name()
     get_subclass(get_class())
