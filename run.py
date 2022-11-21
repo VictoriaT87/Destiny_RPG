@@ -50,102 +50,115 @@ guardian = Player([], 100)
 stored_weapon = Player.weapons([], '')
 
 
-def get_name():
-    """
-    Get the name of the player.
-    """
-    print("Eyes up, Guardian.\n")
-    print("I've finally found you.\n")
-    print("I've been searching for you for centuries.\n")
-    print("What should I call you?")
-    while True:
-        name = input("\n> ").capitalize()
-        # https://www.w3schools.com/python/ref_string_isalpha.asp
-        if not name.isalpha():
-            print("Please enter letters only.")
-            continue
-        else:
-            print(f"It's nice to meet you, {name}. I'm your Ghost.")
-            break
-    return name
-
-
-def get_class():
-    """
-    Player chooses their class. 3 available based on Destiny lore.
-    """
-    print("Let's try to figure out what kind of Guardian you are... \n")
-    print("Do you think you're a Hunter, Warlock or Titan?\n")
-    print("Hunter: Agile and daring, Hunters are quick on their feet")
-    print("and quicker on the draw.\n")
-    print("Warlock: Warlocks weaponize the mysteries of the universe")
-    print("to sustain themselves and devastate their foes.\n")
-    print("Titan: Disciplined and proud, Titans are capable of both ")
-    print("aggresive assaults and stalwart defenses.\n")
-    while True:
-        chosen_class = input("My class is: \n> ").capitalize()
-        classes = ["Hunter", "Warlock", "Titan"]
-        if chosen_class in classes:
-            print(f"Welcome, {chosen_class}.")
-            print("\n")
-            break
-        else:
-            print("Please type one of the classes listed.")
-            continue
-    worksheet.update_cell(2, 1, chosen_class)
-    return chosen_class
-
-
-def get_subclass(chosen_class):
-    """Players choose their subclass - each class has 3."""
-
-    print("Each Lightbearer has a choice... \n")
-    print("Your subclass defines your personality and skill.")
-    print("You must choose now. Are you a... \n")
-
-    if chosen_class == "Hunter":
-        subclasses = ['Nightstalker', 'Blade Dancer', 'Gunslinger']
-
-    elif chosen_class == "Warlock":
-        subclasses = ['Voidwalker', 'Sunsinger', 'Stormcaller']
-
-    elif chosen_class == "Titan":
-        subclasses = ['Striker', 'Defender', 'Sunbreaker']
-
-    for index, subclass in enumerate(subclasses, 1):
-        print(index, subclass)
-    choice = int(input(f"Make your choice, {chosen_class} \n> "))
-    print(f"A {subclasses[choice-1]}?")
-    print("The darkness doesn't stand a chance \n")
-
-    chosen_subclass = subclasses[choice-1]
-    worksheet.update_cell(2, 2, chosen_subclass)
-    player_abilites(chosen_subclass)
-    return chosen_subclass
-
-
-def player_abilites(chosen_subclass):
-    """
-    Gives the player an ability, based on their choice of subclass
-    """
-
-    if chosen_subclass == "Nightstalker" or "Voidwalker" or "Defender":
-        ability = 'Vortex Grenade'
-
-    elif chosen_subclass == "Blade Dancer" or "Stormcaller" or "Striker":
-        ability = 'Lightning Grenade'
-
-    elif chosen_subclass == "Gunslinger" or "Sunsinger" or "Sunbreaker":
-        ability = 'Solar Grenade'
-
-    worksheet.update_cell(2, 3, ability)
-    return ability
-
-
 class Story:
     """
     Functions for the story and player choices
     """
+    def introduction(self):
+        """
+        Introduction to the game to run first
+        """
+
+        print("Welcome Guardian!")
+        print("This is a text adventure game based on the video game Destiny!")
+        print("\n You are a New Light - a person newly re-awoken by a small")
+        print("robot companion known as a Ghost.")
+        print("You are now a Guardian, chosen to wield the Light")
+        print("to defeat the Darkness.\n")
+
+        print("Let's get your adventure started!\n")
+        print("\n")
+
+        clear_worksheet()
+
+    def get_name(self):
+        """
+        Get the name of the player.
+        """
+        print("Eyes up, Guardian.\n")
+        print("I've finally found you.\n")
+        print("I've been searching for you for centuries.\n")
+        print("What should I call you?")
+        while True:
+            name = input("\n> ").capitalize()
+            # https://www.w3schools.com/python/ref_string_isalpha.asp
+            if not name.isalpha():
+                print("Please enter letters only.")
+                continue
+            else:
+                print(f"It's nice to meet you, {name}. I'm your Ghost.")
+                break
+        return name
+
+    def get_class(self):
+        """
+        Player chooses their class. 3 available based on Destiny lore.
+        """
+        print("Let's try to figure out what kind of Guardian you are... \n")
+        print("Do you think you're a Hunter, Warlock or Titan?\n")
+        print("Hunter: Agile and daring, Hunters are quick on their feet")
+        print("and quicker on the draw.\n")
+        print("Warlock: Warlocks weaponize the mysteries of the universe")
+        print("to sustain themselves and devastate their foes.\n")
+        print("Titan: Disciplined and proud, Titans are capable of both ")
+        print("aggresive assaults and stalwart defenses.\n")
+        while True:
+            chosen_class = input("My class is: \n> ").capitalize()
+            classes = ["Hunter", "Warlock", "Titan"]
+            if chosen_class in classes:
+                print(f"Welcome, {chosen_class}.")
+                print("\n")
+                break
+            else:
+                print("Please type one of the classes listed.")
+                continue
+        worksheet.update_cell(2, 1, chosen_class)
+        return chosen_class
+
+    def get_subclass(self, chosen_class):
+        """Players choose their subclass - each class has 3."""
+
+        print("Each Lightbearer has a choice... \n")
+        print("Your subclass defines your personality and skill.")
+        print("You must choose now. Are you a... \n")
+
+        if chosen_class == "Hunter":
+            subclasses = ['Nightstalker', 'Blade Dancer', 'Gunslinger']
+
+        elif chosen_class == "Warlock":
+            subclasses = ['Voidwalker', 'Sunsinger', 'Stormcaller']
+
+        elif chosen_class == "Titan":
+            subclasses = ['Striker', 'Defender', 'Sunbreaker']
+
+        for index, subclass in enumerate(subclasses, 1):
+            print(index, subclass)
+        choice = int(input(f"Make your choice, {chosen_class} \n> "))
+        print(f"A {subclasses[choice-1]}?")
+        print("The darkness doesn't stand a chance \n")
+
+        chosen_subclass = subclasses[choice-1]
+        worksheet.update_cell(2, 2, chosen_subclass)
+        self.player_abilites(chosen_subclass)
+        return chosen_subclass
+
+    def player_abilites(self, chosen_subclass):
+        """
+        Gives the player an ability, based on their choice of subclass
+        """
+
+        if chosen_subclass == "Nightstalker" or "Voidwalker" or "Defender":
+            ability = 'Vortex Grenade'
+
+        elif chosen_subclass == "Blade Dancer" or "Stormcaller" or "Striker":
+            ability = 'Lightning Grenade'
+
+        elif chosen_subclass == "Gunslinger" or "Sunsinger" or "Sunbreaker":
+            ability = 'Solar Grenade'
+
+        worksheet.update_cell(2, 3, ability)
+        return ability
+
     def opening_scene(self):
         """
         First scene to play after choosing a name and class
@@ -317,34 +330,6 @@ def check_weapon():
     Story.building_hallway('')
 
 
-# def main():
-#     """
-#     Introduction to the game to run first
-#     """
-
-#     print("Welcome Guardian!")
-#     print("This is a text adventure game based on the video game Destiny!\n")
-#     print("You are a New Light - a person newly re-awoken by a small")
-#     print("robot companion known as a Ghost.")
-#     print("You are now a Guardian, chosen to wield the Light")
-#     print("to defeat the Darkness.\n")
-
-#     print("Let's get your adventure started!\n")
-#     print("\n")
-
-#     clear_worksheet()
-
-#     get_name()
-#     get_subclass(get_class())
-#     Story.opening_scene(self)
-#     Story.building_entrance()
-#     Story.building_hallway()
-#     check_weapon()
-
-
-# main()
-
 new_story = Story()
-
 
 new_story.opening_scene()
