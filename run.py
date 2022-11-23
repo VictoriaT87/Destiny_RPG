@@ -228,6 +228,7 @@ class Story:
                 guardian.items.remove("key")
                 print("You've used your key!")
                 check_weapon()
+                self.building_hallway()
             elif action == "yes" and guardian.items == []:
                 print("You don't have a key and the lock won't budge.")
                 print("You decide to move on")
@@ -326,8 +327,6 @@ def check_weapon():
 
     elif weapon_find is False:
         print("There was nothing in the chest, only dust...")
-
-    Story.building_hallway('')
 
 
 new_story = Story()
