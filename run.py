@@ -48,6 +48,9 @@ class Player:
 
 guardian = Player([], 100)
 stored_weapon = Player.weapons([], '')
+player_class = worksheet.cell(2, 1).value
+player_subclass = worksheet.cell(2, 2).value
+player_ability = worksheet.cell(2, 3).value
 
 
 class Story:
@@ -61,7 +64,8 @@ class Story:
 
         print("Welcome Guardian!")
         print("This is a text adventure game based on the video game Destiny!")
-        print("\n You are a New Light - a person newly re-awoken by a small")
+        print("\n ")
+        print("You are a New Light - a person newly re-awoken by a small")
         print("robot companion known as a Ghost.")
         print("You are now a Guardian, chosen to wield the Light")
         print("to defeat the Darkness.\n")
@@ -70,11 +74,13 @@ class Story:
         print("\n")
 
         clear_worksheet()
+        self.get_name()
 
     def get_name(self):
         """
         Get the name of the player.
         """
+        print("- - - - - - -")
         print("Eyes up, Guardian.\n")
         print("I've finally found you.\n")
         print("I've been searching for you for centuries.\n")
@@ -87,7 +93,7 @@ class Story:
                 continue
             else:
                 print(f"It's nice to meet you, {name}. I'm your Ghost.")
-                break
+                self.get_class()
         return name
 
     def get_class(self):
@@ -108,52 +114,51 @@ class Story:
             if chosen_class in classes:
                 print(f"Welcome, {chosen_class}.")
                 print("\n")
-                break
+                worksheet.update_cell(2, 1, chosen_class)
+                self.get_subclass()
             else:
                 print("Please type one of the classes listed.")
                 continue
-        worksheet.update_cell(2, 1, chosen_class)
-        return chosen_class
 
-    def get_subclass(self, chosen_class):
+    def get_subclass(self):
         """Players choose their subclass - each class has 3."""
 
         print("Each Lightbearer has a choice... \n")
         print("Your subclass defines your personality and skill.")
         print("You must choose now. Are you a... \n")
 
-        if chosen_class == "Hunter":
+        if player_class == "Hunter":
             subclasses = ['Nightstalker', 'Blade Dancer', 'Gunslinger']
 
-        elif chosen_class == "Warlock":
+        elif player_class == "Warlock":
             subclasses = ['Voidwalker', 'Sunsinger', 'Stormcaller']
 
-        elif chosen_class == "Titan":
+        elif player_class == "Titan":
             subclasses = ['Striker', 'Defender', 'Sunbreaker']
 
         for index, subclass in enumerate(subclasses, 1):
             print(index, subclass)
-        choice = int(input(f"Make your choice, {chosen_class} \n> "))
+        choice = int(input(f"Make your choice, {player_class} \n> "))
         print(f"A {subclasses[choice-1]}?")
         print("The darkness doesn't stand a chance \n")
 
         chosen_subclass = subclasses[choice-1]
         worksheet.update_cell(2, 2, chosen_subclass)
         self.player_abilites(chosen_subclass)
-        return chosen_subclass
+        self.opening_scene()
 
     def player_abilites(self, chosen_subclass):
         """
         Gives the player an ability, based on their choice of subclass
         """
 
-        if chosen_subclass == "Nightstalker" or "Voidwalker" or "Defender":
+        if chosen_subclass in ('Nightstalker', 'Voidwalker', 'Defender'):
             ability = 'Vortex Grenade'
 
-        elif chosen_subclass == "Blade Dancer" or "Stormcaller" or "Striker":
+        elif chosen_subclass in ("Blade Dancer", "Stormcaller", "Striker"):
             ability = 'Lightning Grenade'
 
-        elif chosen_subclass == "Gunslinger" or "Sunsinger" or "Sunbreaker":
+        elif chosen_subclass in ("Gunslinger", "Sunsinger", "Sunbreaker"):
             ability = 'Solar Grenade'
 
         worksheet.update_cell(2, 3, ability)
@@ -271,11 +276,6 @@ class Story:
         fight scene function, checks for weapon from random roll
         or else use abilities
         """
-
-        player_class = worksheet.cell(2, 1).value
-        player_subclass = worksheet.cell(2, 2).value
-        player_ability = worksheet.cell(2, 3).value
-
         if stored_weapon is not None:
             print(f"You pull out your {stored_weapon}")
             print("line up on the Dreg's head...")
@@ -332,4 +332,4 @@ def check_weapon():
 
 new_story = Story()
 
-new_story.opening_scene()
+new_story.introduction()
