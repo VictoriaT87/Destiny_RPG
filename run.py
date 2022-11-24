@@ -59,15 +59,6 @@ class Story:
     Functions for the story and player choices
     """
 
-    def quit_game(self):
-        """
-        function for player to quit the game at any time
-        """
-        user_input = ""
-        user_input = input("\n> ")
-        if user_input == "quit":
-            sys.exit()
-
     def introduction(self):
         """
         Introduction to the game to run first
@@ -460,4 +451,3 @@ def check_weapon():
 new_story = Story()
 
 new_story.introduction()
-new_story.quit_game()
