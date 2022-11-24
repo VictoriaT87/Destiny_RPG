@@ -300,35 +300,50 @@ class Story:
         print("Ahead, you see 2 corridors")
         print("Do you want to go left or right?")
         directions = ["left", "right"]
-        user_input = ""
+        user_input = "".capitalize()
         while user_input not in directions:
-            print("Options: left/right/back")
             user_input = input()
             if user_input == "left":
                 print("You go left and ahead of you see a giant room")
                 print("with a spaceship. You check it out.")
-                pass
+                self.spaceship_room()
             elif user_input == "right":
                 print("You go right. It's very hard to see.")
                 print("In the darkness, you can make out something large...")
                 print("with glowing yellow eyes!")
                 pass
             elif user_input == "back":
-                print("'I'm done fighting these Dregs, I'm out of here!' [END]")
+                print("'I'm done fighting these Dregs, I'm out of here!'[END]")
                 sys.exit()
             else:
                 print("Please enter a valid option.")
 
-        def spaceship_room():
-            """
-            Spaceship room choice function
-            """
-            print("You can see straight away that the ship")
-            print("is missing it's engine.")
-            print("As soon as you take a step back, you hear a sound.")
-            print("A rumbling from the walls...")
-            print("The roof cracks open and you see a Captain Dreg emerge!")
-            print("If you want it, you'll have to take it from him.")
+    def spaceship_room(self):
+        """
+        Spaceship room choice function
+        """
+        print("You can see straight away that the ship")
+        print("is missing it's engine.")
+        print("As soon as you take a step back, you hear a sound.")
+        print("A rumbling from the walls...")
+        print("The roof cracks open and you see a Fallen Captain emerge!")
+        print("He's carrying the engine!")
+        print("If you want it, you'll have to take it from him.")
+
+        print("Fight or run?")
+        user_input = "".capitalize()
+        if user_input == "Fight":
+            pass
+        elif user_input == "Run":
+            print("This Captain is giant!")
+            print("No way you want to take him on. You turn and run.")
+            print("But behind you is an army of Dregs.")
+            print("Within seconds you're swarmed...")
+            print("And your Light fades.")
+            print("[End]")
+            sys.exit()
+        else:
+            print("Please enter a valid option.")
 
 
 def clear_worksheet():
