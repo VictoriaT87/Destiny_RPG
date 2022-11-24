@@ -196,6 +196,7 @@ class Story:
         elif user_input == "3":
             print("You run towards the cliff and jump! This is all too much")
             print("to take. [END]")
+            clear_worksheet()
             sys.exit()
         else:
             print("Please enter a valid option.")
@@ -206,7 +207,6 @@ class Story:
         """
         print("You decide to search through some of the abandoned cars.")
         check_items()
-        print(guardian.items)
 
         if guardian.items == ["key"]:
             print("You put your key away and walk towards the building.")
@@ -271,7 +271,7 @@ class Story:
             print("You flee and run back to the cliff...")
             print("And jump!")
             print("[END]")
-
+            clear_worksheet()
             sys.exit()
         else:
             print("Please enter a valid option.")
@@ -299,7 +299,7 @@ class Story:
     def hallway_choice(self):
         """
         User chooses between 2 paths"""
-        print("\n> ")
+        print("\n ")
         print("Ahead, you see 2 corridors")
         print("Do you want to go left, right or back?")
 
@@ -316,6 +316,7 @@ class Story:
             self.luck_escape()
         elif user_input == "Back":
             print("'I'm done fighting these Dregs, I'm out of here!'[END]")
+            clear_worksheet()
             sys.exit()
         else:
             print("Please enter either left or right.")
@@ -331,7 +332,7 @@ class Story:
         print("The roof cracks open and you see a Fallen Captain emerge!")
         print("He's carrying the engine!")
         print("If you want it, you'll have to take it from him.")
-        print("\n> ")
+        print("\n ")
         print("1. Fight or 2. Run?")
         user_input = ""
         user_input = input("\n> ").capitalize()
@@ -342,7 +343,7 @@ class Story:
                 print("You wield the Light, you aim and the Captain")
                 print("and hit him with the full force of your Super.")
                 print("He staggers... and falls. Dead.")
-                print("\n> ")
+                print("\n ")
                 print("You grab the engine and Ghost installs it.")
                 print("The ship rumbles to life and takes off.")
                 print("Next destination - The Tower... home.")
@@ -356,12 +357,14 @@ class Story:
                 print("The Captain turns to you and aims his gun.")
                 print("He hits you directly and you fall down... dead.")
                 print("Your Ghost can ressurect you. Do you want him to?")
+                print("Yes or No?")
                 user_input = ""
                 user_input = input("\n> ").capitalize()
                 if user_input == "Yes":
                     new_story.introduction()
                 elif user_input == "No":
                     print("Thank you for playing, Guardian!")
+                    clear_worksheet()
                     sys.exit()
                 else:
                     print("Please enter Yes or No.")
@@ -373,8 +376,9 @@ class Story:
             print("Within seconds you're swarmed...")
             print("And your Light fades.")
             print("[END]")
-            print("\n> ")
+            print("\n ")
             print("Thanks for playing, Guardian!")
+            clear_worksheet()
             sys.exit()
         else:
             print("Please enter either fight or run.")
@@ -397,8 +401,9 @@ class Story:
             print("Within seconds, his blast hits you directly!")
             print("You drop to the floor. Dead.")
             print("END")
-            print("\n> ")
+            print("\n ")
             print("Thanks for playing, Guardian!")
+            clear_worksheet()
             sys.exit()
 
 
