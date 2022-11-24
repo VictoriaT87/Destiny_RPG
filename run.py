@@ -16,7 +16,8 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('Destiny_RPG')
 
-worksheet = SHEET.worksheet('Stats')
+class_worksheet = SHEET.worksheet('PlayerClass')
+stats_worksheet = SHEET.worksheet('PlayerStats')
 
 # def slow_text(text):
 #     """
@@ -42,21 +43,30 @@ class Player:
         """
         Connect to weapon cell in spreadsheet
         """
-        worksheet_weapon = worksheet.cell(2, 4).value
+        worksheet_weapon = class_worksheet.cell(2, 4).value
         return worksheet_weapon
 
 
 guardian = Player([], 100)
-stored_weapon = worksheet.cell(2, 4).value
-player_class = worksheet.cell(2, 1).value
-player_subclass = worksheet.cell(2, 2).value
-player_ability = worksheet.cell(2, 3).value
+stored_weapon = class_worksheet.cell(2, 4).value
+player_class = class_worksheet.cell(2, 1).value
+player_subclass = class_worksheet.cell(2, 2).value
+player_ability = class_worksheet.cell(2, 3).value
 
 
 class Story:
     """
     Functions for the story and player choices
     """
+
+    def quit_game(self):
+        """
+        function for player to quit the game at any time
+        """
+        user_input = ""
+        user_input = input("\n> ")
+        if user_input == "quit":
+            sys.exit()
 
     def introduction(self):
         """
@@ -75,6 +85,7 @@ class Story:
         print("\n")
 
         clear_worksheet()
+        inital_luck()
         self.get_name()
 
     def get_name(self):
@@ -115,7 +126,7 @@ class Story:
             if chosen_class in classes:
                 print(f"Welcome, {chosen_class}.")
                 print("\n")
-                worksheet.update_cell(2, 1, chosen_class)
+                class_worksheet.update_cell(2, 1, chosen_class)
                 self.get_subclass()
             else:
                 print("Please type one of the classes listed.")
@@ -139,12 +150,13 @@ class Story:
 
         for index, subclass in enumerate(subclasses, 1):
             print(index, subclass)
+
         choice = int(input(f"Make your choice, {player_class} \n> "))
         print(f"A {subclasses[choice-1]}?")
         print("The darkness doesn't stand a chance \n")
 
         chosen_subclass = subclasses[choice-1]
-        worksheet.update_cell(2, 2, chosen_subclass)
+        class_worksheet.update_cell(2, 2, chosen_subclass)
         self.player_abilites(chosen_subclass)
         self.opening_scene()
 
@@ -162,7 +174,7 @@ class Story:
         elif chosen_subclass in ("Gunslinger", "Sunsinger", "Sunbreaker"):
             ability = 'Solar Grenade'
 
-        worksheet.update_cell(2, 3, ability)
+        class_worksheet.update_cell(2, 3, ability)
         return ability
 
     def opening_scene(self):
@@ -296,27 +308,26 @@ class Story:
     def hallway_choice(self):
         """
         User chooses between 2 paths"""
-
+        print("\n> ")
         print("Ahead, you see 2 corridors")
-        print("Do you want to go left or right?")
-        directions = ["left", "right"]
-        user_input = "".capitalize()
-        while user_input not in directions:
-            user_input = input()
-            if user_input == "left":
-                print("You go left and ahead of you see a giant room")
-                print("with a spaceship. You check it out.")
-                self.spaceship_room()
-            elif user_input == "right":
-                print("You go right. It's very hard to see.")
-                print("In the darkness, you can make out something large...")
-                print("with glowing yellow eyes!")
-                pass
-            elif user_input == "back":
-                print("'I'm done fighting these Dregs, I'm out of here!'[END]")
-                sys.exit()
-            else:
-                print("Please enter a valid option.")
+        print("Do you want to go left, right or back?")
+
+        user_input = ""
+        user_input = input("\n> ").capitalize()
+        if user_input == "Left":
+            print("You go left and ahead of you see a giant room")
+            print("with a spaceship. You check it out.")
+            self.spaceship_room()
+        elif user_input == "Right":
+            print("You go right. It's very hard to see.")
+            print("In the darkness, you can make out something large...")
+            print("with a glowing purple eye!")
+            self.luck_escape()
+        elif user_input == "Back":
+            print("'I'm done fighting these Dregs, I'm out of here!'[END]")
+            sys.exit()
+        else:
+            print("Please enter either left or right.")
 
     def spaceship_room(self):
         """
@@ -329,28 +340,90 @@ class Story:
         print("The roof cracks open and you see a Fallen Captain emerge!")
         print("He's carrying the engine!")
         print("If you want it, you'll have to take it from him.")
+        print("\n> ")
+        print("1. Fight or 2. Run?")
+        user_input = ""
+        user_input = input("\n> ").capitalize()
+        if user_input == "1":
+            if inital_luck() > 50:
+                print("You feel the Light course through you!")
+                print("You use your ultimate ability - your Super.")
+                print("You wield the Light, you aim and the Captain")
+                print("and hit him with the full force of your Super.")
+                print("He staggers... and falls. Dead.")
+                print("\n> ")
+                print("You grab the engine and Ghost installs it.")
+                print("The ship rumbles to life and takes off.")
+                print("Next destination - The Tower... home.")
+                print("END")
 
-        print("Fight or run?")
-        user_input = "".capitalize()
-        if user_input == "Fight":
-            pass
-        elif user_input == "Run":
+            elif inital_luck() < 50:
+                print("You feel the Light course through you!")
+                print("You use your ultimate ability - your Super.")
+                print("You wield the Light, you aim and the Captain")
+                print("But you miss!")
+                print("The Captain turns to you and aims his gun.")
+                print("He hits you directly and you fall down... dead.")
+                print("Your Ghost can ressurect you. Do you want him to?")
+                user_input = ""
+                user_input = input("\n> ").capitalize()
+                if user_input == "Yes":
+                    new_story.introduction()
+                elif user_input == "No":
+                    print("Thank you for playing, Guardian!")
+                    sys.exit()
+                else:
+                    print("Please enter Yes or No.")
+
+        elif user_input == "2":
             print("This Captain is giant!")
             print("No way you want to take him on. You turn and run.")
             print("But behind you is an army of Dregs.")
             print("Within seconds you're swarmed...")
             print("And your Light fades.")
-            print("[End]")
+            print("[END]")
+            print("\n> ")
+            print("Thanks for playing, Guardian!")
             sys.exit()
         else:
-            print("Please enter a valid option.")
+            print("Please enter either fight or run.")
+
+    def luck_escape(self):
+        """
+        Function to check whether the player escapes from the ambush
+        """
+        if inital_luck() > 50:
+            print("You manage to hide behind some nearby crates")
+            print("before the giant fallen Servitar sees you.")
+            print("You wait for his eye to close before you turn and run")
+            print("the down the hallway on the right!")
+            print("Phew!")
+            self.spaceship_room()
+        else:
+            print("Oh no, a Fallen Servitar!")
+            print("You have no time to move before his giant Eye")
+            print("turns it's gaze on you.")
+            print("Within seconds, his blast hits you directly!")
+            print("You drop to the floor. Dead.")
+            print("END")
+            print("\n> ")
+            print("Thanks for playing, Guardian!")
+            sys.exit()
 
 
 def clear_worksheet():
     """
     Clear player spreadsheet at start of game
     """
-    worksheet.delete_rows(2)
+    class_worksheet.delete_rows(2)
+    stats_worksheet.delete_rows(2)
+
+
+def inital_luck():
+    """Roll an Inital Luck number for the character"""
+    character_luck = random.randint(0, 100)
+    stats_worksheet.update_cell(2, 1, character_luck)
+    return character_luck
 
 
 def check_items():
@@ -376,7 +449,7 @@ def check_weapon():
                                "Felwinter's Lie",
                                "Gjallarhorn"
                                ])
-        worksheet.update_cell(2, 4, weapon)
+        class_worksheet.update_cell(2, 4, weapon)
         print(f"You've found a {weapon}!")
         return weapon
 
@@ -387,3 +460,4 @@ def check_weapon():
 new_story = Story()
 
 new_story.introduction()
+new_story.quit_game()
