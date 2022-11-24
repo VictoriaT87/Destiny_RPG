@@ -47,7 +47,7 @@ class Player:
 
 
 guardian = Player([], 100)
-stored_weapon = Player.weapons([], '')
+stored_weapon = worksheet.cell(2, 4).value
 player_class = worksheet.cell(2, 1).value
 player_subclass = worksheet.cell(2, 2).value
 player_ability = worksheet.cell(2, 3).value
@@ -57,6 +57,7 @@ class Story:
     """
     Functions for the story and player choices
     """
+
     def introduction(self):
         """
         Introduction to the game to run first
@@ -282,6 +283,7 @@ class Story:
             print("line up on the Dreg's head...")
             print("and pull the trigger.")
             print("Nice work!")
+            self.hallway_choice()
         else:
             print("You don't have a gun... but you do have your abilities")
             print(f"You're a {player_class}. A {player_subclass}.")
@@ -289,6 +291,44 @@ class Story:
             print("You throw it and it sticks to the Dreg")
             print("and explodes in a burst of Light!")
             print("Nice work! The Dreg is dust.")
+            self.hallway_choice()
+
+    def hallway_choice(self):
+        """
+        User chooses between 2 paths"""
+
+        print("Ahead, you see 2 corridors")
+        print("Do you want to go left or right?")
+        directions = ["left", "right"]
+        user_input = ""
+        while user_input not in directions:
+            print("Options: left/right/back")
+            user_input = input()
+            if user_input == "left":
+                print("You go left and ahead of you see a giant room")
+                print("with a spaceship. You check it out.")
+                pass
+            elif user_input == "right":
+                print("You go right. It's very hard to see.")
+                print("In the darkness, you can make out something large...")
+                print("with glowing yellow eyes!")
+                pass
+            elif user_input == "back":
+                print("'I'm done fighting these Dregs, I'm out of here!' [END]")
+                sys.exit()
+            else:
+                print("Please enter a valid option.")
+
+        def spaceship_room():
+            """
+            Spaceship room choice function
+            """
+            print("You can see straight away that the ship")
+            print("is missing it's engine.")
+            print("As soon as you take a step back, you hear a sound.")
+            print("A rumbling from the walls...")
+            print("The roof cracks open and you see a Captain Dreg emerge!")
+            print("If you want it, you'll have to take it from him.")
 
 
 def clear_worksheet():
