@@ -43,6 +43,25 @@ class Player:
 guardian = Player([], 100)
 
 
+class RandomEncounter:
+    """
+    Class for NPC character and random encounter
+    """
+
+    def __init__(self, name):
+        self.name = name
+
+    def talk(self):
+        """
+        Text to print on random encounter trigger
+        """
+        print(f"A {self.name} emerges from the shadows.")
+        print("He takes one lucky shot at you before he runs away.")
+
+
+vandal = RandomEncounter("Vandal")
+
+
 class Story:
     """
     Functions for the story and player choices
@@ -239,33 +258,34 @@ class Story:
         Function to play scene on entering the building hallway,
         call fight scene or end
         """
-        print("You enter into a long hallway inside the building")
-        print("Everything seems eerily quiet...")
-        print("Suddenly, a loud bang!")
-        print("You peer into the darkness ahead")
-        print("and slowly make out a shape...\n")
-        print("You see a Dreg! A soldier of the Fallen!")
-        print("He runs at you, holding a weapon.")
-        print("What do you do?")
-        print("Fight or Run [END]?")
+        handle_vandal()
+
+        print("You enter into a long hallway inside the building.")
+        print("Ahead you can see 2 open doorways. You can enter one of"
+              " them or continue down the hallway")
+        print("What do you want to do?")
+        print("1. Enter door 1?\n>  "
+              "2. Enter door 2?\n> "
+              "3. Continue down the hallway?\n> ")
 
         user_input = ""
 
-        user_input = input("\n> ").capitalize()
-        if user_input == "Fight":
-            self.dreg_fight("")
-        elif user_input == "Run":
-            print("You've alerady died once fighting Dregs")
-            print("You're not doing it again.")
-            print("You flee and run back to the cliff...")
-            print("And jump!")
-            print("[END]")
-            clear_worksheet()
-            sys.exit()
+        user_input = input("\n> ")
+        if user_input == "1":
+            print("You enter door 1. It's a small room with a Fallen Dreg"
+                  " inside!")
+            self.dreg_fight()
+        if user_input == "2":
+            print("You decide to enter the 2nd door. It's a small room.")
+            self.empty_room()
+        if user_input == "3":
+            print("You continue until you see a giant open room ahead"
+                  "with a spaceship in it!")
+            self.spaceship_room()
         else:
             print("Please enter a valid option.")
 
-    def dreg_fight(self, weapon):
+    def dreg_fight(self):
         """
         fight scene function, checks for weapon from random roll
         or else use abilities
@@ -287,7 +307,7 @@ class Story:
             sys.exit()
 
         if stored_weapon is not None:
-            print(f"You pull out your {weapon}")
+            print(f"You pull out your {stored_weapon}")
             print("line up on the Dreg's head...")
             print("and pull the trigger.")
             print("Nice work!")
@@ -301,9 +321,35 @@ class Story:
             print("Nice work! The Dreg is dust.")
             self.hallway_choice()
 
+    def empty_room(self):
+        """
+        Empty room, player must turn around and choose another option
+        from building_hallway
+        """
+        handle_vandal()
+
+        print("You look around the room."
+              "It seems completely empty, just dust."
+              "You turn around and decide to pick a different option")
+
+        print("You return to the hallway. Do you want to go to 1. Door 1?"
+              "or 2. Continue down the hall?")
+
+        user_input = ""
+
+        user_input = input("\n> ")
+        if user_input == "1":
+            self.dreg_fight()
+        if user_input == "2":
+            self.spaceship_room()
+        else:
+            print("Please enter a valid option.")
+
     def hallway_choice(self):
         """
-        User chooses between 2 paths"""
+        User chooses between 2 paths
+        """
+        handle_vandal()
         print("\n ")
         print("Ahead, you see 2 corridors")
         print("Do you want to go left, right or back?")
@@ -456,6 +502,21 @@ def check_weapon():
 
     elif weapon_find is False:
         print("There was nothing in the chest, only dust...")
+
+
+def handle_vandal():
+    """
+    function for random Vandal encounter
+    """
+    vandal_attack = random.choice([True, False])
+    if vandal_attack is True:
+        print("Out of nowhere, a Fallen Vandal attacks you!")
+        print("You took some damage!", 2)
+        guardian.health -= random.randint(1, 100)
+        print(f"\nHealth: {guardian.health}")
+        if guardian.health == 0:
+            print("You are dead!")
+            sys.exit()
 
 
 new_story = Story()
