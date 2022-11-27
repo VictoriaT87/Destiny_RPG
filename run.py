@@ -2,6 +2,7 @@ import sys
 import os
 import random
 # import time
+import pyfiglet
 
 import gspread
 from google.oauth2.service_account import Credentials
@@ -74,20 +75,10 @@ class Story:
         Introduction to the game to run first
         """
 
-        print(
-            """
-            _____  ______  _____ _______ _____ _   ___     __
-            |  __ \|  ____|/ ____|__   __|_   _| \ | \ \   / /
-            | |  | | |__  | (___    | |    | | |  \| |\ \_/ /
-            | |  | |  __|  \___ \   | |    | | | . ` | \   /
-            | |__| | |____ ____) |  | |   _| |_| |\  |  | |
-            |_____/|______|_____/   |_|__|_____|_| \_|  |_|______
-            |  __ \|  __ \ / ____|  / ____|   /\   |  \/  |  ____|
-            | |__) | |__) | |  __  | |  __   /  \  | \  / | |__
-            |  _  /|  ___/| | |_ | | | |_ | / /\ \ | |\/| |  __|
-            | | \ \| |    | |__| | | |__| |/ ____ \| |  | | |____
-            |_|  \_|_|     \_____|  \_____/_/    \_|_|  |_|______|
-           """)
+        text1 = pyfiglet.figlet_format("DESTINY")
+        text2 = pyfiglet.figlet_format("RPG GAME")
+        print(text1)
+        print(text2)
 
         print("Welcome Guardian!")
         print("This is a text adventure game based on the video game"
