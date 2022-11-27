@@ -73,8 +73,25 @@ class Story:
         Introduction to the game to run first
         """
 
+        print(
+            r"""
+           ______     ________    ______    _________   _____   ____  _____   ____  ____
+          |_   _ `.  |_   __  | .' ____ \  |  _   _  | |_   _| |_   \|_   _| |_  _||_  _|
+          | | `. \   | |_ \_| | (___ \_| |_/ | | \_|   | |     |   \ | |     \ \  / / 
+            | |  | |   |  _| _   _.____`.      | |       | |     | |\ \| |      \ \/ /
+           _| |_.' /  _| |__/ | | \____) |    _| |_     _| |_   _| |_\   |_     _|  |_
+          |______.'  |________|  \______.'   |_____|   |_____| |_____|\____|   |______|
+            _________   ____  ____   ________     _______      _______      ______       
+            |  _   _  | |_   ||   _| |_   __  |   |_   __ \    |_   __ \   .' ___  |
+            |_/ | | \_|   | |__| |     | |_ \_|     | |__) |     | |__) | / .'   \_|
+                | |       |  __  |     |  _| _      |  __ /      |  ___/  | |   ____
+                | |       | |  | |     | |__/ |     | |  \ \_    | |      \ `.___]  |
+                |_|      |___||___|    |______|     |___| |__|  |___|      `._____.'
+            """)
+
         slow_text("Welcome Guardian!")
-        slow_text("This is a text adventure game based on the video game Destiny!")
+        slow_text("This is a text adventure game based on the video game"
+                  " Destiny!")
         slow_text("\n ")
         slow_text("You are a New Light - a person newly re-awoken by a small")
         slow_text("robot companion known as a Ghost.")
@@ -112,7 +129,7 @@ class Story:
         """
         Player chooses their class. 3 available based on Destiny lore.
         """
-        slow_text("Let's try to figure out what kind of Guardian you are... \n")
+        slow_text("Let's try to figure out what kind of Guardian you are...\n")
         slow_text("Do you think you're a Hunter, Warlock or Titan?\n")
         slow_text("Hunter: Agile and daring, Hunters are quick on their feet")
         slow_text("and quicker on the draw.\n")
@@ -203,8 +220,8 @@ class Story:
         elif user_input == "2":
             self.building_entrance()
         elif user_input == "3":
-            slow_text("You run towards the cliff and jump! This is all too much")
-            slow_text("to take. [END]")
+            slow_text("You run towards the cliff and jump! This is all "
+                      "too much to take. [END]")
             clear_worksheet()
             sys.exit()
         else:
@@ -247,9 +264,9 @@ class Story:
                 slow_text("You decide to move on")
                 self.building_hallway()
             elif action == "no":
-                slow_text("The chest looks old and worn...")
-                slow_text("You don't think you'll find anything of value in it.")
-                slow_text("You move into the building.")
+                slow_text("The chest looks old and worn...\n")
+                slow_text("You don't think you'll find anything of value "
+                          "in it. You move into the building.")
                 self.building_hallway()
             else:
                 slow_text("Please enter Yes or No.")
@@ -327,8 +344,8 @@ class Story:
         # Health system from Elijah Henderson
         # https://www.youtube.com/watch?v=n17Hkgi8rt4
         guardian.health -= random.randint(1, 100)
-        slow_text("Before you can make a move, the Dreg takes one shot with his\n"
-                  "weapon. It hits you on the arm!"
+        slow_text("Before you can make a move, the Dreg takes one shot with "
+                  "his weapon.\n It hits you on the arm!"
                   )
         slow_text(f"\nHealth: {guardian.health}")
         if guardian.health < 0:
