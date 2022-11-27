@@ -32,14 +32,6 @@ stats_worksheet = SHEET.worksheet('PlayerStats')
 #         print(char, end="", flush=True)
 
 
-def reset_console():
-    """
-    Reset the console for a new game or continue.
-    """
-    print("\n")
-    os.system('cls||clear')
-
-
 class Player:
     """
     Class for player inventory and weapon.
@@ -109,8 +101,8 @@ class Story:
         print("Let's get your adventure started!\n")
         print("\n")
 
-        clear_worksheet()
-        inital_luck()
+        GameFunctions.clear_worksheet(self)
+        GameFunctions.inital_luck(self)
         self.get_name()
 
     def get_name(self):
@@ -230,7 +222,7 @@ class Story:
         elif user_input == "3":
             print("You run towards the cliff and jump! This is all "
                   "too much to take. [END]")
-            clear_worksheet()
+            GameFunctions.clear_worksheet(self)
             sys.exit()
         else:
             print("Please enter a valid option.")
@@ -240,7 +232,7 @@ class Story:
         Function to search the cars
         """
         print("You decide to search through some of the abandoned cars.")
-        check_items()
+        GameFunctions.check_items(self)
 
         if guardian.items == ["key"]:
             print("You put your key away and walk towards the building.")
@@ -265,7 +257,7 @@ class Story:
             if action == "yes" and guardian.items == ["key"]:
                 guardian.items.remove("key")
                 print("You've used your key!")
-                check_weapon()
+                GameFunctions.check_weapon(self)
                 self.building_hallway()
             elif action == "yes" and guardian.items == []:
                 print("You don't have a key and the lock won't budge.")
@@ -305,7 +297,7 @@ class Story:
             print("You decide to enter the 2nd door. It's a small room.")
             self.empty_room()
         if user_input == "3":
-            
+
             self.spaceship_room()
         else:
             print("Please enter a valid option.")
@@ -315,7 +307,7 @@ class Story:
         Empty room, player must turn around and choose another option
         from building_hallway
         """
-        handle_vandal()
+        GameFunctions.handle_vandal(self)
 
         print("You look around the room.\n"
               "It seems completely empty, just dust.\n"
@@ -356,7 +348,7 @@ class Story:
         if guardian.health < 0:
             print("You are dead!")
             print("Would you like to play again?")
-            play_again()
+            GameFunctions.play_again(self)
 
         if stored_weapon is not None:
             print("\n")
@@ -381,7 +373,7 @@ class Story:
         """
         User chooses between 2 paths
         """
-        handle_vandal()
+        GameFunctions.handle_vandal(self)
 
         print("\n ")
         print("Ahead, you see 2 corridors.")
@@ -400,7 +392,7 @@ class Story:
             self.luck_escape()
         elif user_input == "Back":
             print("'I'm done fighting these Dregs, I'm out of here!'[END]")
-            clear_worksheet()
+            GameFunctions.clear_worksheet(self)
             sys.exit()
         else:
             print("Please enter either left or right.")
@@ -423,7 +415,7 @@ class Story:
         user_input = ""
         user_input = input("\n> ").capitalize()
         if user_input == "Fight":
-            if inital_luck() > 50:
+            if GameFunctions.inital_luck(self) > 50:
                 print("You feel the Light course through you!")
                 print("You use your ultimate ability - your Super.\n")
                 print("You wield the Light, you aim at the Captain")
@@ -437,9 +429,9 @@ class Story:
                 print("\n ")
                 print("Well done Guardian! You win!")
                 print("Would you like to play again?")
-                play_again()
+                GameFunctions.play_again(self)
 
-            elif inital_luck() < 50:
+            elif GameFunctions.inital_luck(self) < 50:
                 print("You feel the Light course through you!")
                 print("You use your ultimate ability - your Super.")
                 print("You wield the Light, you aim at the Captain")
@@ -448,7 +440,7 @@ class Story:
                 print("He hits you directly and you fall down... dead.")
                 print("[END]")
                 print("Your Ghost can resurrect you. Do you want him to?")
-                play_again()
+                GameFunctions.play_again(self)
 
         elif user_input == "Run":
             print("This Captain is giant!")
@@ -460,7 +452,7 @@ class Story:
             print("\n ")
             print("Thanks for playing, Guardian!")
             print("Would you like to play again?")
-            play_again()
+            GameFunctions.play_again(self)
         else:
             print("Please enter either fight or run.")
 
@@ -468,7 +460,7 @@ class Story:
         """
         Function to check whether the player escapes from the ambush
         """
-        if inital_luck() > 50:
+        if GameFunctions.inital_luck(self) > 50:
             print("\n ")
             print("You manage to hide behind some nearby crates")
             print("before the giant fallen Servitor sees you.")
@@ -487,87 +479,93 @@ class Story:
             print("\n ")
             print("Thanks for playing, Guardian!")
             print("Would you like to play again?")
-            play_again()
+            GameFunctions.play_again(self)
 
 
-def play_again():
+class GameFunctions:
     """
-    Option to allow player to play again or exit
+    Class for all game functions
     """
-    print("Yes or No?")
-    user_input = ""
-    user_input = input("\n> ").capitalize()
-    if user_input == "Yes":
-        reset_console()
-        new_story.introduction()
-    elif user_input == "No":
-        print("Thank you for playing, Guardian!")
-        clear_worksheet()
-        sys.exit()
-    else:
-        print("Please enter Yes or No.")
+    def reset_console(self):
+        """
+        Reset the console for a new game or continue.
+        """
+        print("\n")
+        os.system('cls||clear')
 
+    def play_again(self):
+        """
+        Option to allow player to play again or exit
+        """
+        print("Yes or No?")
+        user_input = ""
+        user_input = input("\n> ").capitalize()
+        if user_input == "Yes":
+            self.reset_console()
+            new_story.introduction()
+        elif user_input == "No":
+            print("Thank you for playing, Guardian!")
+            self.clear_worksheet()
+            sys.exit()
+        else:
+            print("Please enter Yes or No.")
 
-def clear_worksheet():
-    """
-    Clear player spreadsheet at start of game
-    """
-    class_worksheet.delete_rows(2)
-    stats_worksheet.delete_rows(2)
+    def clear_worksheet(self):
+        """
+        Clear player spreadsheet at start of game
+        """
+        class_worksheet.delete_rows(2)
+        stats_worksheet.delete_rows(2)
 
+    def inital_luck(self):
+        """Roll an Inital Luck number for the character"""
+        character_luck = random.randint(0, 100)
+        stats_worksheet.update_cell(2, 1, character_luck)
+        return character_luck
 
-def inital_luck():
-    """Roll an Inital Luck number for the character"""
-    character_luck = random.randint(0, 100)
-    stats_worksheet.update_cell(2, 1, character_luck)
-    return character_luck
+    def check_items(self):
+        """
+        Function to check if the player has an key in their inventory
+        """
+        item_find = random.choice([True, False])
+        if item_find is True:
+            guardian.items.append("key")
+            print("You've found a key!")
 
+    def check_weapon(self):
+        """
+        Function to choose if the player gets a random weapoon from the chest
+        """
+        weapon_find = random.choice([True, False])
+        if weapon_find is True:
+            weapon = random.choice([
+                                    "Zhalo Supercell",
+                                    "The Last Word",
+                                    "No Land Beyond",
+                                    "Felwinter's Lie",
+                                    "Gjallarhorn"
+                                    ])
+            class_worksheet.update_cell(2, 4, weapon)
+            print(f"You've found a {weapon}!")
+            return weapon
 
-def check_items():
-    """
-    Function to check if the player has an key in their inventory
-    """
-    item_find = random.choice([True, False])
-    if item_find is True:
-        guardian.items.append("key")
-        print("You've found a key!")
+        elif weapon_find is False:
+            print("There was nothing in the chest, only dust...")
 
-
-def check_weapon():
-    """
-    Function to choose if the player gets a random weapoon from the chest
-    """
-    weapon_find = random.choice([True, False])
-    if weapon_find is True:
-        weapon = random.choice([
-                               "Zhalo Supercell",
-                               "The Last Word",
-                               "No Land Beyond",
-                               "Felwinter's Lie",
-                               "Gjallarhorn"
-                               ])
-        class_worksheet.update_cell(2, 4, weapon)
-        print(f"You've found a {weapon}!")
-        return weapon
-
-    elif weapon_find is False:
-        print("There was nothing in the chest, only dust...")
-
-
-def handle_vandal():
-    """
-    function for random Vandal encounter
-    """
-    vandal_attack = random.choice([True, False])
-    if vandal_attack is True:
-        print("Out of nowhere, a Fallen Vandal attacks you!")
-        print("You took some damage :(")
-        guardian.health -= random.randint(1, 100)
-        print(f"\nHealth: {guardian.health}")
-        if guardian.health < 0:
-            print("You are dead!")
-            print("Your Ghost can ressurect you. Do you want him to?")
-            play_again()
+    def handle_vandal(self):
+        """
+        function for random Vandal encounter
+        """
+        vandal_attack = random.choice([True, False])
+        if vandal_attack is True:
+            print("Out of nowhere, a Fallen Vandal attacks you!")
+            print("You took some damage :(")
+            guardian.health -= random.randint(1, 100)
+            print(f"\nHealth: {guardian.health}")
+            if guardian.health < 0:
+                print("You are dead!")
+                print("Your Ghost can ressurect you. Do you want him to?")
+                self.play_again()
 
 
 new_story = Story()
