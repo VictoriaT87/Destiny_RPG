@@ -264,9 +264,9 @@ class Story:
         print("Ahead you can see 2 open doorways. You can enter one of"
               " them or continue down the hallway")
         print("What do you want to do?")
-        print("1. Enter door 1?\n>  "
-              "2. Enter door 2?\n> "
-              "3. Continue down the hallway?\n> ")
+        print("1. Enter door 1?\n"
+              "2. Enter door 2?\n"
+              "3. Continue down the hallway?")
 
         user_input = ""
 
@@ -279,6 +279,34 @@ class Story:
             print("You decide to enter the 2nd door. It's a small room.")
             self.empty_room()
         if user_input == "3":
+            print("You continue until you see a giant open room ahead"
+                  "with a spaceship in it!")
+            self.spaceship_room()
+        else:
+            print("Please enter a valid option.")
+
+    def empty_room(self):
+        """
+        Empty room, player must turn around and choose another option
+        from building_hallway
+        """
+        handle_vandal()
+
+        print("You look around the room.\n"
+              "It seems completely empty, just dust.\n"
+              "You turn around and decide to pick a different option")
+
+        print("You return to the hallway. Do you want to go to 1. Door 1?"
+              "or 2. Continue down the hall?")
+
+        user_input = ""
+
+        user_input = input("\n> ")
+        if user_input == "1":
+            print("You enter door 1. It's a small room with a Fallen Dreg"
+                  " inside!")
+            self.dreg_fight()
+        if user_input == "2":
             print("You continue until you see a giant open room ahead"
                   "with a spaceship in it!")
             self.spaceship_room()
@@ -298,21 +326,24 @@ class Story:
         # Health system from Elijah Henderson
         # https://www.youtube.com/watch?v=n17Hkgi8rt4
         guardian.health -= random.randint(1, 100)
-        print("Before you can make a move, the Dreg takes one shot with his"
+        print("Before you can make a move, the Dreg takes one shot with his\n"
               "weapon. It hits you on the arm!"
               )
         print(f"\nHealth: {guardian.health}")
-        if guardian.health == 0:
+        if guardian.health < 0:
             print("You are dead!")
-            sys.exit()
+            print("Would you like to play again?")
+            play_again()
 
         if stored_weapon is not None:
+            print("Now it's your turn!")
             print(f"You pull out your {stored_weapon}")
             print("line up on the Dreg's head...")
             print("and pull the trigger.")
             print("Nice work!")
             self.hallway_choice()
         else:
+            print("Now it's your turn!")
             print("You don't have a gun... but you do have your abilities")
             print(f"You're a {player_class}. A {player_subclass}.")
             print(f"You can use your {player_ability}")
@@ -321,35 +352,12 @@ class Story:
             print("Nice work! The Dreg is dust.")
             self.hallway_choice()
 
-    def empty_room(self):
-        """
-        Empty room, player must turn around and choose another option
-        from building_hallway
-        """
-        handle_vandal()
-
-        print("You look around the room."
-              "It seems completely empty, just dust."
-              "You turn around and decide to pick a different option")
-
-        print("You return to the hallway. Do you want to go to 1. Door 1?"
-              "or 2. Continue down the hall?")
-
-        user_input = ""
-
-        user_input = input("\n> ")
-        if user_input == "1":
-            self.dreg_fight()
-        if user_input == "2":
-            self.spaceship_room()
-        else:
-            print("Please enter a valid option.")
-
     def hallway_choice(self):
         """
         User chooses between 2 paths
         """
         handle_vandal()
+
         print("\n ")
         print("Ahead, you see 2 corridors")
         print("Do you want to go left, right or back?")
@@ -399,6 +407,10 @@ class Story:
                 print("The ship rumbles to life and takes off.")
                 print("Next destination - The Tower... home.")
                 print("END")
+                print("\n ")
+                print("Well done Guardian! You win!")
+                print("Would you like to play again?")
+                play_again()
 
             elif inital_luck() < 50:
                 print("You feel the Light course through you!")
@@ -408,17 +420,7 @@ class Story:
                 print("The Captain turns to you and aims his gun.")
                 print("He hits you directly and you fall down... dead.")
                 print("Your Ghost can ressurect you. Do you want him to?")
-                print("Yes or No?")
-                user_input = ""
-                user_input = input("\n> ").capitalize()
-                if user_input == "Yes":
-                    new_story.introduction()
-                elif user_input == "No":
-                    print("Thank you for playing, Guardian!")
-                    clear_worksheet()
-                    sys.exit()
-                else:
-                    print("Please enter Yes or No.")
+                play_again()
 
         elif user_input == "2":
             print("This Captain is giant!")
@@ -429,8 +431,8 @@ class Story:
             print("[END]")
             print("\n ")
             print("Thanks for playing, Guardian!")
-            clear_worksheet()
-            sys.exit()
+            print("Would you like to play again?")
+            play_again()
         else:
             print("Please enter either fight or run.")
 
@@ -439,14 +441,16 @@ class Story:
         Function to check whether the player escapes from the ambush
         """
         if inital_luck() > 50:
+            print("\n ")
             print("You manage to hide behind some nearby crates")
-            print("before the giant fallen Servitar sees you.")
+            print("before the giant fallen Servitor sees you.")
             print("You wait for his eye to close before you turn and run")
             print("the down the hallway on the right!")
             print("Phew!")
             self.spaceship_room()
         else:
-            print("Oh no, a Fallen Servitar!")
+            print("\n ")
+            print("Oh no, a Fallen Servitor!")
             print("You have no time to move before his giant Eye")
             print("turns it's gaze on you.")
             print("Within seconds, his blast hits you directly!")
@@ -454,8 +458,25 @@ class Story:
             print("END")
             print("\n ")
             print("Thanks for playing, Guardian!")
-            clear_worksheet()
-            sys.exit()
+            print("Would you like to play again?")
+            play_again()
+
+
+def play_again():
+    """
+    Option to allow player to play again or exit
+    """
+    print("Yes or No?")
+    user_input = ""
+    user_input = input("\n> ").capitalize()
+    if user_input == "Yes":
+        new_story.introduction()
+    elif user_input == "No":
+        print("Thank you for playing, Guardian!")
+        clear_worksheet()
+        sys.exit()
+    else:
+        print("Please enter Yes or No.")
 
 
 def clear_worksheet():
@@ -511,12 +532,13 @@ def handle_vandal():
     vandal_attack = random.choice([True, False])
     if vandal_attack is True:
         print("Out of nowhere, a Fallen Vandal attacks you!")
-        print("You took some damage!", 2)
+        print("You took some damage :(")
         guardian.health -= random.randint(1, 100)
         print(f"\nHealth: {guardian.health}")
-        if guardian.health == 0:
+        if guardian.health < 0:
             print("You are dead!")
-            sys.exit()
+            print("Your Ghost can ressurect you. Do you want him to?")
+            play_again()
 
 
 new_story = Story()
