@@ -1,6 +1,6 @@
 import sys
 import random
-# import time
+import time
 
 import gspread
 from google.oauth2.service_account import Credentials
@@ -19,15 +19,16 @@ SHEET = GSPREAD_CLIENT.open('Destiny_RPG')
 class_worksheet = SHEET.worksheet('PlayerClass')
 stats_worksheet = SHEET.worksheet('PlayerStats')
 
-# def slow_text(text):
-#     """
-#     Slows the speed of the text being printed.
-#     https://stackoverflow.com/questions/60608275/how-can-i-print-text-so-it-looks-like-its-being-typed-out
-#     """
-#     text += "\n"
-#     for char in text:
-#         time.sleep(0.04)
-#         print(char, end="", flush=True)
+
+def slow_text(text):
+    """
+    Slows the speed of the text being printed.
+    https://stackoverflow.com/questions/60608275/how-can-i-print-text-so-it-looks-like-its-being-typed-out
+    """
+    text += "\n"
+    for char in text:
+        time.sleep(0.04)
+        print(char, end="", flush=True)
 
 
 class Player:
@@ -55,8 +56,8 @@ class RandomEncounter:
         """
         Text to print on random encounter trigger
         """
-        print(f"A {self.name} emerges from the shadows.")
-        print("He takes one lucky shot at you before he runs away.")
+        slow_text(f"A {self.name} emerges from the shadows.")
+        slow_text("He takes one lucky shot at you before he runs away.")
 
 
 vandal = RandomEncounter("Vandal")
@@ -72,16 +73,16 @@ class Story:
         Introduction to the game to run first
         """
 
-        print("Welcome Guardian!")
-        print("This is a text adventure game based on the video game Destiny!")
-        print("\n ")
-        print("You are a New Light - a person newly re-awoken by a small")
-        print("robot companion known as a Ghost.")
-        print("You are now a Guardian, chosen to wield the Light")
-        print("to defeat the Darkness.\n")
+        slow_text("Welcome Guardian!")
+        slow_text("This is a text adventure game based on the video game Destiny!")
+        slow_text("\n ")
+        slow_text("You are a New Light - a person newly re-awoken by a small")
+        slow_text("robot companion known as a Ghost.")
+        slow_text("You are now a Guardian, chosen to wield the Light")
+        slow_text("to defeat the Darkness.\n")
 
-        print("Let's get your adventure started!\n")
-        print("\n")
+        slow_text("Let's get your adventure started!\n")
+        slow_text("\n")
 
         clear_worksheet()
         inital_luck()
@@ -91,19 +92,19 @@ class Story:
         """
         Get the name of the player.
         """
-        print("- - - - - - -")
-        print("Eyes up, Guardian.\n")
-        print("I've finally found you.\n")
-        print("I've been searching for you for centuries.\n")
-        print("What should I call you?")
+        slow_text("- - - - - - -")
+        slow_text("Eyes up, Guardian.\n")
+        slow_text("I've finally found you.\n")
+        slow_text("I've been searching for you for centuries.\n")
+        slow_text("What should I call you?")
         while True:
             name = input("\n> ").capitalize()
             # https://www.w3schools.com/python/ref_string_isalpha.asp
             if not name.isalpha():
-                print("Please enter letters only.")
+                slow_text("Please enter letters only.")
                 continue
             else:
-                print(f"It's nice to meet you, {name}. I'm your Ghost.")
+                slow_text(f"It's nice to meet you, {name}. I'm your Ghost.")
                 self.get_class()
         return name
 
@@ -111,32 +112,32 @@ class Story:
         """
         Player chooses their class. 3 available based on Destiny lore.
         """
-        print("Let's try to figure out what kind of Guardian you are... \n")
-        print("Do you think you're a Hunter, Warlock or Titan?\n")
-        print("Hunter: Agile and daring, Hunters are quick on their feet")
-        print("and quicker on the draw.\n")
-        print("Warlock: Warlocks weaponize the mysteries of the universe")
-        print("to sustain themselves and devastate their foes.\n")
-        print("Titan: Disciplined and proud, Titans are capable of both ")
-        print("aggresive assaults and stalwart defenses.\n")
+        slow_text("Let's try to figure out what kind of Guardian you are... \n")
+        slow_text("Do you think you're a Hunter, Warlock or Titan?\n")
+        slow_text("Hunter: Agile and daring, Hunters are quick on their feet")
+        slow_text("and quicker on the draw.\n")
+        slow_text("Warlock: Warlocks weaponize the mysteries of the universe")
+        slow_text("to sustain themselves and devastate their foes.\n")
+        slow_text("Titan: Disciplined and proud, Titans are capable of both ")
+        slow_text("aggresive assaults and stalwart defenses.\n")
         while True:
             chosen_class = input("My class is: \n> ").capitalize()
             classes = ["Hunter", "Warlock", "Titan"]
             if chosen_class in classes:
-                print(f"Welcome, {chosen_class}.")
-                print("\n")
+                slow_text(f"Welcome, {chosen_class}.")
+                slow_text("\n")
                 class_worksheet.update_cell(2, 1, chosen_class)
                 self.get_subclass(chosen_class)
             else:
-                print("Please type one of the classes listed.")
+                slow_text("Please type one of the classes listed.")
                 continue
 
     def get_subclass(self, chosen_class):
         """Players choose their subclass - each class has 3."""
 
-        print("Each Lightbearer has a choice... \n")
-        print("Your subclass defines your personality and skill.")
-        print("You must choose now. Are you a... \n")
+        slow_text("Each Lightbearer has a choice... \n")
+        slow_text("Your subclass defines your personality and skill.")
+        slow_text("You must choose now. Are you a... \n")
 
         if chosen_class == "Hunter":
             subclasses = ['Nightstalker', 'Blade Dancer', 'Gunslinger']
@@ -151,8 +152,8 @@ class Story:
             print(index, subclass)
 
         choice = int(input(f"Make your choice, {chosen_class} \n> "))
-        print(f"A {subclasses[choice-1]}?")
-        print("The darkness doesn't stand a chance \n")
+        slow_text(f"A {subclasses[choice-1]}?")
+        slow_text("The darkness doesn't stand a chance \n")
 
         chosen_subclass = subclasses[choice-1]
         class_worksheet.update_cell(2, 2, chosen_subclass)
@@ -181,18 +182,18 @@ class Story:
         First scene to play after choosing a name and class
         """
 
-        print("You look around and notice you're in a familiar place...")
-        print("This is the Cosmodrome. The last thing you remember is")
-        print("fighting here in a war against The Fallen.")
-        print("But now everything is overgrown, it feels as if centuries")
-        print("have passed.\n")
-        print("You look around. Behind you is a cliff edge.")
-        print("In front of you are some cars. Beyond them is an entrance")
-        print("to a building.")
-        print("What do you want to do?\n")
-        print("1. Search the cars?")
-        print("2. Go to the building entrance?")
-        print("3. Run off the cliff behind you? This is all too weird!")
+        slow_text("You look around and notice you're in a familiar place...")
+        slow_text("This is the Cosmodrome. The last thing you remember is")
+        slow_text("fighting here in a war against The Fallen.")
+        slow_text("But now everything is overgrown, it feels as if centuries")
+        slow_text("have passed.\n")
+        slow_text("You look around. Behind you is a cliff edge.")
+        slow_text("In front of you are some cars. Beyond them is an entrance")
+        slow_text("to a building.")
+        slow_text("What do you want to do?\n")
+        slow_text("1. Search the cars?")
+        slow_text("2. Go to the building entrance?")
+        slow_text("3. Run off the cliff behind you? This is all too weird!")
 
         user_input = ""
 
@@ -202,24 +203,24 @@ class Story:
         elif user_input == "2":
             self.building_entrance()
         elif user_input == "3":
-            print("You run towards the cliff and jump! This is all too much")
-            print("to take. [END]")
+            slow_text("You run towards the cliff and jump! This is all too much")
+            slow_text("to take. [END]")
             clear_worksheet()
             sys.exit()
         else:
-            print("Please enter a valid option.")
+            slow_text("Please enter a valid option.")
 
     def search_cars(self):
         """
         Function to search the cars
         """
-        print("You decide to search through some of the abandoned cars.")
+        slow_text("You decide to search through some of the abandoned cars.")
         check_items()
 
         if guardian.items == ["key"]:
-            print("You put your key away and walk towards the building.")
+            slow_text("You put your key away and walk towards the building.")
         else:
-            print("But you didn't find anything")
+            slow_text("But you didn't find anything")
 
         self.building_entrance()
 
@@ -228,30 +229,30 @@ class Story:
         Function to enter the building and try to open a chest
         """
 
-        print("The building is long abandoned, rust covers the doors")
-        print("All the windows are broken.")
-        print("In front of you, you see a chest...\n")
-        print("Try to open the chest?")
-        print("Yes or No")
+        slow_text("The building is long abandoned, rust covers the doors.")
+        slow_text("All the windows are broken.")
+        slow_text("In front of you, you see a chest...\n")
+        slow_text("Try to open the chest?")
+        slow_text("Yes or No")
 
         while True:
             action = input("\n> ")
             if action == "yes" and guardian.items == ["key"]:
                 guardian.items.remove("key")
-                print("You've used your key!")
+                slow_text("You've used your key!")
                 check_weapon()
                 self.building_hallway()
             elif action == "yes" and guardian.items == []:
-                print("You don't have a key and the lock won't budge.")
-                print("You decide to move on")
+                slow_text("You don't have a key and the lock won't budge.")
+                slow_text("You decide to move on")
                 self.building_hallway()
             elif action == "no":
-                print("The chest looks old and worn...")
-                print("You don't think you'll find anything of value in it.")
-                print("You move into the building.")
+                slow_text("The chest looks old and worn...")
+                slow_text("You don't think you'll find anything of value in it.")
+                slow_text("You move into the building.")
                 self.building_hallway()
             else:
-                print("Please enter Yes or No.")
+                slow_text("Please enter Yes or No.")
 
     def building_hallway(self):
         """
@@ -260,30 +261,30 @@ class Story:
         """
         handle_vandal()
 
-        print("You enter into a long hallway inside the building.")
-        print("Ahead you can see 2 open doorways. You can enter one of"
-              " them or continue down the hallway")
-        print("What do you want to do?")
-        print("1. Enter door 1?\n"
-              "2. Enter door 2?\n"
-              "3. Continue down the hallway?")
+        slow_text("You enter into a long hallway inside the building.")
+        slow_text("Ahead you can see 2 open doorways. You can enter one of"
+                  " them or continue down the hallway.")
+        slow_text("What do you want to do?")
+        slow_text("1. Enter door 1?\n"
+                  "2. Enter door 2?\n"
+                  "3. Continue down the hallway?")
 
         user_input = ""
 
         user_input = input("\n> ")
         if user_input == "1":
-            print("You enter door 1. It's a small room with a Fallen Dreg"
-                  " inside!")
+            slow_text("You enter door 1. It's a small room with a Fallen Dreg"
+                      " inside!")
             self.dreg_fight()
         if user_input == "2":
-            print("You decide to enter the 2nd door. It's a small room.")
+            slow_text("You decide to enter the 2nd door. It's a small room.")
             self.empty_room()
         if user_input == "3":
-            print("You continue until you see a giant open room ahead"
-                  "with a spaceship in it!")
+            slow_text("You continue until you see a giant open room ahead"
+                      "with a spaceship in it!")
             self.spaceship_room()
         else:
-            print("Please enter a valid option.")
+            slow_text("Please enter a valid option.")
 
     def empty_room(self):
         """
@@ -292,26 +293,26 @@ class Story:
         """
         handle_vandal()
 
-        print("You look around the room.\n"
-              "It seems completely empty, just dust.\n"
-              "You turn around and decide to pick a different option")
+        slow_text("You look around the room.\n"
+                  "It seems completely empty, just dust.\n"
+                  "You turn around and decide to pick a different option")
 
-        print("You return to the hallway. Do you want to go to 1. Door 1?"
-              "or 2. Continue down the hall?")
+        slow_text("You return to the hallway. Do you want to go to 1. Door 1?"
+                  "or 2. Continue down the hall?")
 
         user_input = ""
 
         user_input = input("\n> ")
         if user_input == "1":
-            print("You enter door 1. It's a small room with a Fallen Dreg"
-                  " inside!")
+            slow_text("You enter door 1. It's a small room with a Fallen Dreg"
+                      " inside!")
             self.dreg_fight()
         if user_input == "2":
-            print("You continue until you see a giant open room ahead"
-                  "with a spaceship in it!")
+            slow_text("You continue until you see a giant open room ahead"
+                      "with a spaceship in it!")
             self.spaceship_room()
         else:
-            print("Please enter a valid option.")
+            slow_text("Please enter a valid option.")
 
     def dreg_fight(self):
         """
@@ -326,30 +327,30 @@ class Story:
         # Health system from Elijah Henderson
         # https://www.youtube.com/watch?v=n17Hkgi8rt4
         guardian.health -= random.randint(1, 100)
-        print("Before you can make a move, the Dreg takes one shot with his\n"
-              "weapon. It hits you on the arm!"
-              )
-        print(f"\nHealth: {guardian.health}")
+        slow_text("Before you can make a move, the Dreg takes one shot with his\n"
+                  "weapon. It hits you on the arm!"
+                  )
+        slow_text(f"\nHealth: {guardian.health}")
         if guardian.health < 0:
-            print("You are dead!")
-            print("Would you like to play again?")
+            slow_text("You are dead!")
+            slow_text("Would you like to play again?")
             play_again()
 
         if stored_weapon is not None:
-            print("Now it's your turn!")
-            print(f"You pull out your {stored_weapon}")
-            print("line up on the Dreg's head...")
-            print("and pull the trigger.")
-            print("Nice work!")
+            slow_text("Now it's your turn!")
+            slow_text(f"You pull out your {stored_weapon}")
+            slow_text("line up on the Dreg's head...")
+            slow_text("and pull the trigger.")
+            slow_text("Nice work!")
             self.hallway_choice()
         else:
-            print("Now it's your turn!")
-            print("You don't have a gun... but you do have your abilities")
-            print(f"You're a {player_class}. A {player_subclass}.")
-            print(f"You can use your {player_ability}")
-            print("You throw it and it sticks to the Dreg")
-            print("and explodes in a burst of Light!")
-            print("Nice work! The Dreg is dust.")
+            slow_text("Now it's your turn!")
+            slow_text("You don't have a gun... but you do have your abilities")
+            slow_text(f"You're a {player_class}. A {player_subclass}.")
+            slow_text(f"You can use your {player_ability}")
+            slow_text("You throw it and it sticks to the Dreg")
+            slow_text("and explodes in a burst of Light!")
+            slow_text("Nice work! The Dreg is dust.")
             self.hallway_choice()
 
     def hallway_choice(self):
@@ -358,107 +359,107 @@ class Story:
         """
         handle_vandal()
 
-        print("\n ")
-        print("Ahead, you see 2 corridors")
-        print("Do you want to go left, right or back?")
+        slow_text("\n ")
+        slow_text("Ahead, you see 2 corridors")
+        slow_text("Do you want to go left, right or back?")
 
         user_input = ""
         user_input = input("\n> ").capitalize()
         if user_input == "Left":
-            print("You go left and ahead of you see a giant room")
-            print("with a spaceship. You check it out.")
+            slow_text("You go left and ahead of you see a giant room")
+            slow_text("with a spaceship. You check it out.")
             self.spaceship_room()
         elif user_input == "Right":
-            print("You go right. It's very hard to see.")
-            print("In the darkness, you can make out something large...")
-            print("with a glowing purple eye!")
+            slow_text("You go right. It's very hard to see.")
+            slow_text("In the darkness, you can make out something large...")
+            slow_text("with a glowing purple eye!")
             self.luck_escape()
         elif user_input == "Back":
-            print("'I'm done fighting these Dregs, I'm out of here!'[END]")
+            slow_text("'I'm done fighting these Dregs, I'm out of here!'[END]")
             clear_worksheet()
             sys.exit()
         else:
-            print("Please enter either left or right.")
+            slow_text("Please enter either left or right.")
 
     def spaceship_room(self):
         """
         Spaceship room choice function
         """
-        print("You can see straight away that the ship")
-        print("is missing it's engine.")
-        print("As soon as you take a step back, you hear a sound.")
-        print("A rumbling from the walls...")
-        print("The roof cracks open and you see a Fallen Captain emerge!")
-        print("He's carrying the engine!")
-        print("If you want it, you'll have to take it from him.")
-        print("\n ")
-        print("1. Fight or 2. Run?")
+        slow_text("You can see straight away that the ship")
+        slow_text("is missing it's engine.")
+        slow_text("As soon as you take a step back, you hear a sound.")
+        slow_text("A rumbling from the walls...")
+        slow_text("The roof cracks open and you see a Fallen Captain emerge!")
+        slow_text("He's carrying the engine!")
+        slow_text("If you want it, you'll have to take it from him.")
+        slow_text("\n ")
+        slow_text("1. Fight or 2. Run?")
         user_input = ""
         user_input = input("\n> ").capitalize()
         if user_input == "1":
             if inital_luck() > 50:
-                print("You feel the Light course through you!")
-                print("You use your ultimate ability - your Super.")
-                print("You wield the Light, you aim and the Captain")
-                print("and hit him with the full force of your Super.")
-                print("He staggers... and falls. Dead.")
-                print("\n ")
-                print("You grab the engine and Ghost installs it.")
-                print("The ship rumbles to life and takes off.")
-                print("Next destination - The Tower... home.")
-                print("END")
-                print("\n ")
-                print("Well done Guardian! You win!")
-                print("Would you like to play again?")
+                slow_text("You feel the Light course through you!")
+                slow_text("You use your ultimate ability - your Super.")
+                slow_text("You wield the Light, you aim and the Captain")
+                slow_text("and hit him with the full force of your Super.")
+                slow_text("He staggers... and falls. Dead.")
+                slow_text("\n ")
+                slow_text("You grab the engine and Ghost installs it.")
+                slow_text("The ship rumbles to life and takes off.")
+                slow_text("Next destination - The Tower... home.")
+                slow_text("END")
+                slow_text("\n ")
+                slow_text("Well done Guardian! You win!")
+                slow_text("Would you like to play again?")
                 play_again()
 
             elif inital_luck() < 50:
-                print("You feel the Light course through you!")
-                print("You use your ultimate ability - your Super.")
-                print("You wield the Light, you aim and the Captain")
-                print("But you miss!")
-                print("The Captain turns to you and aims his gun.")
-                print("He hits you directly and you fall down... dead.")
-                print("Your Ghost can ressurect you. Do you want him to?")
+                slow_text("You feel the Light course through you!")
+                slow_text("You use your ultimate ability - your Super.")
+                slow_text("You wield the Light, you aim and the Captain")
+                slow_text("But you miss!")
+                slow_text("The Captain turns to you and aims his gun.")
+                slow_text("He hits you directly and you fall down... dead.")
+                slow_text("Your Ghost can ressurect you. Do you want him to?")
                 play_again()
 
         elif user_input == "2":
-            print("This Captain is giant!")
-            print("No way you want to take him on. You turn and run.")
-            print("But behind you is an army of Dregs.")
-            print("Within seconds you're swarmed...")
-            print("And your Light fades.")
-            print("[END]")
-            print("\n ")
-            print("Thanks for playing, Guardian!")
-            print("Would you like to play again?")
+            slow_text("This Captain is giant!")
+            slow_text("No way you want to take him on. You turn and run.")
+            slow_text("But behind you is an army of Dregs.")
+            slow_text("Within seconds you're swarmed...")
+            slow_text("And your Light fades.")
+            slow_text("[END]")
+            slow_text("\n ")
+            slow_text("Thanks for playing, Guardian!")
+            slow_text("Would you like to play again?")
             play_again()
         else:
-            print("Please enter either fight or run.")
+            slow_text("Please enter either fight or run.")
 
     def luck_escape(self):
         """
         Function to check whether the player escapes from the ambush
         """
         if inital_luck() > 50:
-            print("\n ")
-            print("You manage to hide behind some nearby crates")
-            print("before the giant fallen Servitor sees you.")
-            print("You wait for his eye to close before you turn and run")
-            print("the down the hallway on the right!")
-            print("Phew!")
+            slow_text("\n ")
+            slow_text("You manage to hide behind some nearby crates")
+            slow_text("before the giant fallen Servitor sees you.")
+            slow_text("You wait for his eye to close before you turn and run")
+            slow_text("the down the hallway on the right!")
+            slow_text("Phew!")
             self.spaceship_room()
         else:
-            print("\n ")
-            print("Oh no, a Fallen Servitor!")
-            print("You have no time to move before his giant Eye")
-            print("turns it's gaze on you.")
-            print("Within seconds, his blast hits you directly!")
-            print("You drop to the floor. Dead.")
-            print("END")
-            print("\n ")
-            print("Thanks for playing, Guardian!")
-            print("Would you like to play again?")
+            slow_text("\n ")
+            slow_text("Oh no, a Fallen Servitor!")
+            slow_text("You have no time to move before his giant Eye")
+            slow_text("turns it's gaze on you.")
+            slow_text("Within seconds, his blast hits you directly!")
+            slow_text("You drop to the floor. Dead.")
+            slow_text("END")
+            slow_text("\n ")
+            slow_text("Thanks for playing, Guardian!")
+            slow_text("Would you like to play again?")
             play_again()
 
 
@@ -466,17 +467,17 @@ def play_again():
     """
     Option to allow player to play again or exit
     """
-    print("Yes or No?")
+    slow_text("Yes or No?")
     user_input = ""
     user_input = input("\n> ").capitalize()
     if user_input == "Yes":
         new_story.introduction()
     elif user_input == "No":
-        print("Thank you for playing, Guardian!")
+        slow_text("Thank you for playing, Guardian!")
         clear_worksheet()
         sys.exit()
     else:
-        print("Please enter Yes or No.")
+        slow_text("Please enter Yes or No.")
 
 
 def clear_worksheet():
@@ -501,7 +502,7 @@ def check_items():
     item_find = random.choice([True, False])
     if item_find is True:
         guardian.items.append("key")
-        print("You've found a key!")
+        slow_text("You've found a key!")
 
 
 def check_weapon():
@@ -518,11 +519,11 @@ def check_weapon():
                                "Gjallarhorn"
                                ])
         class_worksheet.update_cell(2, 4, weapon)
-        print(f"You've found a {weapon}!")
+        slow_text(f"You've found a {weapon}!")
         return weapon
 
     elif weapon_find is False:
-        print("There was nothing in the chest, only dust...")
+        slow_text("There was nothing in the chest, only dust...")
 
 
 def handle_vandal():
@@ -531,13 +532,13 @@ def handle_vandal():
     """
     vandal_attack = random.choice([True, False])
     if vandal_attack is True:
-        print("Out of nowhere, a Fallen Vandal attacks you!")
-        print("You took some damage :(")
+        slow_text("Out of nowhere, a Fallen Vandal attacks you!")
+        slow_text("You took some damage :(")
         guardian.health -= random.randint(1, 100)
-        print(f"\nHealth: {guardian.health}")
+        slow_text(f"\nHealth: {guardian.health}")
         if guardian.health < 0:
-            print("You are dead!")
-            print("Your Ghost can ressurect you. Do you want him to?")
+            slow_text("You are dead!")
+            slow_text("Your Ghost can ressurect you. Do you want him to?")
             play_again()
 
 
