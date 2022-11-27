@@ -39,19 +39,8 @@ class Player:
         self.items = items
         self.health = health
 
-    def weapons(self, worksheet_weapon):
-        """
-        Connect to weapon cell in spreadsheet
-        """
-        worksheet_weapon = class_worksheet.cell(2, 4).value
-        return worksheet_weapon
-
 
 guardian = Player([], 100)
-stored_weapon = class_worksheet.cell(2, 4).value
-player_class = class_worksheet.cell(2, 1).value
-player_subclass = class_worksheet.cell(2, 2).value
-player_ability = class_worksheet.cell(2, 3).value
 
 
 class Story:
@@ -118,31 +107,31 @@ class Story:
                 print(f"Welcome, {chosen_class}.")
                 print("\n")
                 class_worksheet.update_cell(2, 1, chosen_class)
-                self.get_subclass()
+                self.get_subclass(chosen_class)
             else:
                 print("Please type one of the classes listed.")
                 continue
 
-    def get_subclass(self):
+    def get_subclass(self, chosen_class):
         """Players choose their subclass - each class has 3."""
 
         print("Each Lightbearer has a choice... \n")
         print("Your subclass defines your personality and skill.")
         print("You must choose now. Are you a... \n")
 
-        if player_class == "Hunter":
+        if chosen_class == "Hunter":
             subclasses = ['Nightstalker', 'Blade Dancer', 'Gunslinger']
 
-        elif player_class == "Warlock":
+        elif chosen_class == "Warlock":
             subclasses = ['Voidwalker', 'Sunsinger', 'Stormcaller']
 
-        elif player_class == "Titan":
+        elif chosen_class == "Titan":
             subclasses = ['Striker', 'Defender', 'Sunbreaker']
 
         for index, subclass in enumerate(subclasses, 1):
             print(index, subclass)
 
-        choice = int(input(f"Make your choice, {player_class} \n> "))
+        choice = int(input(f"Make your choice, {chosen_class} \n> "))
         print(f"A {subclasses[choice-1]}?")
         print("The darkness doesn't stand a chance \n")
 
@@ -264,7 +253,7 @@ class Story:
 
         user_input = input("\n> ").capitalize()
         if user_input == "Fight":
-            self.dreg_fight()
+            self.dreg_fight("")
         elif user_input == "Run":
             print("You've alerady died once fighting Dregs")
             print("You're not doing it again.")
@@ -276,13 +265,29 @@ class Story:
         else:
             print("Please enter a valid option.")
 
-    def dreg_fight(self):
+    def dreg_fight(self, weapon):
         """
         fight scene function, checks for weapon from random roll
         or else use abilities
         """
+        player_class = class_worksheet.cell(2, 1).value
+        player_subclass = class_worksheet.cell(2, 2).value
+        player_ability = class_worksheet.cell(2, 3).value
+        stored_weapon = class_worksheet.cell(2, 4).value
+
+        # Health system from Elijah Henderson
+        # https://www.youtube.com/watch?v=n17Hkgi8rt4
+        guardian.health -= random.randint(1, 100)
+        print("Before you can make a move, the Dreg takes one shot with his"
+              "weapon. It hits you on the arm!"
+              )
+        print(f"\nHealth: {guardian.health}")
+        if guardian.health == 0:
+            print("You are dead!")
+            sys.exit()
+
         if stored_weapon is not None:
-            print(f"You pull out your {stored_weapon}")
+            print(f"You pull out your {weapon}")
             print("line up on the Dreg's head...")
             print("and pull the trigger.")
             print("Nice work!")
