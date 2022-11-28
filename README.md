@@ -172,7 +172,15 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 The following are the steps I went through to deploy my live site:
 
 - The site was deployed using Heroku. The steps to deploy are as follows: 
-  - 
+1. Go to [Heroku](https://dashboard.heroku.com/apps)
+2. Go to 'New' and select 'Create a new app'
+3. Input your app name and create app.
+4. Navigate to 'Settings'
+5. Install the needed buildpacks. Select Python and install and then node.js and install and then click save. They must be in this order.
+6. Navigate to the 'Deploy' section. 
+7. Connect to GitHub, search for your repo and confirm. 
+8. Choose branch to deploy.
+9. Your app should now be available to see. You can choose whether to have your app automatically redeploy with every push or to keep it manual. 
 
 - To Fork the repository:
   - On GitHub.com, navigate to the repository.
