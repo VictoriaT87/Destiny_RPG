@@ -75,8 +75,8 @@ class Story:
         Introduction to the game to run first
         """
 
-        text1 = pyfiglet.figlet_format("DESTINY")
-        text2 = pyfiglet.figlet_format("RPG GAME")
+        text1 = pyfiglet.figlet_format("DESTINY", justify="center")
+        text2 = pyfiglet.figlet_format("RPG GAME", justify="center")
         print(text1)
         print(text2)
 
