@@ -4,7 +4,7 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 
 ![Website responsiveness on multiple screen sizes](assets/documentation/DestinyRPG.png)
 
-[Live link to The Destiny Text Adventure Game](https://destiny-rpg.herokuapp.com/)
+[Live link to The Destiny Text Adventure Gamecl](https://destiny-rpg.herokuapp.com/)
 
 
 <br>
