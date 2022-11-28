@@ -13,6 +13,10 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 
 1. [Features](#features)
     * [Game Start](#game-start)
+    * [Class and Subclasses](#classes-and-subclasses)
+    * [Random Luck and Encounters](#random-luck-and-encounters)
+    * [Inventory](#inventory)
+    * [Play Again](#play-again)
 2. [User Experience (UX)](#user-experience-ux)
     * [Site Goals](#site-goals)
     * [User Stories](#user-stories)
@@ -41,6 +45,20 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 ### Classes and Subclasses
 - The player will be asked to enter their name first and then they are given a choice of which Destiny Class they would like to be, as well as their subclass. These choices are then stored in a Google Sheets Worksheet, allowing this data to be pulled later on in the game to reference the player.
 - Depending on their choices here, the game will later on pick a grenade ability of the element selected in a fight scene. 
+![Class Selection](assets/documentation/class-choice.png)
+![Subclass Selection](assets/documentation/subclass-choice.png)
+![Ability From Worksheet](assets/documentation/grenade-ability.png)
+
+### Random Luck and Encounters
+- When the game first loads, players will be given a random luck number between 1-100. This is chosen using the randint Method. This will effect the end game for the player as well as in certain fights.
+- A random encounter can occur for the player. In certain rooms, an encounter will roll to either True or False. If this is True, the encounter with a Vandal will run and players will lose a certain amount of health, again chosen by the randint Method. 
+
+### Inventory
+- For their first choice, players can search some cars in front of them. If they're lucky, the can find a key, which will allow them to open a chest within the story. This chest has a chance of dropping a weapon, which will give them a greater advantage of winning the game.
+- This item is stored in the Google Sheets Worksheet, allowing the name to be recalled later in the story.
+
+### Play Again
+- At the end of the game or if the player dies, they have the option of playing again. This will trigger code to reset the workseet stats, reset the console and run the story from the beginning.
 
 <br>
 
