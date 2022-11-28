@@ -52,6 +52,7 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 ### Random Luck and Encounters
 - When the game first loads, players will be given a random luck number between 1-100. This is chosen using the randint Method. This will effect the end game for the player as well as in certain fights.
 - A random encounter can occur for the player. In certain rooms, an encounter will roll to either True or False. If this is True, the encounter with a Vandal will run and players will lose a certain amount of health, again chosen by the randint Method. 
+![Random Encounter](assets/documentation/random-encounter.png)
 
 ### Inventory
 - For their first choice, players can search some cars in front of them. If they're lucky, the can find a key, which will allow them to open a chest within the story. This chest has a chance of dropping a weapon, which will give them a greater advantage of winning the game.
