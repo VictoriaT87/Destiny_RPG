@@ -1,31 +1,172 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Destiny RPG Text Adventure Game
 
-Welcome VictoriaT87,
+<br>
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+# Table of Contents
 
-## Reminders
+1. [Features](#features)  
+    * 
+2. [User Experience (UX)](#user-experience-ux)
+    * [Site Goals](#site-goals)
+    * [User Stories](#user-stories)
+    * [Design](#design)
+3. [Technologies](#technologies)
+    * [Languages Used](#languages-used)
+    * [Libraries And Frameworks](#libraries-and-frameworks)
+    * [Tools and Resources](#tools-and-resources)
+4. [Testing](#testing)
+    * 
+5. [Bugs Found and Fixed](#bugs-found-and-fixed)
+    * [Bugs Not Fixed](#bugs-not-fixed)
+6. [Credits And Sources](#credits-and-sources)
+7. [Deployment](#deployment)
+8. [Acknowledgements](#acknowledgements)
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+# Features 
 
-## Creating the Heroku app
+## Existing Features
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+### 
 
-1. `heroku/python`
-2. `heroku/nodejs`
+<br>
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+[Back to Top](#table-of-contents)
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+<br>
 
-Connect your GitHub repository and deploy as normal.
+## Features Left to Implement
 
-## Constraints
+- 
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+<br>
 
------
-Happy coding!
+[Back to Top](#table-of-contents)
+
+<br>
+
+# User Experience (UX)
+
+## Site Goals
+
+
+## User Stories
+
+* Users will:
+
+  * 
+
+<br>
+
+## Design
+
+### Wireframe
+ - 
+
+<br>
+
+[Back to Top](#table-of-contents)
+
+<br>
+
+# Technologies
+
+## Languages Used
+* 
+
+## Libraries And Frameworks
+* 
+## Tools And Resources
+* [GitPod](https://www.gitpod.io/)
+* [GitHub](https://github.com/)
+* [ReadMe Template](https://github.com/Code-Institute-Solutions/readme-template)
+* [Balsamiq](https://balsamiq.com/)
+* [Stack Overflow](https://stackoverflow.com/)
+
+<br>
+
+[Back to Top](#table-of-contents)
+
+<br>
+
+# Testing 
+### Validator Testing 
+
+- 
+ <br>
+
+
+### Other Testing
+ - 
+
+ <br>
+
+
+[Back to Top](#table-of-contents)
+
+<br>
+
+# Bugs Found and Fixed
+ - 
+<br>
+
+# Bugs Not Fixed
+ - 
+
+<br>
+
+[Back to Top](#table-of-contents)
+
+<br>
+
+# Credits and Sources
+
+- 
+<br>
+
+[Back to Top](#table-of-contents)
+
+<br>
+
+# Deployment
+
+The following are the steps I went through to deploy my live site:
+
+- The site was deployed using Heroku. The steps to deploy are as follows: 
+  - 
+
+- To Fork the repository:
+  - On GitHub.com, navigate to the repository.
+  - In the top-right corner of the page, click Fork.
+  - Select an owner for the forked repository.
+  - By default, forks are named the same as their parent repositories. You can change the name of the fork to distinguish it further.
+  - Optionally, add a description of your fork.
+  - Choose whether to copy only the default branch or all branches to the new fork.
+  - Click Create fork.
+
+- To Clone the repository:
+  - On GitHub.com, navigate to the repository.
+  - Above the list of files, click the Code button.
+  - Copy the URL for the repository.
+  - Open Git Bash.
+  - Change the current working directory to the location where you want the cloned directory.
+  - Type git clone, and then paste the URL you copied earlier.
+  - Press Enter. Your local clone will be created.
+
+<br>
+The live link can be found here - 
+
+<br>
+
+[Back to Top](#table-of-contents)
+
+<br>
+
+# Acknowledgements
+- To my amazing boyfriend Thomas. For listening to me worry about this project for months, for keeping me sane, for helping me switch off after a long day with a cup of coffee and a bar of chocolate :)
+- My family and my cats for keeping my stress levels under control!
+- My Mentor [Jubril Akolade](https://github.com/Jubrillionaire) for all the help. His guidance was invaluable.
+- Sean Finn and Sean Johnston, my fellow classmates on Slack. Your help with my many questions was super appreciated, thank you.
+
+<br>
+
+[Back to Top](#table-of-contents)
