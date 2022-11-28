@@ -116,6 +116,9 @@ class GameFunctions:
             print(char, end="", flush=True)
 
 
+function = GameFunctions()
+
+
 class Player:
     """
     Class for player inventory and weapon.
@@ -175,8 +178,8 @@ class Story:
         print("Let's get your adventure started!\n")
         print("\n")
 
-        GameFunctions.clear_worksheet(self)
-        GameFunctions.inital_luck(self)
+        function.clear_worksheet()
+        function.inital_luck()
         self.get_name()
 
     def get_name(self):
@@ -296,7 +299,7 @@ class Story:
         elif user_input == "3":
             print("You run towards the cliff and jump! This is all "
                   "too much to take. [END]")
-            GameFunctions.clear_worksheet(self)
+            function.clear_worksheet()
             sys.exit()
         else:
             print("Please enter a valid option.")
@@ -306,7 +309,7 @@ class Story:
         Function to search the cars
         """
         print("You decide to search through some of the abandoned cars.")
-        GameFunctions.check_items(self)
+        function.check_items()
 
         if guardian.items == ["key"]:
             print("You put your key away and walk towards the building.")
@@ -331,7 +334,7 @@ class Story:
             if action == "yes" and guardian.items == ["key"]:
                 guardian.items.remove("key")
                 print("You've used your key!")
-                GameFunctions.check_weapon(self)
+                function.check_weapon()
                 self.building_hallway()
             elif action == "yes" and guardian.items == []:
                 print("You don't have a key and the lock won't budge.")
@@ -381,7 +384,7 @@ class Story:
         Empty room, player must turn around and choose another option
         from building_hallway
         """
-        GameFunctions.handle_vandal(self)
+        function.handle_vandal()
 
         print("You look around the room.\n"
               "It seems completely empty, just dust.\n"
@@ -422,7 +425,7 @@ class Story:
         if guardian.health < 0:
             print("You are dead!")
             print("Would you like to play again?")
-            GameFunctions.play_again(self)
+            function.play_again()
 
         if stored_weapon is not None:
             print("\n")
@@ -447,7 +450,7 @@ class Story:
         """
         User chooses between 2 paths
         """
-        GameFunctions.handle_vandal(self)
+        function.handle_vandal()
 
         print("\n ")
         print("Ahead, you see 2 corridors.")
@@ -466,7 +469,7 @@ class Story:
             self.luck_escape()
         elif user_input == "Back":
             print("'I'm done fighting these Dregs, I'm out of here!'[END]")
-            GameFunctions.clear_worksheet(self)
+            function.clear_worksheet()
             sys.exit()
         else:
             print("Please enter either left or right.")
@@ -489,7 +492,7 @@ class Story:
         user_input = ""
         user_input = input("\n> ").capitalize()
         if user_input == "Fight":
-            if GameFunctions.inital_luck(self) > 50:
+            if function.inital_luck() > 50:
                 print("You feel the Light course through you!")
                 print("You use your ultimate ability - your Super.\n")
                 print("You wield the Light, you aim at the Captain")
@@ -503,9 +506,9 @@ class Story:
                 print("\n ")
                 print("Well done Guardian! You win!")
                 print("Would you like to play again?")
-                GameFunctions.play_again(self)
+                function.play_again()
 
-            elif GameFunctions.inital_luck(self) < 50:
+            elif function.inital_luck() < 50:
                 print("You feel the Light course through you!")
                 print("You use your ultimate ability - your Super.")
                 print("You wield the Light, you aim at the Captain")
@@ -514,7 +517,7 @@ class Story:
                 print("He hits you directly and you fall down... dead.")
                 print("[END]")
                 print("Your Ghost can resurrect you. Do you want him to?")
-                GameFunctions.play_again(self)
+                function.play_again()
 
         elif user_input == "Run":
             print("This Captain is giant!")
@@ -526,7 +529,7 @@ class Story:
             print("\n ")
             print("Thanks for playing, Guardian!")
             print("Would you like to play again?")
-            GameFunctions.play_again(self)
+            function.play_again()
         else:
             print("Please enter either fight or run.")
 
@@ -534,7 +537,7 @@ class Story:
         """
         Function to check whether the player escapes from the ambush
         """
-        if GameFunctions.inital_luck(self) > 50:
+        if function.inital_luck() > 50:
             print("\n ")
             print("You manage to hide behind some nearby crates")
             print("before the giant fallen Servitor sees you.")
@@ -553,7 +556,7 @@ class Story:
             print("\n ")
             print("Thanks for playing, Guardian!")
             print("Would you like to play again?")
-            GameFunctions.play_again(self)
+            function.play_again()
 
 
 new_story = Story()
