@@ -17,10 +17,7 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
     * [Random Luck and Encounters](#random-luck-and-encounters)
     * [Inventory](#inventory)
     * [Play Again](#play-again)
-2. [User Experience (UX)](#user-experience-ux)
-    * [Site Goals](#site-goals)
-    * [User Stories](#user-stories)
-    * [Design](#design)
+2. [Design](#design)
 3. [Technologies](#technologies)
     * [Languages Used](#languages-used)
     * [Libraries And Frameworks](#libraries-and-frameworks)
@@ -81,23 +78,24 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 
 <br>
 
-# User Experience (UX)
-
-## Site Goals
-
-
 ## User Stories
 
 * Users will:
 
-  * 
+  * Play a Text Based Adventure Game with a story from Destiny The Game.
+  * Have a different game experience every time they play, with random weapons, encounters and luck.
+  * Be able to restart the game without needing to refresh or reload the link.
+
+<br>
+
+[Back to Top](#table-of-contents)
 
 <br>
 
 ## Design
+![Flow Chart](assets/documentation/flow-chart.png)
 
-### Wireframe
- - 
+- My starting point on this project was designing a flow chart based on the first story mission in Destiny The Game. To make the text adventure more fun, I added the random encounters and ability to choose ways to go and luck based weapons.
 
 <br>
 
@@ -108,16 +106,21 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 # Technologies
 
 ## Languages Used
-* 
+* [Python](https://www.python.org/)
 
 ## Libraries And Frameworks
-* 
+* [Google Sheets](https://www.google.com/sheets/about/)
+* [gspread](https://docs.gspread.org/en/v5.7.0/)
+* [Pyfiglet](https://pypi.org/project/pyfiglet/)
+
 ## Tools And Resources
 * [GitPod](https://www.gitpod.io/)
 * [GitHub](https://github.com/)
+* [Heroku](https://heroku.com)
 * [ReadMe Template](https://github.com/Code-Institute-Solutions/readme-template)
-* [Balsamiq](https://balsamiq.com/)
+* [Lucid Chart](https://www.lucidchart.com/)
 * [Stack Overflow](https://stackoverflow.com/)
+* [C anva](https://www.canva.com/) for my README banner.
 
 <br>
 
