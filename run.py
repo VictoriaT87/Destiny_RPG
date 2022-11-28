@@ -18,8 +18,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('Destiny_RPG')
 
-class_worksheet = SHEET.worksheet('PlayerClass')
-stats_worksheet = SHEET.worksheet('PlayerStats')
+stats_worksheet = SHEET.worksheet('PlayerClass')
 
 
 class GameFunctions:
@@ -54,13 +53,12 @@ class GameFunctions:
         """
         Clear player spreadsheet at start of game
         """
-        class_worksheet.delete_rows(2)
         stats_worksheet.delete_rows(2)
 
     def inital_luck(self):
         """Roll an Inital Luck number for the character"""
         character_luck = random.randint(0, 100)
-        stats_worksheet.update_cell(2, 1, character_luck)
+        stats_worksheet.update_cell(2, 5, character_luck)
         return character_luck
 
     def check_items(self):
@@ -85,7 +83,7 @@ class GameFunctions:
                                     "Felwinter's Lie",
                                     "Gjallarhorn"
                                     ])
-            class_worksheet.update_cell(2, 4, weapon)
+            stats_worksheet.update_cell(2, 4, weapon)
             print(f"You've found a {weapon}!")
             return weapon
 
@@ -219,7 +217,7 @@ class Story:
             if chosen_class in classes:
                 print(f"Welcome, {chosen_class}.")
                 print("\n")
-                class_worksheet.update_cell(2, 1, chosen_class)
+                stats_worksheet.update_cell(2, 1, chosen_class)
                 self.get_subclass(chosen_class)
             else:
                 print("Please type one of the classes listed.")
@@ -249,7 +247,7 @@ class Story:
         print("The darkness doesn't stand a chance \n")
 
         chosen_subclass = subclasses[choice-1]
-        class_worksheet.update_cell(2, 2, chosen_subclass)
+        stats_worksheet.update_cell(2, 2, chosen_subclass)
         self.player_abilites(chosen_subclass)
         self.opening_scene()
 
@@ -267,7 +265,7 @@ class Story:
         elif chosen_subclass in ("Gunslinger", "Sunsinger", "Sunbreaker"):
             ability = 'Solar Grenade'
 
-        class_worksheet.update_cell(2, 3, ability)
+        stats_worksheet.update_cell(2, 3, ability)
         return ability
 
     def opening_scene(self):
@@ -409,10 +407,10 @@ class Story:
         fight scene function, checks for weapon from random roll
         or else use abilities
         """
-        player_class = class_worksheet.cell(2, 1).value
-        player_subclass = class_worksheet.cell(2, 2).value
-        player_ability = class_worksheet.cell(2, 3).value
-        stored_weapon = class_worksheet.cell(2, 4).value
+        player_class = stats_worksheet.cell(2, 1).value
+        player_subclass = stats_worksheet.cell(2, 2).value
+        player_ability = stats_worksheet.cell(2, 3).value
+        stored_weapon = stats_worksheet.cell(2, 4).value
 
         # Health system from Elijah Henderson
         # https://www.youtube.com/watch?v=n17Hkgi8rt4
