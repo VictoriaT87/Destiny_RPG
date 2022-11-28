@@ -1,11 +1,18 @@
-# Destiny RPG Text Adventure Game
+# Destiny Text Adventure Game
+
+Welcome to a Destiny Text Adventure Game! This game is built purely using Python. It's designed to be a fun "Choose your own adventure" game, with random luck elements and items. Based on the very popular game Destiny and Destiny 2, this text adventure will bring you through the first mission in the game, from waking on the Cosmodrome to getting you ship's engine to fly to the Tower. If you get a high luck score and you choose the correct path, you'll make it out alive!
+
+![Website responsiveness on multiple screen sizes](assets/documentation/DestinyRPG.png)
+
+[Live link to The Destiny Text Adventure Game](https://destiny-rpg.herokuapp.com/)
+
 
 <br>
 
 # Table of Contents
 
 1. [Features](#features)  
-    * 
+    * The first thing to load is a logo for the game, created with the [Pyfiglet Library](https://pypi.org/project/pyfiglet/). This is a large Ascii text image, saying "Destiny RPG Game". 
 2. [User Experience (UX)](#user-experience-ux)
     * [Site Goals](#site-goals)
     * [User Stories](#user-stories)
