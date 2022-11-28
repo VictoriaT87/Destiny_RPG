@@ -11,8 +11,8 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 
 # Table of Contents
 
-1. [Features](#features)  
-    * The first thing to load is a logo for the game, created with the [Pyfiglet Library](https://pypi.org/project/pyfiglet/). This is a large Ascii text image, saying "Destiny RPG Game". 
+1. [Features](#features)
+    * [Game Start](#game-start)
 2. [User Experience (UX)](#user-experience-ux)
     * [Site Goals](#site-goals)
     * [User Stories](#user-stories)
@@ -33,7 +33,14 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 
 ## Existing Features
 
-### 
+### Game Start
+![Start Screen Image](assets/documentation/start-screen.png)
+- The first thing to load is a logo for the game, created with the [Pyfiglet Library](https://pypi.org/project/pyfiglet/). This is a large Ascii text image, saying "Destiny RPG Game".
+- Along with this is a small paragraph explaining the game and the story for any users that have no prior knowledge of the Destiny games.
+
+### Classes and Subclasses
+- The player will be asked to enter their name first and then they are given a choice of which Destiny Class they would like to be, as well as their subclass. These choices are then stored in a Google Sheets Worksheet, allowing this data to be pulled later on in the game to reference the player.
+- Depending on their choices here, the game will later on pick a grenade ability of the element selected in a fight scene. 
 
 <br>
 
