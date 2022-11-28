@@ -57,6 +57,8 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 ### Inventory
 - For their first choice, players can search some cars in front of them. If they're lucky, the can find a key, which will allow them to open a chest within the story. This chest has a chance of dropping a weapon, which will give them a greater advantage of winning the game.
 - This item is stored in the Google Sheets Worksheet, allowing the name to be recalled later in the story.
+- After all stats are added, the Player Stats sheet will look like this:
+![Random Encounter](assets/documentation/google-sheets.png)
 
 ### Play Again
 - At the end of the game or if the player dies, they have the option of playing again. This will trigger code to reset the workseet stats, reset the console and run the story from the beginning.
@@ -69,7 +71,9 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 
 ## Features Left to Implement
 
-- 
+- I'd love to add either some animation or colour, if possible. I feel this would make the game more appealing to play, especially to younger generations who haven't played Text Adventure games before.
+- The story and encounters could be fleshed out more, with different scenarios, more of an inventory and more randomness.
+- Each subclass also has a unique "Super ability" in the actual Destiny games. I thought of implementing this but felt I would have more repetitive code. When I learn more Python, it would be fun to add this in without repeating myself.
 
 <br>
 
