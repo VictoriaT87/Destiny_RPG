@@ -18,7 +18,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('Destiny_RPG')
 
-stats_worksheet = SHEET.worksheet('PlayerClass')
+stats_worksheet = SHEET.worksheet('PlayerStats')
 
 
 class GameFunctions:
