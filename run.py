@@ -85,6 +85,9 @@ class GameFunctions:
                                     ])
             stats_worksheet.update_cell(2, 4, weapon)
             print(f"You've found a {weapon}!")
+            # if player finds a weapon, update their luck
+            character_luck = random.randint(50, 100)
+            stats_worksheet.update_cell(2, 5, character_luck)
             return weapon
 
         elif weapon_find is False:
