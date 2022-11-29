@@ -87,8 +87,9 @@ class GameFunctions:
             stats_worksheet.update_cell(2, 4, weapon)
             print(f"You've found a {weapon}!")
             # if player finds a weapon, update their luck
-            character_luck = random.randint(50, 100)
-            stats_worksheet.update_cell(2, 5, character_luck)
+            if stats_worksheet.cell(2, 5).value < "50":
+                character_luck = random.randint(50, 100)
+                stats_worksheet.update_cell(2, 5, character_luck)
             return weapon
 
         elif weapon_find is False:
@@ -249,17 +250,12 @@ class Story:
         for index, subclass in enumerate(subclasses, 1):
             print(index, subclass)
 
-        # choice = int(input(f"Make your choice, {chosen_class} \n> "
-        #                    "1, 2 or 3?"))
-
         while True:
             try:
                 choice = int(input(f"\nMake your choice, {chosen_class}. \n"
                                    "1, 2 or 3?\n>"))
             except ValueError:
                 print('Please enter number 1, 2 or 3.')
-            # choice = int(input(f"\nMake your choice, {chosen_class} \n"
-            #                    "1, 2 or 3?\n>"))
 
             else:
                 print(f"A {subclasses[choice-1]}?")
@@ -524,9 +520,10 @@ class Story:
         user_input = ""
 
         while True:
+            luck = stats_worksheet.cell(2, 5).value
             user_input = input("\n> ").capitalize()
             if user_input == "Fight":
-                if function.inital_luck() > 50:
+                if luck >= "50":
                     print("You feel the Light course through you!")
                     print("You use your ultimate ability - your Super.\n")
                     print("You wield the Light, you aim at the Captain")
@@ -542,7 +539,7 @@ class Story:
                     print("Would you like to play again?")
                     function.play_again()
 
-                elif function.inital_luck() < 50:
+                elif luck <= "49":
                     print("You feel the Light course through you!")
                     print("You use your ultimate ability - your Super.")
                     print("You wield the Light, you aim at the Captain")
