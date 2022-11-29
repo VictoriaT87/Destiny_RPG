@@ -90,10 +90,11 @@ class GameFunctions:
             if stats_worksheet.cell(2, 5).value < "50":
                 character_luck = random.randint(50, 100)
                 stats_worksheet.update_cell(2, 5, character_luck)
-            return weapon
 
-        elif weapon_find is False:
+        else:
             print("There was nothing in the chest, only dust...")
+
+        return weapon
 
     def handle_vandal(self):
         """
