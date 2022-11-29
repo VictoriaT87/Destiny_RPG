@@ -249,14 +249,33 @@ class Story:
         for index, subclass in enumerate(subclasses, 1):
             print(index, subclass)
 
-        choice = int(input(f"Make your choice, {chosen_class} \n> "))
-        print(f"A {subclasses[choice-1]}?")
-        print("The darkness doesn't stand a chance \n")
+        # choice = int(input(f"Make your choice, {chosen_class} \n> "
+        #                    "1, 2 or 3?"))
 
-        chosen_subclass = subclasses[choice-1]
-        stats_worksheet.update_cell(2, 2, chosen_subclass)
-        self.player_abilites(chosen_subclass)
-        self.opening_scene()
+        while True:
+            try:
+                choice = int(input(f"\nMake your choice, {chosen_class}. \n"
+                                   "1, 2 or 3?\n>"))
+            except ValueError:
+                print('Please enter number 1, 2 or 3.')
+            # choice = int(input(f"\nMake your choice, {chosen_class} \n"
+            #                    "1, 2 or 3?\n>"))
+
+            else:
+                print(f"A {subclasses[choice-1]}?")
+                print("The darkness doesn't stand a chance \n")
+                chosen_subclass = subclasses[choice-1]
+                stats_worksheet.update_cell(2, 2, chosen_subclass)
+                self.player_abilites(chosen_subclass)
+                self.opening_scene()
+
+        # if choice != int(1, 2, 3):
+        #     raise ValueError('Please enter number 1, 2 or 3')
+
+        # chosen_subclass = subclasses[choice-1]
+        # stats_worksheet.update_cell(2, 2, chosen_subclass)
+        # self.player_abilites(chosen_subclass)
+        # self.opening_scene()
 
     def player_abilites(self, chosen_subclass):
         """
