@@ -296,18 +296,21 @@ class Story:
         First scene to play after choosing a name and class
         """
 
-        print("You look around and notice you're in a familiar place...")
-        print("This is the Cosmodrome. The last thing you remember is")
-        print("fighting here in a war against The Fallen.")
-        print("But now everything is overgrown, it feels as if centuries")
-        print("have passed.\n")
-        print("You look around. Behind you is a cliff edge.")
-        print("In front of you are some cars. Beyond them is an entrance")
-        print("to a building.")
-        print("What do you want to do?\n")
-        print("1. Search the cars?")
-        print("2. Go to the building entrance?")
-        print("3. Run off the cliff behind you? This is all too weird!")
+        print(
+            '''
+You look around and notice you're in a familiar place...
+This is the Cosmodrome. The last thing you remember is
+fighting here in a war against The Fallen.
+But now everything is overgrown, it feels as if centuries
+have passed.\nYou look around. Behind you is a cliff edge.
+In front of you are some cars. Beyond them is an entrance
+to a building.
+What do you want to do?\n
+1. Search the cars?
+2. Go to the building entrance?
+3. Run off the cliff behind you? This is all too weird!
+'''
+        )
 
         user_input = ""
 
@@ -522,12 +525,13 @@ class Story:
 
         while True:
             luck = stats_worksheet.cell(2, 5).value
+            text = """You feel the Light course through you!
+You use your ultimate ability - your Super.
+You wield the Light, you aim at the Captain"""
             user_input = input("\n> ").capitalize()
             if user_input == "Fight":
                 if luck >= "50":
-                    print("You feel the Light course through you!")
-                    print("You use your ultimate ability - your Super.\n")
-                    print("You wield the Light, you aim at the Captain")
+                    print(text)
                     print("and hit him with the full force of your Super.")
                     print("He staggers... and falls dead.")
                     print("\n ")
@@ -541,9 +545,7 @@ class Story:
                     function.play_again()
 
                 elif luck <= "49":
-                    print("You feel the Light course through you!")
-                    print("You use your ultimate ability - your Super.")
-                    print("You wield the Light, you aim at the Captain")
+                    print(text)
                     print("But you miss!")
                     print("The Captain turns to you and aims his gun.")
                     print("He hits you directly and you fall down... dead.")
@@ -552,15 +554,20 @@ class Story:
                     function.play_again()
 
             elif user_input == "Run":
-                print("This Captain is giant!")
-                print("No way you want to take him on. You turn and run.")
-                print("But behind you is an army of Dregs.")
-                print("Within seconds you're swarmed...")
-                print("And your Light fades.")
-                print("[END]")
-                print("\n ")
-                print("Thanks for playing, Guardian!")
-                print("Would you like to play again?")
+                print("This Captain is giant!\n"
+                      "No way you want to take him on. You turn and run."
+                      "But behind you is an army of Dregs.\n"
+                      "Within seconds you're swarmed...\n""And your Light"
+                      " fades.\n[END]\nThanks for playing, Guardian!"
+                      "Would you like to play again?")
+                # print("No way you want to take him on. You turn and run.")
+                # print("But behind you is an army of Dregs.")
+                # print("Within seconds you're swarmed...")
+                # print("And your Light fades.")
+                # print("[END]")
+                # print("\n ")
+                # print("Thanks for playing, Guardian!")
+                # print("Would you like to play again?")
                 function.play_again()
             else:
                 print("Please enter either fight or run.")
@@ -571,24 +578,32 @@ class Story:
         Function to check whether the player escapes from the ambush
         """
         if function.inital_luck() > 50:
-            print("\n ")
-            print("You manage to hide behind some nearby crates")
-            print("before the giant fallen Servitor sees you.")
-            print("You wait for his eye to close before you turn and run")
-            print("the down the hallway on the right!")
-            print("Phew!\n")
+            print("\nYou manage to hide behind some nearby crates"
+                  "before the giant fallen Servitor sees you.\n"
+                  "You wait for his eye to close before you turn and run"
+                  "the down the hallway on the right!\nPhew!\n")
+            # print("You manage to hide behind some nearby crates")
+            # print("before the giant fallen Servitor sees you.")
+            # print("You wait for his eye to close before you turn and run")
+            # print("the down the hallway on the right!")
+            # print("Phew!\n")
             self.spaceship_room()
         else:
-            print("\n ")
-            print("Oh no, a Fallen Servitor!")
-            print("You have no time to move before his giant Eye")
-            print("turns it's gaze on you.")
-            print("Within seconds, his blast hits you directly!")
-            print("You drop to the floor. Dead.")
-            print("[END]")
-            print("\n ")
-            print("Thanks for playing, Guardian!")
-            print("Would you like to play again?")
+            print("\nOh no, a Fallen Servitor! "
+                  "You have no time to move before his giant Eye"
+                  "turns it's gaze on you. Within seconds, his blast"
+                  "hits you directly! You drop to the floor. Dead."
+                  "[END]\nThanks for playing, Guardian!"
+                  "Would you like to play again?")
+            # print("Oh no, a Fallen Servitor!")
+            # print("You have no time to move before his giant Eye")
+            # print("turns it's gaze on you.")
+            # print("Within seconds, his blast hits you directly!")
+            # print("You drop to the floor. Dead.")
+            # print("[END]")
+            # print("\n ")
+            # print("Thanks for playing, Guardian!")
+            # print("Would you like to play again?")
             function.play_again()
 
 
