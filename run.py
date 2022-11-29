@@ -25,6 +25,7 @@ class GameFunctions:
     """
     Class for all game functions
     """
+
     def reset_console(self):
         """
         Reset the console for a new game or continue.
@@ -77,12 +78,12 @@ class GameFunctions:
         weapon_find = random.choice([True, False])
         if weapon_find is True:
             weapon = random.choice([
-                                    "Zhalo Supercell",
-                                    "The Last Word",
-                                    "No Land Beyond",
-                                    "Felwinter's Lie",
-                                    "Gjallarhorn"
-                                    ])
+                "Zhalo Supercell",
+                "The Last Word",
+                "No Land Beyond",
+                "Felwinter's Lie",
+                "Gjallarhorn"
+            ])
             stats_worksheet.update_cell(2, 4, weapon)
             print(f"You've found a {weapon}!")
             # if player finds a weapon, update their luck
@@ -294,18 +295,20 @@ class Story:
 
         user_input = ""
 
-        user_input = input("\n> ")
-        if user_input == "1":
-            self.search_cars()
-        elif user_input == "2":
-            self.building_entrance()
-        elif user_input == "3":
-            print("You run towards the cliff and jump! This is all "
-                  "too much to take. [END]")
-            function.clear_worksheet()
-            sys.exit()
-        else:
-            print("Please enter a valid option.")
+        while True:
+            user_input = input("\n> ")
+            if user_input == "1":
+                self.search_cars()
+            elif user_input == "2":
+                self.building_entrance()
+            elif user_input == "3":
+                print("You run towards the cliff and jump! This is all "
+                      "too much to take. [END]")
+                function.clear_worksheet()
+                sys.exit()
+            else:
+                print("Please enter a valid option.")
+                continue
 
     def search_cars(self):
         """
@@ -368,19 +371,20 @@ class Story:
 
         user_input = ""
 
-        user_input = input("\n> ")
-        if user_input == "1":
-            print("You enter door 1. It's a small room with a Fallen Dreg"
-                  " inside!")
-            self.dreg_fight()
-        if user_input == "2":
-            print("You decide to enter the 2nd door. It's a small room.")
-            self.empty_room()
-        if user_input == "3":
-
-            self.spaceship_room()
-        else:
-            print("Please enter a valid option.")
+        while True:
+            user_input = input("\n> ")
+            if user_input == "1":
+                print("You enter door 1. It's a small room with a Fallen Dreg"
+                      " inside!")
+                self.dreg_fight()
+            if user_input == "2":
+                print("You decide to enter the 2nd door. It's a small room.")
+                self.empty_room()
+            if user_input == "3":
+                self.spaceship_room()
+            else:
+                print("Please enter a valid option.")
+                continue
 
     def empty_room(self):
         """
@@ -398,15 +402,17 @@ class Story:
 
         user_input = ""
 
-        user_input = input("\n> ")
-        if user_input == "1":
-            print("You enter door 1. It's a small room with a Fallen Dreg"
-                  " inside!")
-            self.dreg_fight()
-        if user_input == "2":
-            self.spaceship_room()
-        else:
-            print("Please enter a valid option.")
+        while True:
+            user_input = input("\n> ")
+            if user_input == "1":
+                print("You enter door 1. It's a small room with a Fallen Dreg"
+                      " inside!")
+                self.dreg_fight()
+            if user_input == "2":
+                self.spaceship_room()
+            else:
+                print("Please enter a valid option.")
+                continue
 
     def dreg_fight(self):
         """
@@ -460,22 +466,25 @@ class Story:
         print("Do you want to go left, right or back?")
 
         user_input = ""
-        user_input = input("\n> ").capitalize()
-        if user_input == "Left":
-            print("You go left and ahead of you see a giant room")
-            print("with a spaceship. You check it out.")
-            self.spaceship_room()
-        elif user_input == "Right":
-            print("You go right. It's very hard to see.")
-            print("In the darkness, you can make out something large...")
-            print("with a glowing purple eye!")
-            self.luck_escape()
-        elif user_input == "Back":
-            print("'I'm done fighting these Dregs, I'm out of here!'[END]")
-            function.clear_worksheet()
-            sys.exit()
-        else:
-            print("Please enter either left or right.")
+
+        while True:
+            user_input = input("\n> ").capitalize()
+            if user_input == "Left":
+                print("You go left and ahead of you see a giant room")
+                print("with a spaceship. You check it out.")
+                self.spaceship_room()
+            elif user_input == "Right":
+                print("You go right. It's very hard to see.")
+                print("In the darkness, you can make out something large...")
+                print("with a glowing purple eye!")
+                self.luck_escape()
+            elif user_input == "Back":
+                print("'I'm done fighting these Dregs, I'm out of here!'[END]")
+                function.clear_worksheet()
+                sys.exit()
+            else:
+                print("Please enter either left, right or back.")
+                continue
 
     def spaceship_room(self):
         """
@@ -492,49 +501,53 @@ class Story:
         print("If you want it, you'll have to take it from him.")
         print("\n ")
         print("Fight or Run?")
+
         user_input = ""
-        user_input = input("\n> ").capitalize()
-        if user_input == "Fight":
-            if function.inital_luck() > 50:
-                print("You feel the Light course through you!")
-                print("You use your ultimate ability - your Super.\n")
-                print("You wield the Light, you aim at the Captain")
-                print("and hit him with the full force of your Super.")
-                print("He staggers... and falls dead.")
-                print("\n ")
-                print("You grab the engine and Ghost installs it.")
-                print("The ship rumbles to life and takes off.")
-                print("Next destination - The Tower... Home.")
+
+        while True:
+            user_input = input("\n> ").capitalize()
+            if user_input == "Fight":
+                if function.inital_luck() > 50:
+                    print("You feel the Light course through you!")
+                    print("You use your ultimate ability - your Super.\n")
+                    print("You wield the Light, you aim at the Captain")
+                    print("and hit him with the full force of your Super.")
+                    print("He staggers... and falls dead.")
+                    print("\n ")
+                    print("You grab the engine and Ghost installs it.")
+                    print("The ship rumbles to life and takes off.")
+                    print("Next destination - The Tower... Home.")
+                    print("[END]")
+                    print("\n ")
+                    print("Well done Guardian! You win!")
+                    print("Would you like to play again?")
+                    function.play_again()
+
+                elif function.inital_luck() < 50:
+                    print("You feel the Light course through you!")
+                    print("You use your ultimate ability - your Super.")
+                    print("You wield the Light, you aim at the Captain")
+                    print("But you miss!")
+                    print("The Captain turns to you and aims his gun.")
+                    print("He hits you directly and you fall down... dead.")
+                    print("[END]")
+                    print("Your Ghost can resurrect you. Do you want him to?")
+                    function.play_again()
+
+            elif user_input == "Run":
+                print("This Captain is giant!")
+                print("No way you want to take him on. You turn and run.")
+                print("But behind you is an army of Dregs.")
+                print("Within seconds you're swarmed...")
+                print("And your Light fades.")
                 print("[END]")
                 print("\n ")
-                print("Well done Guardian! You win!")
+                print("Thanks for playing, Guardian!")
                 print("Would you like to play again?")
                 function.play_again()
-
-            elif function.inital_luck() < 50:
-                print("You feel the Light course through you!")
-                print("You use your ultimate ability - your Super.")
-                print("You wield the Light, you aim at the Captain")
-                print("But you miss!")
-                print("The Captain turns to you and aims his gun.")
-                print("He hits you directly and you fall down... dead.")
-                print("[END]")
-                print("Your Ghost can resurrect you. Do you want him to?")
-                function.play_again()
-
-        elif user_input == "Run":
-            print("This Captain is giant!")
-            print("No way you want to take him on. You turn and run.")
-            print("But behind you is an army of Dregs.")
-            print("Within seconds you're swarmed...")
-            print("And your Light fades.")
-            print("[END]")
-            print("\n ")
-            print("Thanks for playing, Guardian!")
-            print("Would you like to play again?")
-            function.play_again()
-        else:
-            print("Please enter either fight or run.")
+            else:
+                print("Please enter either fight or run.")
+                continue
 
     def luck_escape(self):
         """
