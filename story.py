@@ -159,26 +159,22 @@ class Story:
         # Health system from Elijah Henderson
         # https://www.youtube.com/watch?v=n17Hkgi8rt4
         character.guardian.health -= random.randint(1, 100)
-        print("Before you can make a move, the Dreg takes one shot with "
+        print("\nBefore you can make a move, the Dreg takes one shot with "
               "his weapon.\nIt hits you on the arm!"
               )
         print(f"\nHealth: {character.guardian.health}")
         if character.guardian.health < 0:
-            print("You are dead!")
-            print("Would you like to play again?")
+            print("You are dead!\nWould you like to play again?")
             functions.GameFunctions.play_again(self)
 
         if stored_weapon is not None:
-            print("\n")
-            print("Now it's your turn!")
+            print("\nNow it's your turn!")
             print(f"You pull out your {stored_weapon}")
-            print("line up on the Dreg's head...")
-            print("and pull the trigger.")
+            print("line up on the Dreg's head...\nand pull the trigger.")
             print("Nice work!")
             self.hallway_choice()
         else:
-            print("\n")
-            print("Now it's your turn!")
+            print("\nNow it's your turn!")
             print("You don't have a gun... but you do have your abilities.\n")
             print(f"You're a {player_class}. A {player_subclass}.")
             print(f"You can use your {player_ability}")
