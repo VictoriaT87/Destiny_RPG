@@ -90,11 +90,10 @@ class GameFunctions:
             if stats_worksheet.cell(2, 5).value < "50":
                 character_luck = random.randint(50, 100)
                 stats_worksheet.update_cell(2, 5, character_luck)
+                return weapon
 
         else:
             print("There was nothing in the chest, only dust...")
-
-        return weapon
 
     def handle_vandal(self):
         """
@@ -111,7 +110,7 @@ class GameFunctions:
                 print("Your Ghost can ressurect you. Do you want him to?")
                 GameFunctions.play_again(self)
 
-    def slow_text(self, text):
+    def s_print(self, text):
         """
         Slows the speed of the text being printed.
         https://stackoverflow.com/questions/60608275/how-can-i-print-text-so-it-looks-like-its-being-typed-out
@@ -172,17 +171,17 @@ class Story:
         print(text1)
         print(text2)
 
-        print("Welcome Guardian!")
-        print("This is a text adventure game based on the video game"
-              " Destiny!")
-        print("\n ")
-        print("You are a New Light - a person newly re-awoken by a small")
-        print("robot companion known as a Ghost.")
-        print("You are now a Guardian, chosen to wield the Light")
-        print("to defeat the Darkness.\n")
+        print("""
+Welcome Guardian!
+This is a text adventure game based on the video game Destiny!\n
+You are a New Light - a person newly re-awoken by a small
+robot companion known as a Ghost.
+You are now a Guardian, chosen to wield the Light
+to defeat the Darkness.\n
 
-        print("Let's get your adventure started!\n")
-        print("\n")
+Let's get your adventure started!\n
+\n
+        """)
 
         function.clear_worksheet()
         function.inital_luck()
@@ -192,11 +191,13 @@ class Story:
         """
         Get the name of the player.
         """
-        print("- - - - - - -")
-        print("Eyes up, Guardian.\n")
-        print("I've finally found you.\n")
-        print("I've been searching for you for centuries.\n")
-        print("What should I call you?")
+        print("""
+- - - - - - -
+Eyes up, Guardian.\n
+I've finally found you.\n
+I've been searching for you for centuries.\n
+What should I call you?
+""")
         while True:
             name = input("\n> ").capitalize()
             # https://www.w3schools.com/python/ref_string_isalpha.asp
@@ -298,11 +299,12 @@ class Story:
 
         print(
             '''
-You look around and notice you're in a familiar place...
+You look around and notice you're in a familiar place...\n
 This is the Cosmodrome. The last thing you remember is
 fighting here in a war against The Fallen.
 But now everything is overgrown, it feels as if centuries
-have passed.\nYou look around. Behind you is a cliff edge.
+have passed.\n
+You look around. Behind you is a cliff edge.
 In front of you are some cars. Beyond them is an entrance
 to a building.
 What do you want to do?\n
@@ -417,7 +419,8 @@ What do you want to do?\n
               "You turn around and decide to pick a different option")
 
         print("You return to the hallway. Do you want to go to")
-        print("1. Door 1? or 2. Continue down the hall?")
+        print("1. Door 1? or") 
+        print("2. Continue down the hall?")
 
         user_input = ""
 

@@ -2,6 +2,7 @@ import sys
 import os
 import random
 import time
+import run
 
 import gspread
 from google.oauth2.service_account import Credentials
@@ -39,7 +40,7 @@ def play_again():
     user_input = input("\n> ").capitalize()
     if user_input == "Yes":
         reset_console()
-        run.introduction()
+        run.Story.introduction("")
     elif user_input == "No":
         print("Thank you for playing, Guardian!")
         clear_worksheet()
