@@ -49,7 +49,8 @@ class UserInputs:
             # https://www.w3schools.com/python/ref_string_isalpha.asp
             if not name.isalpha():
                 print("Please enter letters only.")
-                continue
+            elif len(name.strip(" ")) < 3:
+                print("Please enter a name at least 3 letters long.")
             else:
                 print(f"It's nice to meet you, {name}. I'm your Ghost.")
                 UserInputs.get_class(self)

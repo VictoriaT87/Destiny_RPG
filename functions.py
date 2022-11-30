@@ -1,8 +1,6 @@
 import sys
 import os
 import random
-import time
-
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -144,17 +142,6 @@ class GameFunctions:
                 print("You are dead!")
                 print("Your Ghost can ressurect you. Do you want him to?")
                 GameFunctions.play_again(self)
-
-    def s_print(self, text):
-        """
-        Slows the speed of the text being printed.
-        https://stackoverflow.com/questions/60608275/how-can-i-print-text-so-it-looks-like-its-being-typed-out
-        """
-
-        text += "\n"
-        for char in text:
-            time.sleep(0.09)
-            print(char, end="", flush=True)
 
 
 function = GameFunctions()
