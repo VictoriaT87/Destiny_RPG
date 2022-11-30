@@ -1,3 +1,8 @@
+"""
+This is all the text used throughout the game.
+"""
+
+
 def introduction_text():
     """
     Introduction to the game to run first

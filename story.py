@@ -1,3 +1,8 @@
+"""
+This file contains the story scenes layed out.
+It calls on the functions, text and character files.
+"""
+
 import sys
 import random
 import pyfiglet

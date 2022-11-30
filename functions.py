@@ -63,7 +63,9 @@ class GameFunctions:
         stats_worksheet.delete_rows(2)
 
     def inital_luck(self):
-        """Roll an Inital Luck number for the character"""
+        """
+        Roll an Inital Luck number for the character
+        """
 
         character_luck = random.randint(0, 100)
         stats_worksheet.update_cell(2, 5, character_luck)
@@ -93,7 +95,7 @@ class GameFunctions:
                 print("You decide to move on.\n")
                 story.Story.building_hallway(self)
             elif action == "no":
-                print("The chest looks old and worn...\n")
+                print("The chest looks old and worn...")
                 print("You don't think you'll find anything of value "
                       "in it.\nYou move into the building.")
                 story.Story.building_hallway(self)
@@ -156,22 +158,3 @@ class GameFunctions:
 
 
 function = GameFunctions()
-
-
-class RandomEncounter:
-    """
-    Class for NPC character and random encounter
-    """
-
-    def __init__(self, name):
-        self.name = name
-
-    def talk(self):
-        """
-        Text to print on random encounter trigger
-        """
-        print(f"A {self.name} emerges from the shadows.")
-        print("He takes one lucky shot at you before he runs away.")
-
-
-vandal = RandomEncounter("Vandal")
