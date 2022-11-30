@@ -419,7 +419,7 @@ What do you want to do?\n
               "You turn around and decide to pick a different option")
 
         print("You return to the hallway. Do you want to go to")
-        print("1. Door 1? or") 
+        print("1. Door 1? or")
         print("2. Continue down the hall?")
 
         user_input = ""
@@ -581,10 +581,12 @@ You wield the Light, you aim at the Captain"""
         Function to check whether the player escapes from the ambush
         """
         if function.inital_luck() > 50:
-            print("\nYou manage to hide behind some nearby crates"
-                  "before the giant fallen Servitor sees you.\n"
-                  "You wait for his eye to close before you turn and run"
-                  "the down the hallway on the right!\nPhew!\n")
+            print("""
+\nYou manage to hide behind some nearby crates
+before the giant fallen Servitor sees you.\n
+You wait for his eye to close before you turn and run
+the down the hallway on the right!\nPhew!\n
+                  """)
             # print("You manage to hide behind some nearby crates")
             # print("before the giant fallen Servitor sees you.")
             # print("You wait for his eye to close before you turn and run")
@@ -592,12 +594,14 @@ You wield the Light, you aim at the Captain"""
             # print("Phew!\n")
             self.spaceship_room()
         else:
-            print("\nOh no, a Fallen Servitor! "
-                  "You have no time to move before his giant Eye"
-                  "turns it's gaze on you. Within seconds, his blast"
-                  "hits you directly! You drop to the floor. Dead."
-                  "[END]\nThanks for playing, Guardian!"
-                  "Would you like to play again?")
+            print("""
+\nOh no, a Fallen Servitor! "
+"You have no time to move before his giant Eye"
+"turns it's gaze on you. Within seconds, his blast"
+"hits you directly! You drop to the floor. Dead."
+"[END]\nThanks for playing, Guardian!"
+"Would you like to play again?
+                """)
             # print("Oh no, a Fallen Servitor!")
             # print("You have no time to move before his giant Eye")
             # print("turns it's gaze on you.")

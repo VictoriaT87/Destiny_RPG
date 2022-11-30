@@ -2,12 +2,13 @@ import sys
 import os
 import random
 import time
-import run
 
 import gspread
 from google.oauth2.service_account import Credentials
 
 from character import guardian
+import run
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
