@@ -17,18 +17,21 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
     * [Random Luck and Encounters](#random-luck-and-encounters)
     * [Inventory](#inventory)
     * [Play Again](#play-again)
-2. [Design](#design)
-3. [Technologies](#technologies)
+    * [Future Features](#play-again)
+2. [Project Goals](#project-goals)
+3. [User Stories](#user-stories)
+4. [Design](#design)
+5. [Technologies](#technologies)
     * [Languages Used](#languages-used)
     * [Libraries And Frameworks](#libraries-and-frameworks)
     * [Tools and Resources](#tools-and-resources)
-4. [Testing](#testing)
+6. [Testing](#testing)
     * 
-5. [Bugs Found and Fixed](#bugs-found-and-fixed)
+7. [Bugs Found and Fixed](#bugs-found-and-fixed)
     * [Bugs Not Fixed](#bugs-not-fixed)
-6. [Credits And Sources](#credits-and-sources)
-7. [Deployment](#deployment)
-8. [Acknowledgements](#acknowledgements)
+8. [Credits And Sources](#credits-and-sources)
+9. [Deployment](#deployment)
+10. [Acknowledgements](#acknowledgements)
 
 # Features 
 
@@ -66,11 +69,23 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 
 <br>
 
-## Features Left to Implement
+## Future Features
 
 - I'd love to add either some animation or colour, if possible. I feel this would make the game more appealing to play, especially to younger generations who haven't played Text Adventure games before.
 - The story and encounters could be fleshed out more, with different scenarios, more of an inventory and more randomness.
 - Each subclass also has a unique "Super ability" in the actual Destiny games. I thought of implementing this but felt I would have more repetitive code. When I learn more Python, it would be fun to add this in without repeating myself.
+
+<br>
+
+[Back to Top](#table-of-contents)
+
+<br>
+
+## Project Goals
+
+* I wanted to create an old school Choose Your Own Adventure type game but with the Destiny theme. As a kid, I played my fair share of text based Adventure games and the appeal of them has never left me. Bringing a new game into an old game was an idea I was very fond of.
+
+* As a purely python game, I knew something that had multiple choices, as well as an inventory system, was going to be challenging to me for this project.
 
 <br>
 
@@ -121,6 +136,9 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 * [Google Sheets](https://www.google.com/sheets/about/)
 * [gspread](https://docs.gspread.org/en/v5.7.0/)
 * [Pyfiglet](https://pypi.org/project/pyfiglet/)
+* [os](https://docs.python.org/3/library/os.html#os.system)
+* [random](https://docs.python.org/3/library/random.html)
+* [time](https://docs.python.org/3/library/time.html)
 
 ## Tools And Resources
 * [GitPod](https://www.gitpod.io/)
@@ -140,12 +158,14 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 # Testing 
 ### Validator Testing 
 
+* All code passed through the CI Python Linter with no issues or warnings
+
 ![Linter Result](assets/documentation/linter.png)
  <br>
 
 
 ### Other Testing
- - 
+ - For a list of all manual testing done, please follow this link.
 
  <br>
 
