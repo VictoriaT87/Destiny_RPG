@@ -5,11 +5,11 @@ It calls on the functions, text and character files.
 
 import sys
 import random
+import pyfiglet
 
 import gspread
 from google.oauth2.service_account import Credentials
 
-import run
 import functions
 import text
 import character
@@ -33,6 +33,23 @@ class Story:
     """
     Functions for the story and player choices
     """
+
+    def introduction(self):
+        """
+        First function to run on Start.
+        Logo image, introduction text, luck roll and worksheet cleared
+        """
+
+        text1 = pyfiglet.figlet_format("DESTINY", justify="center")
+        text2 = pyfiglet.figlet_format("RPG GAME", justify="center")
+        print(text1)
+        print(text2)
+
+        text.introduction_text()
+
+        functions.GameFunctions.clear_worksheet(self)
+        functions.GameFunctions.inital_luck(self)
+        character.UserInputs.get_name(self)
 
     def opening_scene(self):
         """
@@ -240,4 +257,6 @@ class Story:
 def main():
     """Start the game"""
 
-    run.start_game()
+    new_story = Story()
+
+    new_story.introduction()
