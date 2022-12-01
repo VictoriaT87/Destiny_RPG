@@ -40,7 +40,7 @@ class GameFunctions:
         """
         Option to allow player to play again or exit
         """
-        print("Yes or No?")
+        self.s_print("Yes or No?")
         user_input = ""
         user_input = input("\n> ").capitalize()
         if user_input == "Yes":
@@ -48,7 +48,7 @@ class GameFunctions:
             guardian.health = 100
             new_story.introduction()
         elif user_input == "No":
-            print("Thank you for playing, Guardian!")
+            self.s_print("Thank you for playing, Guardian!")
             self.clear_worksheet()
             sys.exit()
         else:
@@ -73,7 +73,7 @@ class GameFunctions:
         item_find = random.choice([True, False])
         if item_find is True:
             guardian.items.append("key")
-            print("You've found a key!")
+            self.s_print("You've found a key!")
 
     def check_weapon(self):
         """
@@ -89,7 +89,7 @@ class GameFunctions:
                 "Gjallarhorn"
             ])
             stats_worksheet.update_cell(2, 4, weapon)
-            print(f"You've found a {weapon}!")
+            self.s_print(f"You've found a {weapon}!")
             # if player finds a weapon, update their luck
             if stats_worksheet.cell(2, 5).value < "50":
                 character_luck = random.randint(50, 100)
@@ -97,7 +97,7 @@ class GameFunctions:
                 return weapon
 
         else:
-            print("There was nothing in the chest, only dust...")
+            self.s_print("There was nothing in the chest, only dust...")
 
     def handle_vandal(self):
         """
@@ -105,13 +105,14 @@ class GameFunctions:
         """
         vandal_attack = random.choice([True, False])
         if vandal_attack is True:
-            print("Out of nowhere, a Fallen Vandal attacks you!")
-            print("You took some damage :(")
+            self.s_print("Out of nowhere, a Fallen Vandal attacks you!")
+            self.s_print("You took some damage :(")
             guardian.health -= random.randint(1, 100)
             print(f"\nHealth: {guardian.health}")
             if guardian.health < 0:
-                print("You are dead!")
-                print("Your Ghost can ressurect you. Do you want him to?")
+                self.s_print("You are dead!")
+                self.s_print(
+                    "Your Ghost can ressurect you. Do you want him to?")
                 GameFunctions.play_again(self)
 
     def s_print(self, text):
@@ -166,7 +167,7 @@ class Story:
         while True:
             start = input("Press the ENTER key to begin!\n")
             if start == "":
-                print("The game will now begin!\n")
+                GameFunctions.s_print(self, "The game will now begin!\n")
                 GameFunctions.reset_console(self)
                 self.get_name()
             else:
@@ -186,7 +187,8 @@ class Story:
                 print("Please enter letters only.")
                 continue
             else:
-                print(f"It's nice to meet you, {name}. I'm your Ghost.")
+                GameFunctions.s_print(
+                    self, f"It's nice to meet you, {name}. I'm your Ghost.")
                 self.get_class()
         return name
 
@@ -200,7 +202,7 @@ class Story:
             chosen_class = input("My class is: \n> ").capitalize()
             classes = ["Hunter", "Warlock", "Titan"]
             if chosen_class in classes:
-                print(f"Welcome, {chosen_class}.")
+                GameFunctions.s_print(self, f"Welcome, {chosen_class}.")
                 stats_worksheet.update_cell(2, 1, chosen_class)
                 self.get_subclass(chosen_class)
             else:
@@ -233,8 +235,9 @@ class Story:
                 print('Please enter number 1, 2 or 3.')
 
             else:
-                print(f"A {subclasses[choice-1]}?")
-                print("The darkness doesn't stand a chance \n")
+                GameFunctions.s_print(self, f"A {subclasses[choice-1]}?")
+                GameFunctions.s_print(
+                    self, "The darkness doesn't stand a chance \n")
                 chosen_subclass = subclasses[choice-1]
                 stats_worksheet.update_cell(2, 2, chosen_subclass)
                 self.player_abilites(chosen_subclass)
@@ -270,8 +273,9 @@ class Story:
             elif user_input == "2":
                 self.building_entrance()
             elif user_input == "3":
-                print("You run towards the cliff and jump! This is all "
-                      "too much to take. [END]")
+                GameFunctions.s_print(self, "You run towards the cliff and"
+                                      "jump! This is all too much to take."
+                                      "[END]")
                 function.clear_worksheet()
                 sys.exit()
             else:
@@ -282,13 +286,15 @@ class Story:
         """
         Function to search the cars
         """
-        print("You decide to search through some of the abandoned cars.")
+        GameFunctions.s_print(
+            self, "You decide to search through some of the abandoned cars.")
         function.check_items()
 
         if guardian.items == ["key"]:
-            print("You put your key away and walk towards the building.")
+            GameFunctions.s_print(
+                self, "You put your key away and walk towards the building.")
         else:
-            print("But you didn't find anything")
+            GameFunctions.s_print(self, "But you didn't find anything")
 
         self.building_entrance()
 
@@ -302,17 +308,20 @@ class Story:
             action = input("\n> ")
             if action == "yes" and guardian.items == ["key"]:
                 guardian.items.remove("key")
-                print("You've used your key!")
+                GameFunctions.s_print(self, "You've used your key!")
                 function.check_weapon()
                 self.building_hallway()
             elif action == "yes" and guardian.items == []:
-                print("You don't have a key and the lock won't budge.")
-                print("You decide to move on.\n")
+                GameFunctions.s_print(
+                    self, "You don't have a key and the lock won't budge.")
+                GameFunctions.s_print(self, "You decide to move on.\n")
                 self.building_hallway()
             elif action == "no":
-                print("The chest looks old and worn...\n")
-                print("You don't think you'll find anything of value "
-                      "in it.\nYou move into the building.")
+                GameFunctions.s_print(
+                    self, "The chest looks old and worn...\n")
+                GameFunctions.s_print(self, "You don't think you'll find"
+                                      "anything of value in it."
+                                      "\nYou move into the building.")
                 self.building_hallway()
             else:
                 print("Please enter Yes or No.")
@@ -328,11 +337,12 @@ class Story:
         while True:
             user_input = input("\n> ")
             if user_input == "1":
-                print("You enter door 1. It's a small room with a Fallen Dreg"
-                      " inside!")
+                GameFunctions.s_print(self, "You enter door 1. It's a small"
+                                      "room with a Fallen Dreg inside!")
                 self.dreg_fight()
             if user_input == "2":
-                print("You decide to enter the 2nd door. It's a small room.")
+                GameFunctions.s_print(self, "You decide to enter the 2nd door."
+                                      "It's a small room.")
                 self.empty_room()
             if user_input == "3":
                 self.spaceship_room()
@@ -353,8 +363,8 @@ class Story:
         while True:
             user_input = input("\n> ")
             if user_input == "1":
-                print("You enter door 1. It's a small room with a Fallen Dreg"
-                      " inside!")
+                GameFunctions.s_print(self, "You enter door 1. It's a small"
+                                      "room with a Fallen Dreg inside!")
                 self.dreg_fight()
             if user_input == "2":
                 self.spaceship_room()
@@ -375,29 +385,32 @@ class Story:
         # Health system from Elijah Henderson
         # https://www.youtube.com/watch?v=n17Hkgi8rt4
         guardian.health -= random.randint(1, 100)
-        print("Before you can make a move, the Dreg takes one shot with "
-              "his weapon.\nIt hits you on the arm!"
-              )
+        GameFunctions.s_print(self, "Before you can make a move, the Dreg"
+                              "takes one shot with his weapon."
+                              "\nIt hits you on the arm!"
+                              )
 
         print(f"\nHealth: {guardian.health}")
         if guardian.health < 0:
-            print("You are dead!")
-            print("Would you like to play again?")
+            GameFunctions.s_print(self, "You are dead!")
+            GameFunctions.s_print(self, "Would you like to play again?")
             function.play_again()
 
         if stored_weapon is not None:
-            print("\nNow it's your turn!")
-            print(f"You pull out your {stored_weapon}")
-            print("line up on the Dreg's head...")
-            print("and pull the trigger. Nice work!")
+            GameFunctions.s_print(self, "\nNow it's your turn!")
+            GameFunctions.s_print(self, f"You pull out your {stored_weapon}")
+            GameFunctions.s_print(self, "line up on the Dreg's head...")
+            GameFunctions.s_print(self, "and pull the trigger. Nice work!")
             self.hallway_choice()
         else:
             abilites_text = (f"You're a {player_class}. A {player_subclass}."
                              f" You can use your {player_ability}.")
 
-            print("\nNow it's your turn!")
-            print("You don't have a gun... but you do have your abilities.\n")
-            print(abilites_text)
+            GameFunctions.s_print(self, "\nNow it's your turn!")
+            GameFunctions.s_print(self,
+                                  "You don't have a gun... but you do have"
+                                  "your abilities\n")
+            GameFunctions.s_print(self, abilites_text)
             story.dreg_fight_weapon_text()
 
             self.hallway_choice()
@@ -408,24 +421,31 @@ class Story:
         """
         function.handle_vandal()
 
-        print("\nAhead, you see 2 corridors.")
-        print("Do you want to go left, right or back?")
+        GameFunctions.s_print(self, "\nAhead, you see 2 corridors.")
+        GameFunctions.s_print(self, "Do you want to go left, right or back?")
 
         user_input = ""
 
         while True:
             user_input = input("\n> ").capitalize()
             if user_input == "Left":
-                print("You go left and ahead of you see a giant room")
-                print("with a spaceship. You check it out.")
+                GameFunctions.s_print(
+                    self, "You go left and ahead of you see a giant room")
+                GameFunctions.s_print(
+                    self, "with a spaceship. You check it out.")
                 self.spaceship_room()
             elif user_input == "Right":
-                print("You go right. It's very hard to see.")
-                print("In the darkness, you can make out something large...")
-                print("with a glowing purple eye!")
+                GameFunctions.s_print(
+                    self, "You go right. It's very hard to see.")
+                GameFunctions.s_print(self,
+                                      "In the darkness, you can make out"
+                                      "something large with a glowing"
+                                      "purple eye")
                 self.luck_escape()
             elif user_input == "Back":
-                print("'I'm done fighting these Dregs, I'm out of here!'[END]")
+                GameFunctions.s_print(
+                    self, "'I'm done fighting these Dregs, I'm out of here!'"
+                    "[END]")
                 function.clear_worksheet()
                 sys.exit()
             else:
