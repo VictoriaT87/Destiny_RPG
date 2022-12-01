@@ -160,7 +160,7 @@ class Story:
         print(text1)
         print(text2)
 
-        function.s_print(story.INTRODUCTION_TEXT)
+        print(story.INTRODUCTION_TEXT)
         function.clear_worksheet()
         function.inital_luck()
 
@@ -177,7 +177,7 @@ class Story:
         """
         Get the name of the player.
         """
-        function.s_print(story.CHOOSE_NAME_TEXT)
+        print(story.CHOOSE_NAME_TEXT)
 
         while True:
             name = input("\n> ").capitalize()
@@ -196,7 +196,7 @@ class Story:
         """
         Player chooses their class. 3 available based on Destiny lore.
         """
-        function.s_print(story.CHOOSE_CLASS_TEXT)
+        print(story.CHOOSE_CLASS_TEXT)
 
         while True:
             chosen_class = input("My class is: \n> ").capitalize()
@@ -213,7 +213,7 @@ class Story:
         """
         Players choose their subclass - each class has 3.
         """
-        function.s_print(story.CHOOSE_SUBCLASS_TEXT)
+        print(story.CHOOSE_SUBCLASS_TEXT)
 
         if chosen_class == "Hunter":
             subclasses = ['Nightstalker', 'Blade Dancer', 'Gunslinger']
@@ -228,12 +228,14 @@ class Story:
             print(index, subclass)
 
         while True:
-            try:
-                choice = int(input(f"\nMake your choice, {chosen_class}. \n"
-                                   "1, 2 or 3?\n>"))
-            except ValueError:
-                print('Please enter number 1, 2 or 3.')
 
+            try:
+                choice = int(input(f"\nMake your choice, {chosen_class}."
+                                   "\n1, 2 or 3?\n>"))
+                if choice < 1 or choice > 3:
+                    raise ValueError("Please enter number 1, 2 or 3.")
+            except ValueError as error:
+                print(error)
             else:
                 function.s_print(f"A {subclasses[choice-1]}?")
                 function.s_print("The darkness doesn't stand a chance \n")
