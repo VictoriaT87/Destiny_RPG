@@ -23,6 +23,7 @@ SHEET = GSPREAD_CLIENT.open('Destiny_RPG')
 stats_worksheet = SHEET.worksheet('PlayerStats')
 
 
+# This Class contains functions that will run throughout the game
 class GameFunctions:
     """
     Class for all game functions
@@ -127,6 +128,7 @@ class GameFunctions:
 function = GameFunctions()
 
 
+# This Class contains the player health and inventory system
 class Player:
     """
     Class for player inventory and weapon.
@@ -140,25 +142,7 @@ class Player:
 guardian = Player([], 100)
 
 
-class RandomEncounter:
-    """
-    Class for NPC character and random encounter
-    """
-
-    def __init__(self, name):
-        self.name = name
-
-    def talk(self):
-        """
-        Text to print on random encounter trigger
-        """
-        print(f"A {self.name} emerges from the shadows.")
-        print("He takes one lucky shot at you before he runs away.")
-
-
-vandal = RandomEncounter("Vandal")
-
-
+# This Class contains the story of the game, printed to the terminal
 class Story:
     """
     Functions for the story and player choices
@@ -166,7 +150,8 @@ class Story:
 
     def introduction(self):
         """
-        Introduction to the game to run first
+        Introduction to the game - runs the logo, clears the worksheet,
+        asks the player to press Enter to start
         """
 
         text1 = pyfiglet.figlet_format("DESTINY", justify="center")
@@ -309,7 +294,7 @@ class Story:
 
     def building_entrance(self):
         """
-        Function to enter the building and try to open a chest
+        Enter the building and try to open a chest
         """
         story.entrance_text()
 
@@ -334,8 +319,8 @@ class Story:
 
     def building_hallway(self):
         """
-        Function to play scene on entering the building hallway,
-        call fight scene or end
+        Function to play scene on entering the building hallway -
+        players choose a room
         """
         story.hallway_text()
         user_input = ""
@@ -379,7 +364,7 @@ class Story:
 
     def dreg_fight(self):
         """
-        fight scene function, checks for weapon from random roll
+        Fight scene function, checks for weapon from random roll
         or else use abilities
         """
         player_class = stats_worksheet.cell(2, 1).value
@@ -449,7 +434,7 @@ class Story:
 
     def spaceship_room(self):
         """
-        Spaceship room choice function
+        Final fight scene, ending depends on the players Luck score
         """
         story.spaceship_room_text()
         user_input = ""
@@ -486,6 +471,6 @@ class Story:
             function.play_again()
 
 
+# Run the game
 new_story = Story()
-
 new_story.introduction()
