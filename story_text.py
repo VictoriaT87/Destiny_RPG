@@ -209,10 +209,10 @@ def luck_roll_lose():
     """ Text if player loses their luck roll against the Servitor """
 
     print('''
-\nOh no, a Fallen Servitor! "
-"You have no time to move before his giant Eye"
-"turns it's gaze on you. Within seconds, his blast"
-"hits you directly! You drop to the floor. Dead."
-"[END]\nThanks for playing, Guardian!"
-"Would you like to play again?
+\nOh no, a Fallen Servitor!
+You have no time to move before his giant Eye
+turns it's gaze on you. Within seconds, his blast
+hits you directly! You drop to the floor. Dead.
+[END]\nThanks for playing, Guardian!
+Would you like to play again?
 ''')
