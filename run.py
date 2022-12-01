@@ -3,10 +3,11 @@ import os
 import random
 import time
 import pyfiglet
-import story_text
 
 import gspread
 from google.oauth2.service_account import Credentials
+
+import story_text as story
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -43,6 +44,7 @@ class GameFunctions:
         user_input = input("\n> ").capitalize()
         if user_input == "Yes":
             GameFunctions.reset_console(self)
+            guardian.health = 100
             new_story.introduction()
         elif user_input == "No":
             print("Thank you for playing, Guardian!")
@@ -172,33 +174,26 @@ class Story:
         print(text1)
         print(text2)
 
-        print('''
-Welcome Guardian!
-This is a text adventure game based on the video game Destiny!\n
-You are a New Light - a person newly re-awoken by a small
-robot companion known as a Ghost.
-You are now a Guardian, chosen to wield the Light
-to defeat the Darkness.\n
-
-Let's get your adventure started!\n
-\n
-        ''')
-
+        story.introduction_text()
         function.clear_worksheet()
         function.inital_luck()
-        self.get_name()
+
+        while True:
+            start = input("Press the ENTER key to begin!\n")
+            if start == "":
+                print("The game will now begin!\n")
+                GameFunctions.reset_console(self)
+                self.get_name()
+            else:
+                print(f"You typed '{start}'. The game will not start yet.")
+                continue
 
     def get_name(self):
         """
         Get the name of the player.
         """
-        print('''
-- - - - - - -
-Eyes up, Guardian.\n
-I've finally found you.\n
-I've been searching for you for centuries.\n
-What should I call you?
-''')
+        story.choose_name_text()
+
         while True:
             name = input("\n> ").capitalize()
             # https://www.w3schools.com/python/ref_string_isalpha.asp
@@ -214,20 +209,13 @@ What should I call you?
         """
         Player chooses their class. 3 available based on Destiny lore.
         """
-        print("Let's try to figure out what kind of Guardian you are...\n")
-        print("Do you think you're a Hunter, Warlock or Titan?\n")
-        print("Hunter: Agile and daring, Hunters are quick on their feet")
-        print("and quicker on the draw.\n")
-        print("Warlock: Warlocks weaponize the mysteries of the universe")
-        print("to sustain themselves and devastate their foes.\n")
-        print("Titan: Disciplined and proud, Titans are capable of both ")
-        print("aggresive assaults and stalwart defenses.\n")
+        story.choose_class_text()
+
         while True:
             chosen_class = input("My class is: \n> ").capitalize()
             classes = ["Hunter", "Warlock", "Titan"]
             if chosen_class in classes:
                 print(f"Welcome, {chosen_class}.")
-                print("\n")
                 stats_worksheet.update_cell(2, 1, chosen_class)
                 self.get_subclass(chosen_class)
             else:
@@ -235,11 +223,10 @@ What should I call you?
                 continue
 
     def get_subclass(self, chosen_class):
-        """Players choose their subclass - each class has 3."""
-
-        print("Each Lightbearer has a choice... \n")
-        print("Your subclass defines your personality and skill.")
-        print("You must choose now. Are you a... \n")
+        """
+        Players choose their subclass - each class has 3.
+        """
+        story.choose_subclass_text()
 
         if chosen_class == "Hunter":
             subclasses = ['Nightstalker', 'Blade Dancer', 'Gunslinger']
@@ -272,7 +259,6 @@ What should I call you?
         """
         Gives the player an ability, based on their choice of subclass
         """
-
         if chosen_subclass in ('Nightstalker', 'Voidwalker', 'Defender'):
             ability = 'Vortex Grenade'
 
@@ -289,24 +275,7 @@ What should I call you?
         """
         First scene to play after choosing a name and class
         """
-
-        print(
-            '''
-You look around and notice you're in a familiar place...\n
-This is the Cosmodrome. The last thing you remember is
-fighting here in a war against The Fallen.
-But now everything is overgrown, it feels as if centuries
-have passed.\n
-You look around. Behind you is a cliff edge.
-In front of you are some cars. Beyond them is an entrance
-to a building.
-What do you want to do?\n
-1. Search the cars?
-2. Go to the building entrance?
-3. Run off the cliff behind you? This is all too weird!
-'''
-        )
-
+        story.first_scene_text()
         user_input = ""
 
         while True:
@@ -342,12 +311,7 @@ What do you want to do?\n
         """
         Function to enter the building and try to open a chest
         """
-
-        print("The building is long abandoned, rust covers the doors.")
-        print("All the windows are broken.")
-        print("In front of you, you see a chest...\n")
-        print("Try to open the chest?")
-        print("Yes or No")
+        story.entrance_text()
 
         while True:
             action = input("\n> ")
@@ -373,16 +337,7 @@ What do you want to do?\n
         Function to play scene on entering the building hallway,
         call fight scene or end
         """
-        print("\n")
-        print("You enter into a long hallway inside the building.")
-        print("Ahead you can see 2 open doorways.")
-        print("You can enter one of "
-              "them or continue down the hallway.")
-        print("What do you want to do?")
-        print("1. Enter door 1?\n"
-              "2. Enter door 2?\n"
-              "3. Continue down the hallway?")
-
+        story.hallway_text()
         user_input = ""
 
         while True:
@@ -406,14 +361,7 @@ What do you want to do?\n
         from building_hallway
         """
         function.handle_vandal()
-
-        print("You look around the room.\n"
-              "It seems completely empty, just dust.\n"
-              "You turn around and decide to pick a different option")
-
-        print("You return to the hallway. Do you want to go to")
-        print("1. Door 1? or")
-        print("2. Continue down the hall?")
+        story.empty_room_text()
 
         user_input = ""
 
@@ -445,6 +393,7 @@ What do you want to do?\n
         print("Before you can make a move, the Dreg takes one shot with "
               "his weapon.\nIt hits you on the arm!"
               )
+
         print(f"\nHealth: {guardian.health}")
         if guardian.health < 0:
             print("You are dead!")
@@ -452,22 +401,20 @@ What do you want to do?\n
             function.play_again()
 
         if stored_weapon is not None:
-            print("\n")
-            print("Now it's your turn!")
+            print("\nNow it's your turn!")
             print(f"You pull out your {stored_weapon}")
             print("line up on the Dreg's head...")
-            print("and pull the trigger.")
-            print("Nice work!")
+            print("and pull the trigger. Nice work!")
             self.hallway_choice()
         else:
-            print("\n")
-            print("Now it's your turn!")
+            abilites_text = (f"You're a {player_class}. A {player_subclass}."
+                             f" You can use your {player_ability}.")
+
+            print("\nNow it's your turn!")
             print("You don't have a gun... but you do have your abilities.\n")
-            print(f"You're a {player_class}. A {player_subclass}.")
-            print(f"You can use your {player_ability}")
-            print("You throw it and it sticks to the Dreg")
-            print("and explodes in a burst of Light!\n")
-            print("Nice work! The Dreg is dust.")
+            print(abilites_text)
+            story.dreg_fight_weapon_text()
+
             self.hallway_choice()
 
     def hallway_choice(self):
@@ -476,8 +423,7 @@ What do you want to do?\n
         """
         function.handle_vandal()
 
-        print("\n ")
-        print("Ahead, you see 2 corridors.")
+        print("\nAhead, you see 2 corridors.")
         print("Do you want to go left, right or back?")
 
         user_input = ""
@@ -505,67 +451,24 @@ What do you want to do?\n
         """
         Spaceship room choice function
         """
-        print("Ahead of you, you see a giant open room ahead "
-              "with a spaceship in it!")
-        print("You can see straight away that the ship")
-        print("is missing it's engine.\n")
-        print("As soon as you take a step back, you hear a sound.")
-        print("A rumbling from the walls...")
-        print("The roof cracks open and you see a Fallen Captain emerge!")
-        print("He's carrying the engine!")
-        print("If you want it, you'll have to take it from him.")
-        print("\n ")
-        print("Fight or Run?")
-
+        story.spaceship_room_text()
         user_input = ""
 
         while True:
             luck = stats_worksheet.cell(2, 5).value
-            text = '''
-You feel the Light course through you!
-You use your ultimate ability - your Super.
-You wield the Light, you aim at the Captain
-'''
+
             user_input = input("\n> ").capitalize()
             if user_input == "Fight":
                 if luck >= "50":
-                    print(text)
-                    print("and hit him with the full force of your Super.")
-                    print("He staggers... and falls dead.")
-                    print("\n ")
-                    print("You grab the engine and Ghost installs it.")
-                    print("The ship rumbles to life and takes off.")
-                    print("Next destination - The Tower... Home.")
-                    print("[END]")
-                    print("\n ")
-                    print("Well done Guardian! You win!")
-                    print("Would you like to play again?")
+                    story.captain_fight_win_text()
                     function.play_again()
 
                 elif luck <= "49":
-                    print(text)
-                    print("But you miss!")
-                    print("The Captain turns to you and aims his gun.")
-                    print("He hits you directly and you fall down... dead.")
-                    print("[END]")
-                    print("Your Ghost can resurrect you. Do you want him to?")
+                    story.captain_fight_lose_text()
                     function.play_again()
 
             elif user_input == "Run":
-                print("This Captain is giant!\n"
-                      "No way you want to take him on. You turn and run."
-                      "But behind you is an army of Dregs.\n"
-                      "Within seconds you're swarmed...\n""And your Light"
-                      " fades.\n[END]\nThanks for playing, Guardian!"
-                      "Would you like to play again?")
-                # print("No way you want to take him on. You turn and run.")
-                # print("But behind you is an army of Dregs.")
-                # print("Within seconds you're swarmed...")
-                # print("And your Light fades.")
-                # print("[END]")
-                # print("\n ")
-                # print("Thanks for playing, Guardian!")
-                # print("Would you like to play again?")
+                story.captain_fight_run()
                 function.play_again()
             else:
                 print("Please enter either fight or run.")
@@ -576,36 +479,10 @@ You wield the Light, you aim at the Captain
         Function to check whether the player escapes from the ambush
         """
         if function.inital_luck() > 50:
-            print('''
-\nYou manage to hide behind some nearby crates
-before the giant fallen Servitor sees you.\n
-You wait for his eye to close before you turn and run
-the down the hallway on the right!\nPhew!\n
-                  ''')
-            # print("You manage to hide behind some nearby crates")
-            # print("before the giant fallen Servitor sees you.")
-            # print("You wait for his eye to close before you turn and run")
-            # print("the down the hallway on the right!")
-            # print("Phew!\n")
+            story.luck_roll_win()
             self.spaceship_room()
         else:
-            print('''
-\nOh no, a Fallen Servitor! "
-"You have no time to move before his giant Eye"
-"turns it's gaze on you. Within seconds, his blast"
-"hits you directly! You drop to the floor. Dead."
-"[END]\nThanks for playing, Guardian!"
-"Would you like to play again?
-                ''')
-            # print("Oh no, a Fallen Servitor!")
-            # print("You have no time to move before his giant Eye")
-            # print("turns it's gaze on you.")
-            # print("Within seconds, his blast hits you directly!")
-            # print("You drop to the floor. Dead.")
-            # print("[END]")
-            # print("\n ")
-            # print("Thanks for playing, Guardian!")
-            # print("Would you like to play again?")
+            story.luck_roll_lose()
             function.play_again()
 
 

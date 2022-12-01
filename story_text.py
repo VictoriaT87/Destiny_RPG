@@ -105,6 +105,16 @@ What do you want to do?\n
 ''')
 
 
+def dreg_fight_weapon_text():
+    """ dreg fight scene text"""
+
+    print('''
+You throw it and it sticks to the Dreg
+and explodes in a burst of Light!\n
+Nice work! The Dreg is dust.
+    ''')
+
+
 def empty_room_text():
     """empty room story text"""
 
