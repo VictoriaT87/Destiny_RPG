@@ -39,6 +39,7 @@ You must choose now. Are you a... \n
 '''
 
 FIRST_SCENE_TEXT = '''
+- - - - - - -
 You look around and notice you're in a familiar place...\n
 This is the Cosmodrome. The last thing you remember is
 fighting here in a war against The Fallen.
