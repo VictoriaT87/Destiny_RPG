@@ -1,8 +1,8 @@
 # Destiny Text Adventure Game
 
-Welcome to a Destiny Text Adventure Game! This game is built purely using Python. It's designed to be a fun "Choose your own adventure" game, with random luck elements and items. Based on the very popular game Destiny and Destiny 2, this text adventure will bring you through the first mission in the game, from waking on the Cosmodrome to getting you ship's engine to fly to the Tower. If you get a high luck score and you choose the correct path, you'll make it out alive!
-
 ![Website responsiveness on multiple screen sizes](assets/documentation/DestinyRPG.png)
+
+Welcome to a Destiny Text Adventure Game! This game is built purely using Python. It's designed to be a fun "Choose your own adventure" game, with random luck elements and items. Based on the very popular games [Destiny and Destiny 2](https://www.bungie.net/), this text adventure will bring you through the first mission in the game, from waking on the Cosmodrome to getting you ship's engine to fly to the Tower. If you get a high luck score and you choose the correct path, you'll make it out alive!
 
 [Live link to The Destiny Text Adventure Gamecl](https://destiny-rpg.herokuapp.com/)
 
@@ -86,6 +86,13 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
   * Have a different game experience every time they play, with random weapons, encounters and luck.
   * Be able to restart the game without needing to refresh or reload the link.
 
+* Users expect:
+
+  * A fun to play text adventure game in an old school style.
+  * A Destiny themed game, with enemies, classes and weapons they recognize.
+  * Replayability.
+  * A fast paced game, playing through the first Destiny story mission.
+
 <br>
 
 [Back to Top](#table-of-contents)
@@ -93,9 +100,11 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 <br>
 
 ## Design
-![Flow Chart](assets/documentation/flow-chart.png)
 
 - My starting point on this project was designing a flow chart based on the first story mission in Destiny The Game. To make the text adventure more fun, I added the random encounters and ability to choose ways to go and luck based weapons.
+
+![Flow Chart](assets/documentation/flow-chart.png)
+
 
 <br>
 
@@ -120,7 +129,7 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 * [ReadMe Template](https://github.com/Code-Institute-Solutions/readme-template)
 * [Lucid Chart](https://www.lucidchart.com/)
 * [Stack Overflow](https://stackoverflow.com/)
-* [C anva](https://www.canva.com/) for my README banner.
+* [Canva](https://www.canva.com/) for my README image.
 
 <br>
 
@@ -131,7 +140,7 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 # Testing 
 ### Validator Testing 
 
-- 
+![Linter Result](assets/documentation/linter.png)
  <br>
 
 
