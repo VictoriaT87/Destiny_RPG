@@ -241,7 +241,7 @@ class Story:
                 print("Please enter number 1, 2 or 3.")
             else:
                 function.s_print(f"A {subclasses[choice-1]}?")
-                function.s_print("The darkness doesn't stand a chance \n")
+                function.s_print("The Darkness doesn't stand a chance \n")
                 chosen_subclass = subclasses[choice-1]
                 stats_worksheet.update_cell(2, 2, chosen_subclass)
                 self.player_abilites(chosen_subclass)

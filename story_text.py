@@ -81,7 +81,7 @@ Nice work! The Dreg is dust.
 EMPTY_ROOM_TEXT = '''
 You look around the room.
 It seems completely empty, just dust.
-You turn around and decide to pick a different option\n
+You turn around and decide to pick a different option.\n
 You return to the hallway. Do you want to go to
 1. Door 1?
 or
