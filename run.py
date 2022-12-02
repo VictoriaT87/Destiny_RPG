@@ -370,7 +370,7 @@ class Story:
             if user_input == "2":
                 self.spaceship_room()
             else:
-                print("Please enter a valid option.")
+                print("Please choose number 1 or 2.")
                 continue
 
     def dreg_fight(self):
@@ -469,7 +469,7 @@ class Story:
                 function.s_print(story.CAPTAIN_FIGHT_RUN)
                 function.play_again()
             else:
-                print("Please enter either fight or run.")
+                print("Please enter either Fight or Run.")
                 continue
 
     def luck_escape(self):
