@@ -114,7 +114,7 @@ class GameFunctions:
             if guardian.health < 0:
                 self.s_print("You are dead!")
                 self.s_print(
-                    "Your Ghost can ressurect you. Do you want him to?")
+                    "Your Ghost can resurrect you. Do you want him to?")
                 GameFunctions.play_again(self)
 
     def s_print(self, text):
@@ -172,7 +172,8 @@ class Story:
                 function.reset_console()
                 self.get_name()
             else:
-                print(f"You typed '{start}'. The game will not start yet.")
+                print(f"You typed '{start}'. When you're ready to"
+                      " begin. press ENTER.")
                 continue
 
     def get_name(self):
@@ -327,6 +328,7 @@ class Story:
                 self.building_hallway()
             else:
                 print("Please enter Yes or No.")
+                continue
 
     def building_hallway(self):
         """
@@ -465,7 +467,7 @@ class Story:
                     function.play_again()
 
             elif user_input == "Run":
-                print(story.CAPTAIN_FIGHT_WIN_TEXT)
+                print(story.CAPTAIN_FIGHT_RUN)
                 function.play_again()
             else:
                 print("Please enter either fight or run.")

@@ -11,20 +11,17 @@ Type a name into terminal when prompted | Receive message "It's nice to meet you
 Pick a class from the options | Receive message "Welcome, {chosen_class}." | As expected | Pass
 Pick a subclass from the options | Receive message "A {subclasses[choice-1]}?" | As expected | Pass
 Player class, subclass and luck are uploaded to spreadsheet | Should be visible on spreadsheet | As expected | Pass
-Choose story option 1, 2 or 3 | Player must enter one of these options or options are repeated | As expected | Pass
 Chooses story option 1 to search cars | Function to search cars runs | As expected | Pass
 Chooses story option 2 to enter building | Function to enter building runs | As expected | Pass
-Chooses story option 3 to exit game | You run towards the cliff and jump! This is all too much to take.[END] | As expected | Pass
+Chooses story option 3 to exit game | Message "You run towards the cliff and jump! This is all too much to take.[END]" prints | As expected | Pass
 Searching the cars either finds a key or not | Receive message "You've found a key!" or "But you didn't find anything" | As expected | Pass
 Function runs automatically to enter the building | Building story text will print | As expected | Pass
-Pick yes or no to search the chest | If another option is entered, receive message "Please enter Yes or No." | As expected | Pass
-Pick yes to open the chest with key | Message "You've used your key" received | As expected | Pass
-Pick yes to open the chest without key | Message "You don't have a key and the lock won't budge." | As expected | Pass
-Pick no to open the chest | Message "The chest looks old and worn...\n" | As expected | Pass
+Pick yes to open the chest with key in inventory | Message "You've used your key" received | As expected | Pass
+Pick yes to open the chest without key in inventory | Message "You don't have a key and the lock won't budge." | As expected | Pass
+Pick no to open the chest | Message "The chest looks old and worn..." | As expected | Pass
 If chest is opened, random roll for a weapon | Message "You've found a {weapon}!, spreadsheet updated | As expected | Pass
 If chest is opened, random roll for a weapon | Message "There was nothing in the chest, only dust..." | As expected | Pass
 Building hallway function runs | Story text to choose a path runs | As expected | Pass
-Player must choose 1, 2 or 3 in Hallway function | If anything other than 1, 2 or 3, receive message "Please choose number 1, 2 or 3." | As expected | Pass
 Player chooses room 1 | Dreg attacks player for random health amount | As expected | Pass
 Player chooses room 1 | Player character attacks back with no weapon, text to show "You're a {player_class}. A {player_subclass}. You can use your {player_ability}." | As expected | Pass
 Player chooses room 1 | Player character attacks back with a weapon, text to show "You pull out your {stored_weapon}" | As expected | Pass
@@ -36,23 +33,26 @@ Player chooses right from hallway options | LuckEscape function text prints | As
 Player has high luck number | Message "You manage to hide behind some nearby crates" prints | As expected | Pass
 Player has low luck number | Message "Oh no, a Fallen Servitor!" prints, game ends | As expected | Pass
 Player chooses back from hallway options | Game Ends | As expected | Pass
-Spaceship room function with high luck roll | Message "you aim at the Captain
-and hit him with the full force of your Super." prints | As expected | Pass
+Spaceship room function with high luck roll | Message "you aim at the Captain and hit him with the full force of your Super." prints | As expected | Pass
 Spaceship room function with low luck roll | Message "You wield the Light, you aim at the Captain But you miss" prints | As expected | Pass
 Player is asked if they want to play again | Message "Would you like to play again?" prints | As expected | Pass
+Player is asked if they want to be resurrected | Message "Please enter yes or no" prints | As expected | Pass
+
 ### Errors
 
 Error Tested | Expected Result | Actual Result | Pass/Fail
 -------------|-----------------|---------------|----------
-Press something before 'enter' on intro screen | Receive message ""You typed '{input}'. The game will not start yet." and should remain on intro screen | As expected | Pass
-Type something other than letters when asked for name | Receive message "Please enter letters only." | As expected | Pass
-Type something other than races listed or with capital letters | Receive message "Please type one of the races listed and ensure to use lowercase." | As expected | Pass
-Type something other than class listed or with capital letters | Receive message "Please type one of the classes listed and ensure to use lowercase." | As expected | Pass
-Type something other than weapons listed or with capital letters | Receive message "Please type one of the weapons listed and ensure to use lowercase. | As expected | Pass
-Type something other than yes/Yes or no/No during exit game | Receive message "Please type either yes/Yes or no/No" | As expected | Pass
-Type something other than 1, 2 or 3 during decision stages | Receive message "Please type either '1', '2', or '3'." | As expected | Pass
-Type something other than 1 or 2 during option to play again after winning | Receive message "Please type either '1', or '2'." | As expected | Pass
-Type something other than 1 or 2 during option to play again losing| Receive message "Please type either '1', or '2'." | As expected | Pass
+Press something before 'enter' on intro screen | Receive message "You typed '{start}'. When you're ready to begin. press ENTER." and should remain on Introduction screen | As expected | Pass
+Player enters something other than letters when asked for name | Receive message "Please enter letters only." | As expected | Pass
+Type less than 3 characters when asked for name | Receive message "Please enter a name at least 3 letters long." | As expected | Pass
+Player enters anything other than the 3 possible Classes | Receive message "Please type one of the classes listed." | As expected | Pass
+Player enters anything other than the numbers 1, 2 or 3 when option arises | Receive message "Please enter number 1, 2 or 3." | As expected | Pass
+Search function runs, awards a key to player inventory if True | Player inventory is updated or not, player receives message to inform them | As expected | Pass
+Player types anything other than Yes or No when question arises | Receive message "Please enter yes or no" | As expected | Pass
+Player receives a weapon | Receive message "You've found a {weapon}!" | As expected | Pass
+Players don't enter either Fight or Run during Captain fight | Receive message "Please enter Yes or No." | As expected | Pass
+Players don't enter either Yes or No when asked to be resurrected | Receive message "Please enter either fight or run." | As expected | Pass
+
 
 
 ## Fixed bugs
