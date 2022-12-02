@@ -298,7 +298,14 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
   - #### Fix:
   
     - Researching lead to me to understand that I had my possible abilites in a [list] and the google spreadsheet couldn't understand that. Removing them from a list and putting them in a Tuple fixed this error.
+
+<br>
+
+ ### Potentially compromised credentials 
+
   - Not a bug necessarily but a lesson learned. When creating a 2nd Heroku deployment, I used the same creds.json file as this and was informed by an email from Google, Github and Heroku that my key was compromised. I had to remake the key for this project as a result and update it on Heroku.
+
+![Potentially compromised credentials](assets/documentation/creds-comp.png)
 
 <br>
 
