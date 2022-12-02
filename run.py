@@ -41,19 +41,20 @@ class GameFunctions:
         Option to allow player to play again or exit
         """
         self.s_print("Yes or No?")
-        user_input = ""
-        user_input = input("\n> ").capitalize()
-        if user_input == "Yes":
-            GameFunctions.reset_console(self)
-            guardian.health = 100
-            new_story.introduction()
-        elif user_input == "No":
-            self.s_print("Thank you for playing, Guardian!")
-            self.clear_worksheet()
-            sys.exit()
-        else:
-            print("Please enter Yes or No.")
-            
+
+        while True:
+            user_input = input("\n> ").capitalize()
+            if user_input == "Yes":
+                GameFunctions.reset_console(self)
+                guardian.health = 100
+                new_story.introduction()
+            elif user_input == "No":
+                self.s_print("Thank you for playing, Guardian!")
+                self.clear_worksheet()
+                sys.exit()
+            else:
+                print("Please enter Yes or No.")
+                continue
 
     def clear_worksheet(self):
         """
