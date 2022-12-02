@@ -301,6 +301,8 @@ class Story:
                 function.s_print("You run towards the cliff and jump!"
                                  " This is all too much to take.[END]"
                                  )
+
+                function.s_print("\nThanks for playing, Guardian!")
                 function.clear_worksheet()
                 sys.exit()
             else:
