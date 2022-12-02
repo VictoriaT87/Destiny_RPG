@@ -210,7 +210,7 @@ class Story:
             if not name.isalpha():
                 print("Please enter letters only.")
             elif len(name.strip(" ")) < 3 or len(name.strip(" ")) > 8:
-                print("Please enter a name btween 3 and 8 letters long.")
+                print("Please enter a name between 3 and 8 letters long.")
             else:
                 function.s_print(f"It's nice to meet you, {name}."
                                  " I'm your Ghost.")

@@ -315,7 +315,7 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
  - I understand this is not going to be assessed, I just would personally like to keep it so I can perhaps figure out why it was so slow to load. My research lead me to believe this was either because of a cache issue or just some bottleneck I have in the code.
 
 # Bugs Not Fixed
- - As far as I am aware, all bugs were fixed within this project. I have had it peer tested through Slack and no issues were reported in the final version.
+ - I would like the printed enumarate list in the get_subclass function to print to the terminal as slowly as the rest of the text. However, when I try to add function.s_print (to call the slow typing), it tells me I can't have both (index, subclass) in the method - "Too many positional arguments in method call".
 
 <br>
 
