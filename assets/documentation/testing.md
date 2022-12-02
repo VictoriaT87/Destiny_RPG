@@ -68,8 +68,6 @@ Players don't enter either Yes or No when asked to be resurrected | Receive mess
   - #### Fix:
 
     - Add len(name.strip(" ")) to the function - user now needs to input a username 3 characters or longer.
-    
-  ![Hand Value Solution](README-images/hand_value.png) 
 
   ### get_subclass()
 
@@ -79,18 +77,58 @@ Players don't enter either Yes or No when asked to be resurrected | Receive mess
 
   - #### Fix:
 
-    - I originally tried to use a range() for the input but with I struggled with making this work. Upon further research, I realised I could add an if statement to my Try, to make sure the user input either 1, 2 or 3.
+    - I originally tried to use a range() for the input but I struggled with making this work because of the input containing an f-string. Upon further research, I realised I could add an if statement to my Try, to make sure the user input either 1, 2 or 3.
 
-   ![Name Input Solution](README-images/name-input.png)   
+![Subclass Index](subclass_index.png) 
 
-  ### instructions()
+  <br>
 
   - #### Reason for fail:
 
-    - When testing my instruction screen text I noticed that the text was not lining up correctly when deployed on Heroku.
+    - Entering a string in the Subclass input was giving the error "invalid lteral for int() with base 10"
 
   - #### Fix:
 
-    - After some more testing and research I concluded that the new line method I was using was incorrect. I had been using \ (backslashes) to enter a new line of text but I found if i simply used inverted commas and lined up the text in a block along with \n, the text would line up as I wanted. See below code snippet for function solution.
+    - Researching this took me a long time. As I was enumerating the list for Subclass choices with an index (that starts at 0), I needed the input to be an int. I asked for help on both Reddit.com/LearnPython and StackOverflow and eventually figured out that with a Try statement, I could add a ValueError and an if statement to make sure the player entered a number between 1 and 3 and it wasn't a string.
 
-   ![Instruction text solution](README-images/instruction-solution.png)   
+![Subclass Int Error](subclass-int-error.png)
+
+  - #### Reason for fail:
+
+    - When calling get_subclass, it was choosing the last game's choice, instead of the current one. 
+
+  - #### Fix:
+
+    - To fix, I passed the chosen_class parameter to get_subclass:
+        - if player_class == "Hunter":
+        - if chosen_class == "Hunter":
+
+  <br>
+
+  ### Else statements
+
+  - #### Reason for fail:
+
+    - If a player entered a choice that wasn't listed for certain options, the error message would print to the terminal however, instead of repeating the choices, the game would then print a different functions questions.
+
+  - #### Fix:
+
+    - For this, I realised I needed to add the word "continue" within my Else statement. This made the code loop again if an incorrect option was entered.
+
+  <br>
+
+![Else Statements](else-statement.png)
+
+  <br>
+
+  ### Player Health not clearing each run
+
+  - #### Reason for fail:
+
+    - Everytime the health function would run, it would choose a randint between 1 and 100. This would be removed from the players starting health of 100. However, if a player chose to re-run the game, the players health would stay as the negative number. This meant the player would always die at the Dreg Fight function.
+
+  - #### Fix:
+
+    - Add the code "guardian.health = 100" to the play_again function. This would reset it every time.
+
+![Player Health](health_bug.png)
