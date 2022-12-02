@@ -258,7 +258,7 @@ class Story:
                 choice = int(input(f"\nMake your choice, {chosen_class}."
                                    "\n1, 2 or 3?\n>"))
                 if choice < 1 or choice > 3 or choice == str():
-                    raise ValueError("Please enter number 1, 2 or 3.")
+                    raise ValueError
             except ValueError:
                 print("Please enter number 1, 2 or 3.")
             else:
