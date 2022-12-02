@@ -68,6 +68,28 @@ class GameFunctions:
         stats_worksheet.update_cell(2, 5, character_luck)
         return character_luck
 
+    def open_chest(self):
+        """Function to open the chest if player has a key"""
+
+        while True:
+            action = input("\n> ")
+            if action == "yes" and guardian.items == ["key"]:
+                guardian.items.remove("key")
+                print("You've used your key!")
+                GameFunctions.check_weapon(self)
+            elif action == "yes" and guardian.items == []:
+                print("You don't have a key and the lock won't budge.")
+                print("You decide to move on.\n")
+                Story.building_hallway(self)
+            elif action == "no":
+                print("The chest looks old and worn...")
+                print("You don't think you'll find anything of value "
+                      "in it.\nYou move into the building.")
+                Story.building_hallway(self)
+            else:
+                print("Please enter Yes or No.")
+                continue
+
     def check_items(self):
         """
         Function to check if the player has an key in their inventory
@@ -124,7 +146,7 @@ class GameFunctions:
         """
         text += "\n"
         for char in text:
-            time.sleep(0.09)
+            time.sleep(0.05)
             print(char, end="", flush=True)
 
 
@@ -209,7 +231,7 @@ class Story:
                 stats_worksheet.update_cell(2, 1, chosen_class)
                 self.get_subclass(chosen_class)
             else:
-                print("Please type one of the classes listed.")
+                print("Please type either Hunter, Warlock or Titan.")
                 continue
 
     def get_subclass(self, chosen_class):
@@ -306,29 +328,7 @@ class Story:
         Enter the building and try to open a chest
         """
         function.s_print(story.ENTRANCE_TEXT)
-
-        while True:
-            action = input("\n> ")
-            if action == "yes" and guardian.items == ["key"]:
-                guardian.items.remove("key")
-                function.s_print("You've used your key!")
-                function.check_weapon()
-                self.building_hallway()
-            elif action == "yes" and guardian.items == []:
-                function.s_print(
-                    "You don't have a key and the lock won't budge.")
-                function.s_print("You decide to move on.\n")
-                self.building_hallway()
-            elif action == "no":
-                function.s_print(
-                    "The chest looks old and worn...\n")
-                function.s_print("You don't think you'll find"
-                                 "anything of value in it."
-                                 "\nYou move into the building.")
-                self.building_hallway()
-            else:
-                print("Please enter Yes or No.")
-                continue
+        function.open_chest()
 
     def building_hallway(self):
         """
@@ -427,8 +427,7 @@ class Story:
             user_input = input("\n> ").capitalize()
             if user_input == "Left":
                 function.s_print(
-                    "You go left and ahead of you see a giant room")
-                function.s_print(
+                    "You go left and ahead of you see a giant room"
                     "with a spaceship. You check it out.")
                 self.spaceship_room()
             elif user_input == "Right":
