@@ -132,3 +132,29 @@ Players don't enter either Yes or No when asked to be resurrected | Receive mess
     - Add the code "guardian.health = 100" to the play_again function. This would reset it every time.
 
 ![Player Health](health_bug.png)
+
+<br>
+
+ ### dreg_fight() function not calling the correct values
+
+  - #### Reason for fail:
+  
+    - The dreg_fight function was not calling the correct values.
+    
+  - #### Fix:
+  
+    - I had originally put the parameters in the function for the returned values of (chosen_class, chosen_subclass, abilities, weapon), however I realised that because of the different classes I have, this wasn't working. To fix it, I wrote local variables to pull the values from the spreadsheet instead.
+
+![Dreg Fight Variables](fight_error.png)
+
+<br>
+
+ ### Error Code 400 on gspread
+
+  - #### Reason for fail:
+  
+    - When running the player_abilites function, I would get an error saying "gspread.exceptions.APIError: {'code': 400,..."
+    
+  - #### Fix:
+  
+    - Researching lead to me to understand that I had my possible abilites in a [list] and the google spreadsheet couldn't understand that. Removing them from a list and putting them in a Tuple fixed this error.

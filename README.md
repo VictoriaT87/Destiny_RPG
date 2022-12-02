@@ -165,7 +165,7 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 
 
 ### Other Testing
- - For a list of all manual testing done, please follow this link.
+ - For a list of all manual testing done and function errors found, please follow [this link](assets/documentation/testing.md).
 
  <br>
 
@@ -175,11 +175,18 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 <br>
 
 # Bugs Found and Fixed
- - 
+ - All bugs found and fixed are listed in the [testing documentation](assets/documentation/testing.md)
+  - Not a bug necessarily but a lesson learned. When creating a 2nd Heroku deployment, I used the same creds.json file as this and was informed by an email from Google, Github and Heroku that my key was compromised. I had to remake the key for this project as a result and update it on Heroku.
+
 <br>
 
+# Separated Project
+ - After looking at some other Text Adventure games and talking over it with my Mentor, I decided to split the run.py files in separate ones for the sake of easy readability. This project worked as intended, however on first run when all imports were added, I got the error message: "AttributeError: partially initialized module has no attribute (most likely due to a circular import)". This was because my functions file was importing the story file and vice versa. This was fixed by adding "from ... import ..." statements.
+ - The project being split into multiple separate files worked, however the loading time for it was a little over 10 seconds when delpoyed to Heroku. This made it feel like the program was hanging or just not working when the "Run Program" button was clicked in Heroku. Because of this, I decided to revert all my changes back into the single run.py file, however I made a new repo with the old files, and have linked it here: [Destiny RPG Multi-File](https://github.com/VictoriaT87/Destiny_RPG_Multi_File), as well as the deployed version here: [Destiny RPG Mutli-File Deplyed](https://destiny-multifile.herokuapp.com/)
+ - I understand this is not going to be assessed, I just would personally like to keep it so I can perhaps figure out why it was so slow to load. My research lead me to believe this was either because of a cache issue or just some bottleneck I have in the code.
+
 # Bugs Not Fixed
- - 
+ - As far as I am aware, all bugs were fixed within this project. I have had it peer tested through Slack and no issues were reported in the final version.
 
 <br>
 
@@ -189,7 +196,19 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 
 # Credits and Sources
 
-- 
+- The Project is built using the foundation from the [Elijah Henderson youtube videos on "Let's Make a Text Adventure Game In Python"](https://www.youtube.com/watch?v=HzDcKq2NDwM)
+- The classes, subclasses, abilites, weapons and enemies are based on the video game [Destiny by Bungie](https://www.bungie.net/)
+- The slow typing code was found on [StackOverflow.com](https://stackoverflow.com/questions/60608275/how-can-i-print-text-so-it-looks-like-its-being-typed-out)
+- Clearing the terminal when starting the game or replaying was based on code found on [StackOverflow.com](https://stackoverflow.com/questions/2084508/clear-terminal-in-python)
+- Random choice code was found on [Pynative.com](https://pynative.com/python-random-choice/)
+- Code for enumerating the index and text in get_subclass was made with help from [GeeksforGeeks.org](https://www.geeksforgeeks.org/enumerate-in-python/)
+- Getting the value from individual cells was found at [StackOverflow.com](https://stackoverflow.com/questions/19480449/reading-particular-cell-value-from-excelsheet-in-python)
+- Deleting a certain row from the Google spreadsheet was found in [pythoninoffice.com](https://pythoninoffice.com/use-python-to-delete-excel-rows-columns/)
+- Object Oriented Programming and Classes were learned on the [Tech With Tim Youtube Channel](https://www.youtube.com/watch?v=JeznW_7DlB0)
+- Validation for entering a number in the get_subclass function was found at [StackOverflow.com](https://stackoverflow.com/questions/41832613/python-input-validation-how-to-limit-user-input-to-a-specific-range-of-integers)
+- The fix to add a Try statement into the get_subclass function int(input()): [StackOverflow.com](https://stackoverflow.com/questions/71374555/prevent-error-on-intinput-that-is-a-string-and-prevent-negative-number-input) and [Programiz.com](https://www.programiz.com/python-programming/exception-handling)
+- Raising a ValueError if player entered a string or the incorrect number in the get_subclass function [DigitalOcean.com](https://www.digitalocean.com/community/tutorials/python-valueerror-exception-handling-examples)
+
 <br>
 
 [Back to Top](#table-of-contents)
@@ -230,7 +249,8 @@ The following are the steps I went through to deploy my live site:
   - Press Enter. Your local clone will be created.
 
 <br>
-The live link can be found here - 
+
+The live link can be found here - [Destiny RPG Game](https://destiny-rpg.herokuapp.com/)
 
 <br>
 
