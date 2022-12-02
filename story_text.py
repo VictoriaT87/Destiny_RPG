@@ -8,8 +8,8 @@ Welcome Guardian!
 This is a text adventure game based on the video game Destiny!
 \nYou are a New Light - a person newly re-awoken by a small
 robot companion known as a Ghost.
-You are now a Guardian, chosen to wield the Light
-to defeat the Darkness.\n
+You are now a Guardian, chosen to wield the Light to
+defeat the Darkness.\n
 Let's get your adventure started!\n
 '''
 

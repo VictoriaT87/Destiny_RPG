@@ -399,8 +399,8 @@ class Story:
 
         if stored_weapon is not None:
             function.s_print("\nNow it's your turn!")
-            function.s_print(f"You pull out your {stored_weapon}")
-            function.s_print("line up on the Dreg's head...")
+            function.s_print(f"You pull out your {stored_weapon}.")
+            function.s_print("Line up on the Dreg's head...")
             function.s_print("and pull the trigger. Nice work!")
             self.hallway_choice()
         else:
@@ -409,7 +409,7 @@ class Story:
 
             function.s_print("\nNow it's your turn!")
             function.s_print("You don't have a gun... but you do have"
-                             " your abilities\n")
+                             " your abilities.\n")
             function.s_print(abilites_text)
             function.s_print(story.DREG_FIGHT_WEAPON_TEXT)
             self.hallway_choice()
