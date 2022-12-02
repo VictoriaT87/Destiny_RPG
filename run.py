@@ -234,10 +234,10 @@ class Story:
             try:
                 choice = int(input(f"\nMake your choice, {chosen_class}."
                                    "\n1, 2 or 3?\n>"))
-                if choice < 1 or choice > 3:
+                if choice < 1 or choice > 3 or choice == str():
                     raise ValueError("Please enter number 1, 2 or 3.")
-            except ValueError as error:
-                print(error)
+            except ValueError:
+                print("Please enter number 1, 2 or 3.")
             else:
                 print(f"A {subclasses[choice-1]}?")
                 print("The darkness doesn't stand a chance \n")
@@ -267,7 +267,6 @@ class Story:
         First scene to play after choosing a name and class
         """
         print(story.FIRST_SCENE_TEXT)
-        user_input = ""
 
         while True:
             user_input = input("\n> ")
@@ -335,7 +334,6 @@ class Story:
         players choose a room
         """
         print(story.HALLWAY_TEXT)
-        user_input = ""
 
         while True:
             user_input = input("\n> ")
@@ -360,8 +358,6 @@ class Story:
         """
         function.handle_vandal()
         print(story.EMPTY_ROOM_TEXT)
-
-        user_input = ""
 
         while True:
             user_input = input("\n> ")
@@ -425,8 +421,6 @@ class Story:
         print("\nAhead, you see 2 corridors.")
         print("Do you want to go left, right or back?")
 
-        user_input = ""
-
         while True:
             user_input = input("\n> ").capitalize()
             if user_input == "Left":
@@ -456,7 +450,6 @@ class Story:
         Final fight scene, ending depends on the players Luck score
         """
         print(story.SPACESHIP_ROOM_TEXT)
-        user_input = ""
 
         while True:
             luck = stats_worksheet.cell(2, 5).value
