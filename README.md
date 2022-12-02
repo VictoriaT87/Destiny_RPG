@@ -124,7 +124,7 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 
 - My starting point on this project was designing a flow chart based on the first story mission in Destiny The Game. To make the text adventure more fun, I added the random encounters and ability to choose ways to go and luck based weapons.
 
-![Flow Chart](assets/documentation/flow-chart.png)
+<img src="assets/documentation/flow-chart.png" alt="flow-chart" width="600"/>
 
 
 <br>
