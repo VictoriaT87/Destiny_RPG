@@ -2,7 +2,7 @@
 
 ![Website responsiveness on multiple screen sizes](assets/documentation/DestinyRPG.png)
 
-Welcome to a Destiny Text Adventure Game! This game is built purely using Python. It's designed to be a fun "Choose your own adventure" game, with random luck elements and items. Based on the very popular games [Destiny and Destiny 2](https://www.bungie.net/), this text adventure will bring you through the first mission in the game, from waking on the Cosmodrome to getting you ship's engine to fly to the Tower. If you get a high luck score and you choose the correct path, you'll make it out alive!
+Welcome to a Destiny Text Adventure Game! This game is built purely using Python. It's designed to be a fun "Choose your own adventure" game, with random luck elements and items. Based on the very popular games [Destiny and Destiny 2](https://www.bungie.net/), this text adventure will bring you through the first mission in the game, from waking on the Cosmodrome to getting your ship's engine to fly to the Tower. If you get a high luck score and you choose the correct path, you'll make it out alive!
 
 [Live link to The Destiny Text Adventure Gamecl](https://destiny-rpg.herokuapp.com/)
 
@@ -26,7 +26,8 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
     * [Libraries And Frameworks](#libraries-and-frameworks)
     * [Tools and Resources](#tools-and-resources)
 6. [Testing](#testing)
-    * 
+    * [Validator Testing](#validator-testing)
+    * [Other Testing](#other-testing)
 7. [Bugs Found and Fixed](#bugs-found-and-fixed)
     * [Bugs Not Fixed](#bugs-not-fixed)
 8. [Credits And Sources](#credits-and-sources)
@@ -45,6 +46,7 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 ### Classes and Subclasses
 - The player will be asked to enter their name first and then they are given a choice of which Destiny Class they would like to be, as well as their subclass. These choices are then stored in a Google Sheets Worksheet, allowing this data to be pulled later on in the game to reference the player.
 - Depending on their choices here, the game will later on pick a grenade ability of the element selected in a fight scene. 
+
 ![Class Selection](assets/documentation/class-choice.png)
 ![Subclass Selection](assets/documentation/subclass-choice.png)
 ![Ability From Worksheet](assets/documentation/grenade-ability.png)
@@ -52,16 +54,20 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 ### Random Luck and Encounters
 - When the game first loads, players will be given a random luck number between 1-100. This is chosen using the randint Method. This will effect the end game for the player as well as in certain fights.
 - A random encounter can occur for the player. In certain rooms, an encounter will roll to either True or False. If this is True, the encounter with a Vandal will run and players will lose a certain amount of health, again chosen by the randint Method. 
+
 ![Random Encounter](assets/documentation/random-encounter.png)
 
 ### Inventory
 - For their first choice, players can search some cars in front of them. If they're lucky, the can find a key, which will allow them to open a chest within the story. This chest has a chance of dropping a weapon, which will give them a greater advantage of winning the game.
 - This item is stored in the Google Sheets Worksheet, allowing the name to be recalled later in the story.
 - After all stats are added, the Player Stats sheet will look like this:
+
 ![Random Encounter](assets/documentation/google-sheets.png)
 
 ### Play Again
 - At the end of the game or if the player dies, they have the option of playing again. This will trigger code to reset the workseet stats, reset the console and run the story from the beginning.
+
+![Play Again](assets/documentation/play-again.png)
 
 <br>
 
