@@ -29,6 +29,16 @@ class GameFunctions:
     Class for all game functions
     """
 
+    def s_print(self, text):
+        """
+        Slows the speed of the text being printed.
+        https://stackoverflow.com/questions/60608275/how-can-i-print-text-so-it-looks-like-its-being-typed-out
+        """
+        text += "\n"
+        for char in text:
+            time.sleep(0.03)
+            print(char, end="", flush=True)
+
     def reset_console(self):
         """
         Reset the console for a new game or continue.
@@ -68,8 +78,19 @@ class GameFunctions:
         stats_worksheet.update_cell(2, 5, character_luck)
         return character_luck
 
+    def check_items(self):
+        """
+        Function to check if the player has an key in their inventory
+        """
+        item_find = random.choice([True, False])
+        if item_find is True:
+            guardian.items.append("key")
+            self.s_print("You've found a key!")
+
     def open_chest(self):
-        """Function to open the chest if player has a key"""
+        """
+        Function to open the chest
+        """
 
         while True:
             action = input("\n> ")
@@ -77,6 +98,7 @@ class GameFunctions:
                 guardian.items.remove("key")
                 print("You've used your key!")
                 GameFunctions.check_weapon(self)
+                Story.building_hallway(self)
             elif action == "yes" and guardian.items == []:
                 print("You don't have a key and the lock won't budge.")
                 print("You decide to move on.\n")
@@ -89,15 +111,6 @@ class GameFunctions:
             else:
                 print("Please enter Yes or No.")
                 continue
-
-    def check_items(self):
-        """
-        Function to check if the player has an key in their inventory
-        """
-        item_find = random.choice([True, False])
-        if item_find is True:
-            guardian.items.append("key")
-            self.s_print("You've found a key!")
 
     def check_weapon(self):
         """
@@ -113,7 +126,7 @@ class GameFunctions:
                 "Gjallarhorn"
             ])
             stats_worksheet.update_cell(2, 4, weapon)
-            self.s_print(f"You've found a {weapon}!")
+            GameFunctions.s_print(self, f"You've found a {weapon}!")
             # if player finds a weapon, update their luck
             if stats_worksheet.cell(2, 5).value < "50":
                 character_luck = random.randint(50, 100)
@@ -121,7 +134,9 @@ class GameFunctions:
                 return weapon
 
         else:
-            self.s_print("There was nothing in the chest, only dust...")
+            GameFunctions.s_print(self, "There was nothing in the chest,"
+                                  " only dust...")
+            Story.building_hallway(self)
 
     def handle_vandal(self):
         """
@@ -138,16 +153,6 @@ class GameFunctions:
                 self.s_print(
                     "Your Ghost can resurrect you. Do you want him to?")
                 GameFunctions.play_again(self)
-
-    def s_print(self, text):
-        """
-        Slows the speed of the text being printed.
-        https://stackoverflow.com/questions/60608275/how-can-i-print-text-so-it-looks-like-its-being-typed-out
-        """
-        text += "\n"
-        for char in text:
-            time.sleep(0.04)
-            print(char, end="", flush=True)
 
 
 function = GameFunctions()
@@ -263,7 +268,7 @@ class Story:
                 print("Please enter number 1, 2 or 3.")
             else:
                 function.s_print(f"A {subclasses[choice-1]}?")
-                function.s_print("The Darkness doesn't stand a chance \n")
+                function.s_print("The Darkness doesn't stand a chance. \n")
                 chosen_subclass = subclasses[choice-1]
                 stats_worksheet.update_cell(2, 2, chosen_subclass)
                 self.player_abilites(chosen_subclass)
@@ -330,7 +335,7 @@ class Story:
         Enter the building and try to open a chest
         """
         function.s_print(story.ENTRANCE_TEXT)
-        function.open_chest()
+        GameFunctions.open_chest(self)
 
     def building_hallway(self):
         """
@@ -423,7 +428,7 @@ class Story:
         function.handle_vandal()
 
         function.s_print("\nAhead, you see 2 corridors.")
-        function.s_print("Do you want to go left, right or back?")
+        function.s_print("Do you want to go left, right or turn back?")
 
         while True:
             user_input = input("\n> ").capitalize()
@@ -438,7 +443,8 @@ class Story:
                 self.luck_escape()
             elif user_input == "Back":
                 function.s_print("'I'm done fighting these Dregs,"
-                                 "I'm out of here!'[END]")
+                                 " I'm out of here!'[END]\n"
+                                 "Thanks for playing Guardian!")
                 function.clear_worksheet()
                 sys.exit()
             else:
@@ -485,4 +491,4 @@ class Story:
 
 # Run the game
 new_story = Story()
-new_story.building_hallway()
+new_story.introduction()
