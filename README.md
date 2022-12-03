@@ -289,6 +289,20 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 
 <br>
 
+ ### Object has no Attribute
+
+  - #### Reason for fail:
+  
+    - When going through the story, some of the functions failed to run with the error "object has no attribute".
+    
+  - #### Fix:
+  
+    - Instead of calling the class, I was calling a 'self.' method. This worked for some versions of the adventure that the player chose but if the adventure went to the GameFunctions class back to the Story functions class, it wouldn't be able to find the correct object. To fix this, I wrote "GameFunctions.object(self, )" or "Story.object(self, )". This worked to fix the issue.
+
+![Dreg Fight Variables](assets/documentation/attribute_error.png)
+
+<br>
+
  ### Error Code 400 on gspread
 
   - #### Reason for fail:
