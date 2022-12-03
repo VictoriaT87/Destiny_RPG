@@ -171,7 +171,7 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 
 
 ### Other Testing
- - For a list of all manual testing done and function errors found, please follow [this link](assets/documentation/testing.md).
+ - For a list of all manual testing done and functions tested, please follow [this link](assets/documentation/testing.md).
 
  <br>
 
@@ -212,7 +212,7 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 
   - #### Reason for fail:
 
-    - Entering a string in the Subclass input was giving the error "invalid lteral for int() with base 10"
+    - Entering a string in the Subclass input was giving the error "invalid literal for int() with base 10"
 
   - #### Fix:
 
@@ -249,7 +249,7 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 
   - #### Reason for fail:
 
-    - If a player entered a choice that wasn't listed for certain options, the error message would print to the terminal however, instead of repeating the choices, the game would then print a different functions questions.
+    - If a player entered a choice that wasn't listed for certain options, the error message would print to the terminal. However, instead of repeating the choices, the game would then print a different function's questions.
 
   - #### Fix:
 
@@ -311,7 +311,7 @@ Welcome to a Destiny Text Adventure Game! This game is built purely using Python
 
 # Separated Project
  - After looking at some other Text Adventure games and talking over it with my Mentor, I decided to split the run.py files in separate ones for the sake of easy readability. This project worked as intended, however on first run when all imports were added, I got the error message: "AttributeError: partially initialized module has no attribute (most likely due to a circular import)". This was because my functions file was importing the story file and vice versa. This was fixed by adding "from ... import ..." statements.
- - The project being split into multiple separate files worked, however the loading time for it was a little over 10 seconds when delpoyed to Heroku. This made it feel like the program was hanging or just not working when the "Run Program" button was clicked in Heroku. Because of this, I decided to revert all my changes back into the single run.py file, however I made a new repo with the old files, and have linked it here: [Destiny RPG Multi-File](https://github.com/VictoriaT87/Destiny_RPG_Multi_File), as well as the deployed version here: [Destiny RPG Mutli-File Deplyed](https://destiny-multifile.herokuapp.com/)
+ - The project being split into multiple separate files worked, however the loading time for it was a little over 10 seconds when deployed to Heroku. This made it feel like the program was hanging or just not working when the "Run Program" button was clicked in Heroku. Because of this, I decided to revert all my changes back into the single run.py file, however I made a new repo with the old files, and have linked it here: [Destiny RPG Multi-File](https://github.com/VictoriaT87/Destiny_RPG_Multi_File), as well as the deployed version here: [Destiny RPG Mutli-File Deplyed](https://destiny-multifile.herokuapp.com/)
  - I understand this is not going to be assessed, I just would personally like to keep it so I can perhaps figure out why it was so slow to load. My research lead me to believe this was either because of a cache issue or just some bottleneck I have in the code.
 
 # Bugs Not Fixed
