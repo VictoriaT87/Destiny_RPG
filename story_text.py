@@ -89,7 +89,7 @@ or
 '''
 
 SPACESHIP_ROOM_TEXT = '''
-Ahead of you, you see a giant open room ahead
+Ahead of you, you see a giant open room
 with a spaceship in it!
 You can see straight away that the ship
 is missing it's engine.\n
@@ -130,8 +130,8 @@ CAPTAIN_FIGHT_RUN = '''
 This Captain is giant!\n
 No way you want to take him on. You turn and run.
 But behind you is an army of Dregs.\n
-Within seconds you're swarmed...\nAnd your Light
-fades.\n
+Within seconds you're swarmed...\n
+And your Light fades.\n
 [END]\n
 Thanks for playing, Guardian!
 Would you like to play again?

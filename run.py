@@ -131,7 +131,7 @@ class GameFunctions:
         if vandal_attack is True:
             self.s_print("Out of nowhere, a Fallen Vandal attacks you!")
             self.s_print("You took some damage :(")
-            guardian.health -= random.randint(1, 100)
+            guardian.health -= random.randint(1, 50)
             print(f"\nHealth: {guardian.health}")
             if guardian.health < 0:
                 self.s_print("You are dead!")
@@ -146,7 +146,7 @@ class GameFunctions:
         """
         text += "\n"
         for char in text:
-            time.sleep(0.05)
+            time.sleep(0.04)
             print(char, end="", flush=True)
 
 
@@ -350,7 +350,7 @@ class Story:
                                  " It's a small room.")
                 self.empty_room()
             if user_input == "3":
-                self.spaceship_room()
+                Story.spaceship_room(self)
             else:
                 print("Please choose number 1, 2 or 3.")
                 continue
@@ -394,7 +394,7 @@ class Story:
                          )
 
         print(f"\nHealth: {guardian.health}")
-        if guardian.health < 0:
+        if guardian.health <= 0:
             function.s_print("You are dead!")
             function.s_print("Would you like to play again?")
             function.play_again()
@@ -430,7 +430,7 @@ class Story:
             if user_input == "Left":
                 function.s_print(
                     "You go left and ahead of you see a giant room"
-                    "with a spaceship. You check it out.")
+                    " with a spaceship. You check it out.")
                 self.spaceship_room()
             elif user_input == "Right":
                 function.s_print(
