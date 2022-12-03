@@ -350,7 +350,7 @@ class Story:
                                  " It's a small room.")
                 self.empty_room()
             if user_input == "3":
-                Story.spaceship_room(self)
+                self.spaceship_room()
             else:
                 print("Please choose number 1, 2 or 3.")
                 continue
@@ -428,9 +428,6 @@ class Story:
         while True:
             user_input = input("\n> ").capitalize()
             if user_input == "Left":
-                function.s_print(
-                    "You go left and ahead of you see a giant room"
-                    " with a spaceship. You check it out.")
                 self.spaceship_room()
             elif user_input == "Right":
                 function.s_print(
@@ -488,4 +485,4 @@ class Story:
 
 # Run the game
 new_story = Story()
-new_story.introduction()
+new_story.building_hallway()
