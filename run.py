@@ -96,18 +96,18 @@ class GameFunctions:
         """
 
         while True:
-            action = input("\n> ")
-            if action == "yes" and guardian.items == ["key"]:
+            action = input("\n> ").capitalize()
+            if action == "Yes" and guardian.items == ["key"]:
                 guardian.items.remove("key")
                 GameFunctions.s_print(self, "You've used your key!")
                 GameFunctions.check_weapon(self)
                 Story.building_hallway(self)
-            elif action == "yes" and guardian.items == []:
+            elif action == "Yes" and guardian.items == []:
                 GameFunctions.s_print(
                     self, "You don't have a key and the lock"
                     " won't budge. You decide to move on.\n")
                 Story.building_hallway(self)
-            elif action == "no":
+            elif action == "No":
                 GameFunctions.s_print(self, "The chest looks old and worn...")
                 GameFunctions.s_print(self, "You don't think you'll find"
                                       " anything of value in it.\n"
