@@ -50,14 +50,17 @@ class GameFunctions:
         """
         Option to allow player to play again or exit
         """
-        self.s_print("Yes or No?")
+        GameFunctions.s_print(self, "Yes or No?")
 
         while True:
             user_input = input("\n> ").capitalize()
             if user_input == "Yes":
                 GameFunctions.reset_console(self)
                 guardian.health = 100
-                new_story.introduction()
+                stats_worksheet.update_cell(2, 4, "")
+                GameFunctions.s_print(self, "Your ghost ressurects you in"
+                                      " a safe place...")
+                new_story.opening_scene()
             elif user_input == "No":
                 self.s_print("Thank you for playing, Guardian!")
                 self.clear_worksheet()
@@ -96,17 +99,19 @@ class GameFunctions:
             action = input("\n> ")
             if action == "yes" and guardian.items == ["key"]:
                 guardian.items.remove("key")
-                print("You've used your key!")
+                GameFunctions.s_print(self, "You've used your key!")
                 GameFunctions.check_weapon(self)
                 Story.building_hallway(self)
             elif action == "yes" and guardian.items == []:
-                print("You don't have a key and the lock won't budge.")
-                print("You decide to move on.\n")
+                GameFunctions.s_print(
+                    self, "You don't have a key and the lock"
+                    " won't budge. You decide to move on.\n")
                 Story.building_hallway(self)
             elif action == "no":
-                print("The chest looks old and worn...")
-                print("You don't think you'll find anything of value "
-                      "in it.\nYou move into the building.")
+                GameFunctions.s_print(self, "The chest looks old and worn...")
+                GameFunctions.s_print(self, "You don't think you'll find"
+                                      " anything of value in it.\n"
+                                      "You move into the building.")
                 Story.building_hallway(self)
             else:
                 print("Please enter Yes or No.")
@@ -428,7 +433,7 @@ class Story:
         function.handle_vandal()
 
         function.s_print("\nAhead, you see 2 corridors.")
-        function.s_print("Do you want to go left, right or turn back?")
+        function.s_print("Do you want to go left, right or back?")
 
         while True:
             user_input = input("\n> ").capitalize()
@@ -439,14 +444,14 @@ class Story:
                     "You go right. It's very hard to see.")
                 function.s_print("In the darkness, you can make out"
                                  " something large with a glowing"
-                                 " purple eye")
+                                 " purple eye.")
                 self.luck_escape()
             elif user_input == "Back":
                 function.s_print("'I'm done fighting these Dregs,"
                                  " I'm out of here!'[END]\n"
-                                 "Thanks for playing Guardian!")
-                function.clear_worksheet()
-                sys.exit()
+                                 "Thanks for playing Guardian!\n"
+                                 "Would you like to play again?")
+                GameFunctions.play_again(self)
             else:
                 print("Please enter either left, right or back.")
                 continue
